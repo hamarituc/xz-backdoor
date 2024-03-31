@@ -3641,7 +3641,7 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined resolve_imports()
+                            ;undefined _Llzma_delta_props_decode_part_0()
                                                           ;XREF[3,0]:   0010289e,001028a5,_elfSectionHeaders::00001110
 .text.lzma_de...f30f1efa        ENDBR64                                             
 .text.lzma_de...b805000000      MOV         EAX,0x5                                 
@@ -5798,7 +5798,7 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined .Llzma_delta_props_encode.part.0()
+                            ;undefined resolve_imports()
           ;local_30      undefined8         -30                      ;XREF[2,0]:   00104229,00104252
           ;local_38      undefined8         -38                      ;XREF[2,0]:   0010423c,0010424d
           ;local_40      undefined8         -40                      ;XREF[2,0]:   0010407e,0010432d
@@ -7271,7 +7271,7 @@
 .text.lzma_lz...4c89e2          MOV         RDX,R12                                 
 .text.lzma_lz...4c89fe          MOV         RSI,R15                                 
 .text.lzma_lz...4c89ef          MOV         RDI,R13                                 
-.text.lzma_lz...e844edffff      CALL        .text.lzma_delta_props_encoda:.Llzma_...;undefined .Llzma_delta_props_encode....
+.text.lzma_lz...e844edffff      CALL        .text.lzma_delta_props_encoda:resolve...;undefined resolve_imports()
 .text.lzma_lz...85c0            TEST        EAX,EAX                                 
 .text.lzma_lz...0f8490000000    JZ          LAB_001053b4                            
 .text.lzma_lz...4c89f6          MOV         RSI,R14                                 
@@ -26067,7 +26067,7 @@ _elfSectionHe...000000000...    Elf64_Sh...                                     
       |__elfSectionHe...sh_name         ddw         43Eh                                    
       |__elfSectionHe...sh_type         Elf_Sect...SHT_PROGBITS                            
       |__elfSectionHe...sh_flags        dq          6h                                      
-      |__elfSectionHe...sh_addr         dq          .text.lzma_delta_props_decodd:resolve...
+      |__elfSectionHe...sh_addr         dq          .text.lzma_delta_props_decodd:_Llzma_...
       |__elfSectionHe...sh_offset       dq          2870h                                   
       |__elfSectionHe...sh_size         dq          31h                                     
       |__elfSectionHe...sh_link         ddw         0h                                      
@@ -26617,7 +26617,7 @@ _elfSectionHe...000000000...    Elf64_Sh...                                     
       |__elfSectionHe...sh_name         ddw         772h                                    
       |__elfSectionHe...sh_type         Elf_Sect...SHT_PROGBITS                            
       |__elfSectionHe...sh_flags        dq          6h                                      
-      |__elfSectionHe...sh_addr         dq          .text.lzma_delta_props_encoda:.Llzma_...
+      |__elfSectionHe...sh_addr         dq          .text.lzma_delta_props_encoda:resolve...
       |__elfSectionHe...sh_offset       dq          40A0h                                   
       |__elfSectionHe...sh_size         dq          2E8h                                    
       |__elfSectionHe...sh_link         ddw         0h                                      

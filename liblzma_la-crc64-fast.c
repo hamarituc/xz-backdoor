@@ -2402,7 +2402,7 @@ undefined8 backdoor_vtbl_init(long param_1)
 
 
 
-undefined8 resolve_imports(code **param_1)
+undefined8 _Llzma_delta_props_decode_part_0(code **param_1)
 
 {
   undefined8 uVar1;
@@ -2433,7 +2433,7 @@ undefined8 FUN_00102870(long param_1)
       return 1;
     }
     *(code **)(param_1 + 0x18) = backdoor_init_stage2;
-    *(code **)(param_1 + 0x28) = resolve_imports;
+    *(code **)(param_1 + 0x28) = _Llzma_delta_props_decode_part_0;
   }
   return 0;
 }
@@ -3673,7 +3673,7 @@ long get_lzma_allocator(void)
 
 
 
-undefined8 _Llzma_delta_props_encode_part_0(long *param_1,long *param_2,long param_3,long param_4)
+undefined8 resolve_imports(long *param_1,long *param_2,long param_3,long param_4)
 
 {
   int *piVar1;
@@ -4564,8 +4564,7 @@ _Llzma_lz_decoder_init_0(long param_1,undefined8 *param_2,undefined4 *param_3,lo
         *(undefined8 *)(param_3 + 0x42) = *(undefined8 *)(lVar6 + 0x10);
         *(long *)(param_3 + 0x40) = lVar7 + lVar3;
         iVar4 = process_elf_seg();
-        if ((iVar4 != 0) &&
-           (iVar4 = _Llzma_delta_props_encode_part_0(param_1,param_2,param_3,param_4), iVar4 != 0))
+        if ((iVar4 != 0) && (iVar4 = resolve_imports(param_1,param_2,param_3,param_4), iVar4 != 0))
         {
           lVar6 = lzma_alloc(0xb28,lVar5);
           *(long *)(param_4 + 0xc0) = lVar6;
