@@ -2194,7 +2194,10 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined table_lookup_multi()
+                            ;char * table_lookup_multi(long param_1, int param_2, int param_3)
+          ;param_1       long               RDI                      
+          ;param_2       int                ESI                      
+          ;param_3       int                EDX                      
           ;local_2c      undefined4         -2c                      ;XREF[2,0]:   0010187b,001019a6
           ;local_2e      undefined2         -2e                      ;XREF[2,0]:   00101a09,00101a49
           ;local_34      undefined4         -34                      ;XREF[3,0]:   00101a0e,00101a12,00101a61
@@ -2213,13 +2216,13 @@
 .text.crc_ini...4155            PUSH        R13                                     
 .text.crc_ini...4154            PUSH        R12                                     
 .text.crc_ini...53              PUSH        RBX                                     
-.text.crc_ini...4889fb          MOV         RBX,RDI                                 
-.text.crc_ini...bf58000000      MOV         EDI,0x58                                
+.text.crc_ini...4889fb          MOV         RBX,param_1                             
+.text.crc_ini...bf58000000      MOV         param_1,0x58                            
 .text.crc_ini...4883ec20        SUB         RSP,0x20                                
-.text.crc_ini...8974241c        MOV         dword ptr [RSP + local_2c+0x48],ESI     
-.text.crc_ini...be0f000000      MOV         ESI,0xf                                 
-.text.crc_ini...89542410        MOV         dword ptr [RSP + local_38+0x48],EDX     
-.text.crc_ini...ba03000000      MOV         EDX,0x3                                 
+.text.crc_ini...8974241c        MOV         dword ptr [RSP + local_2c+0x48],param_2 
+.text.crc_ini...be0f000000      MOV         param_2,0xf                             
+.text.crc_ini...89542410        MOV         dword ptr [RSP + local_38+0x48],param_3 
+.text.crc_ini...ba03000000      MOV         param_3,0x3                             
 .text.crc_ini...e84e930000      CALL        .text.lzma_index_iter_rewina:.Llzma_i...;undefined .Llzma_index_iter_rewind.c...
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...7508            JNZ         LAB_0010189e                            
@@ -2239,23 +2242,23 @@
                             LAB_001018b5:                 ;XREF[1,0]:   00101966
 .text.crc_ini...443bb3d80...    CMP         R14D,dword ptr [RBX + 0xd8]             
 .text.crc_ini...73d8            JNC         LAB_00101896                            
-.text.crc_ini...488b93f00...    MOV         RDX,qword ptr [RBX + 0xf0]              
+.text.crc_ini...488b93f00...    MOV         param_3,qword ptr [RBX + 0xf0]          
 .text.crc_ini...4489f0          MOV         EAX,R14D                                
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...4889df          MOV         RDI,RBX                                 
-.text.crc_ini...4c8d2482        LEA         R12,[RDX + RAX*0x4]                     
-.text.crc_ini...ba04000000      MOV         EDX,0x4                                 
-.text.crc_ini...4c89e6          MOV         RSI,R12                                 
+.text.crc_ini...4889df          MOV         param_1,RBX                             
+.text.crc_ini...4c8d2482        LEA         R12,[param_3 + RAX*0x4]                 
+.text.crc_ini...ba04000000      MOV         param_3,0x4                             
+.text.crc_ini...4c89e6          MOV         param_2,R12                             
 .text.crc_ini...e89ffaffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...74b1            JZ          LAB_00101896                            
-.text.crc_ini...418b1424        MOV         EDX,dword ptr [R12]                     
+.text.crc_ini...418b1424        MOV         param_3,dword ptr [R12]                 
 .text.crc_ini...488b83f80...    MOV         RAX,qword ptr [RBX + 0xf8]              
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...4889df          MOV         RDI,RBX                                 
-.text.crc_ini...488d0490        LEA         RAX,[RAX + RDX*0x4]                     
-.text.crc_ini...ba08000000      MOV         EDX,0x8                                 
-.text.crc_ini...4889c6          MOV         RSI,RAX                                 
+.text.crc_ini...4889df          MOV         param_1,RBX                             
+.text.crc_ini...488d0490        LEA         RAX,[RAX + param_3*0x4]                 
+.text.crc_ini...ba08000000      MOV         param_3,0x8                             
+.text.crc_ini...4889c6          MOV         param_2,RAX                             
 .text.crc_ini...4889442408      MOV         qword ptr [RSP + local_40+0x48],RAX     
 .text.crc_ini...e872faffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
@@ -2263,14 +2266,14 @@
                             LAB_00101912:                 ;XREF[1,0]:   00101961
 .text.crc_ini...488b442408      MOV         RAX,qword ptr [RSP + local_40+0x48]     
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...ba18000000      MOV         EDX,0x18                                
-.text.crc_ini...488bfb          MOV         RDI,RBX                                 
+.text.crc_ini...ba18000000      MOV         param_3,0x18                            
+.text.crc_ini...488bfb          MOV         param_1,RBX                             
 .text.crc_ini...482b83f80...    SUB         RAX,qword ptr [RBX + 0xf8]              
 .text.crc_ini...48c1f802        SAR         RAX,0x2                                 
 .text.crc_ini...4189c5          MOV         R13D,EAX                                
 .text.crc_ini...4d6be518        IMUL        R12,R13,0x18                            
 .text.crc_ini...4c036338        ADD         R12,qword ptr [RBX + 0x38]              
-.text.crc_ini...4c89e6          MOV         RSI,R12                                 
+.text.crc_ini...4c89e6          MOV         param_2,R12                             
 .text.crc_ini...e83efaffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...0f844cffffff    JZ          LAB_00101896                            
@@ -2291,15 +2294,15 @@
 .text.crc_ini...418b0424        MOV         EAX,dword ptr [R12]                     
 .text.crc_ini...48034330        ADD         RAX,qword ptr [RBX + 0x30]              
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...488bfb          MOV         RDI,RBX                                 
-.text.crc_ini...ba01000000      MOV         EDX,0x1                                 
-.text.crc_ini...4889c6          MOV         RSI,RAX                                 
+.text.crc_ini...488bfb          MOV         param_1,RBX                             
+.text.crc_ini...ba01000000      MOV         param_3,0x1                             
+.text.crc_ini...4889c6          MOV         param_2,RAX                             
 .text.crc_ini...4989c7          MOV         R15,RAX                                 
 .text.crc_ini...e8ecf9ffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...0f84fafeffff    JZ          LAB_00101896                            
-.text.crc_ini...31f6            XOR         ESI,ESI                                 
-.text.crc_ini...4c89ff          MOV         RDI,R15                                 
+.text.crc_ini...31f6            XOR         param_2,param_2                         
+.text.crc_ini...4c89ff          MOV         param_1,R15                             
 .text.crc_ini...e8fa8e0000      CALL        .text.simple_coder_updata:table_get     ;undefined table_get()
 .text.crc_ini...8b4c241c        MOV         ECX,dword ptr [RSP + local_2c+0x48]     
 .text.crc_ini...3bc1            CMP         EAX,ECX                                 
@@ -2309,32 +2312,32 @@
 .text.crc_ini...4d01ed          ADD         R13,R13                                 
 .text.crc_ini...4c036b70        ADD         R13,qword ptr [RBX + 0x70]              
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...488bfb          MOV         RDI,RBX                                 
-.text.crc_ini...ba02000000      MOV         EDX,0x2                                 
-.text.crc_ini...4c89ee          MOV         RSI,R13                                 
+.text.crc_ini...488bfb          MOV         param_1,RBX                             
+.text.crc_ini...ba02000000      MOV         param_3,0x2                             
+.text.crc_ini...4c89ee          MOV         param_2,R13                             
 .text.crc_ini...e8abf9ffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...0f84b9feffff    JZ          LAB_00101896                            
 .text.crc_ini...8a83d0000000    MOV         AL,byte ptr [RBX + 0xd0]                
-.text.crc_ini...66418b5500      MOV         DX,word ptr [R13]                       
+.text.crc_ini...66418b5500      MOV         param_3,word ptr [R13]                  
 .text.crc_ini...83e018          AND         EAX,0x18                                
 .text.crc_ini...3c18            CMP         AL,0x18                                 
 .text.crc_ini...0f855fffffff    JNZ         LAB_00101952                            
-.text.crc_ini...66f7c2fe7f      TEST        DX,0x7ffe                               
+.text.crc_ini...66f7c2fe7f      TEST        param_3,0x7ffe                          
 .text.crc_ini...0f8454ffffff    JZ          LAB_00101952                            
-.text.crc_ini...6681e2ff7f      AND         DX,0x7fff                               
+.text.crc_ini...6681e2ff7f      AND         param_3,0x7fff                          
 .text.crc_ini...33c0            XOR         EAX,EAX                                 
 .text.crc_ini...4c8b6b60        MOV         R13,qword ptr [RBX + 0x60]              
-.text.crc_ini...668954241a      MOV         word ptr [RSP + local_2e+0x48],DX       
+.text.crc_ini...668954241a      MOV         word ptr [RSP + local_2e+0x48],param_3  
 .text.crc_ini...89442414        MOV         dword ptr [RSP + local_34+0x48],EAX     
                             LAB_00101a12:                 ;XREF[1,0]:   00101a68
 .text.crc_ini...8b442414        MOV         EAX,dword ptr [RSP + local_34+0x48]     
 .text.crc_ini...483b4368        CMP         RAX,qword ptr [RBX + 0x68]              
 .text.crc_ini...0f8332ffffff    JNC         LAB_00101952                            
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...ba14000000      MOV         EDX,0x14                                
-.text.crc_ini...4c89ee          MOV         RSI,R13                                 
-.text.crc_ini...488bfb          MOV         RDI,RBX                                 
+.text.crc_ini...ba14000000      MOV         param_3,0x14                            
+.text.crc_ini...4c89ee          MOV         param_2,R13                             
+.text.crc_ini...488bfb          MOV         param_1,RBX                             
 .text.crc_ini...e84bf9ffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...0f8415ffffff    JZ          LAB_00101952                            
@@ -2353,25 +2356,25 @@
                             LAB_00101a6a:                 ;XREF[1,0]:   00101a53
 .text.crc_ini...458b7d0c        MOV         R15D,dword ptr [R13 + 0xc]              
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...ba08000000      MOV         EDX,0x8                                 
-.text.crc_ini...4889df          MOV         RDI,RBX                                 
+.text.crc_ini...ba08000000      MOV         param_3,0x8                             
+.text.crc_ini...4889df          MOV         param_1,RBX                             
 .text.crc_ini...4d01ef          ADD         R15,R13                                 
-.text.crc_ini...4c89fe          MOV         RSI,R15                                 
+.text.crc_ini...4c89fe          MOV         param_2,R15                             
 .text.crc_ini...e8faf8ffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...0f84c4feffff    JZ          LAB_00101952                            
 .text.crc_ini...418b07          MOV         EAX,dword ptr [R15]                     
 .text.crc_ini...48034330        ADD         RAX,qword ptr [RBX + 0x30]              
 .text.crc_ini...b904000000      MOV         ECX,0x4                                 
-.text.crc_ini...4889df          MOV         RDI,RBX                                 
-.text.crc_ini...ba01000000      MOV         EDX,0x1                                 
-.text.crc_ini...488bf0          MOV         RSI,RAX                                 
+.text.crc_ini...4889df          MOV         param_1,RBX                             
+.text.crc_ini...ba01000000      MOV         param_3,0x1                             
+.text.crc_ini...488bf0          MOV         param_2,RAX                             
 .text.crc_ini...4989c7          MOV         R15,RAX                                 
 .text.crc_ini...e8d3f8ffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.crc_ini...85c0            TEST        EAX,EAX                                 
 .text.crc_ini...0f849dfeffff    JZ          LAB_00101952                            
-.text.crc_ini...31f6            XOR         ESI,ESI                                 
-.text.crc_ini...4c89ff          MOV         RDI,R15                                 
+.text.crc_ini...31f6            XOR         param_2,param_2                         
+.text.crc_ini...4c89ff          MOV         param_1,R15                             
 .text.crc_ini...e8e18d0000      CALL        .text.simple_coder_updata:table_get     ;undefined table_get()
 .text.crc_ini...39442410        CMP         dword ptr [RSP + local_38+0x48],EAX     
 .text.crc_ini...7590            JNZ         LAB_00101a55                            
@@ -2387,25 +2390,29 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined table_lookup_ex()
+                            ;char * table_lookup_ex(long * param_1, undefined8 param_2)
+          ;param_1       long *             RDI                      
+          ;param_2       undefined8         RSI                      
+          ;s             undefined8         RAX                      ;XREF[1,0]:   00101aea
                                                           ;XREF[3,0]:   00101b66,00105ed9,_elfSectionHeaders::00000890
 .text.crc64_g...f30f1efa        ENDBR64                                             
 .text.crc64_g...53              PUSH        RBX                                     
 .text.crc64_g...31d2            XOR         EDX,EDX                                 
-.text.crc64_g...4889fb          MOV         RBX,RDI                                 
-.text.crc64_g...e871fdffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
-.text.crc64_g...4885c0          TEST        RAX,RAX                                 
+.text.crc64_g...4889fb          MOV         RBX,param_1                             
+.text.crc64_g...e871fdffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
+.text.crc64_g...4885c0          TEST        s,s                                     
 .text.crc64_g...741a            JZ          LAB_00101b0e                            
-.text.crc64_g...488b5008        MOV         RDX,qword ptr [RAX + 0x8]               
+.text.crc64_g...488b5008        MOV         RDX,qword ptr [s + 0x8]                 
 .text.crc64_g...4885d2          TEST        RDX,RDX                                 
 .text.crc64_g...740f            JZ          LAB_00101b0c                            
-.text.crc64_g...6683780600      CMP         word ptr [RAX + 0x6],0x0                
+.text.crc64_g...6683780600      CMP         word ptr [s + 0x6],0x0                  
+                            ;If (s[6] == 0 && s[7] == 0) || (s[8] == 0 && ... && s[15] == 0)
 .text.crc64_g...7408            JZ          LAB_00101b0c                            
-.text.crc64_g...488b03          MOV         RAX,qword ptr [RBX]                     
-.text.crc64_g...4801d0          ADD         RAX,RDX                                 
+.text.crc64_g...488b03          MOV         s,qword ptr [RBX]                       
+.text.crc64_g...4801d0          ADD         s,RDX                                   
 .text.crc64_g...eb02            JMP         LAB_00101b0e                            
                             LAB_00101b0c:                 ;XREF[2,0]:   00101afb,00101b02
-.text.crc64_g...31c0            XOR         EAX,EAX                                 
+.text.crc64_g...31c0            XOR         s,s                                     
                             LAB_00101b0e:                 ;XREF[2,0]:   00101af2,00101b0a
 .text.crc64_g...5b              POP         RBX                                     
 .text.crc64_g...c3              RET                                                 
@@ -2456,7 +2463,7 @@
                                                           ;XREF[1,0]:   _elfSectionHeaders::00000910
 .text.init_pr...f30f1efa        ENDBR64                                             
 .text.init_pr...89d6            MOV         ESI,EDX                                 
-.text.init_pr...e975ffffff      JMP         .text.crc64_generia:table_lookup_ex     ;undefined table_lookup_ex()
+.text.init_pr...e975ffffff      JMP         .text.crc64_generia:table_lookup_ex     ;char * table_lookup_ex(long * param_...
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
@@ -3474,7 +3481,8 @@
 .text.lzma_lz...f3ab            STOSD.REP   RDI                                     
 .text.lzma_lz...4889df          MOV         RDI,RBX                                 
 .text.lzma_lz...4c896c2410      MOV         qword ptr [RSP + local_a8+0xb8],R13     
-.text.lzma_lz...e84cf2ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EVP_Digest"
+.text.lzma_lz...e84cf2ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...488d4c2438      LEA         RCX=>local_80,[RSP + 0x38]              
 .text.lzma_lz...4c8b4c2428      MOV         R9,qword ptr [RSP + local_90+0xb8]      
 .text.lzma_lz...4885c0          TEST        RAX,RAX                                 
@@ -3537,7 +3545,8 @@
 .text.lzma_lz...31d2            XOR         EDX,EDX                                 
 .text.lzma_lz...be600c0000      MOV         ESI,0xc60                               
 .text.lzma_lz...4889df          MOV         RDI,RBX                                 
-.text.lzma_lz...e864f1ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EVP_sha256"
+.text.lzma_lz...e864f1ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...4885c0          TEST        RAX,RAX                                 
 .text.lzma_lz...7424            JZ          LAB_00102725                            
 .text.lzma_lz...488b4008        MOV         RAX,qword ptr [RAX + 0x8]               
@@ -3672,7 +3681,7 @@
 .text.microlz...7518            JNZ         LAB_001028ab                            
 .text.microlz...488d05b64...    LEA         RAX,[.text.lzma_validate_chaia:backdo...
 .text.microlz...48894718        MOV         qword ptr [RDI +...,RAX=>.text.lzma_v...
-.text.microlz...488d058bf...    LEA         RAX,[.text.lzma_delta_props_decodd:re...
+.text.microlz...488d058bf...    LEA         RAX,[.text.lzma_delta_props_decodd:_L...
 .text.microlz...48894728        MOV         qword ptr [RDI +...,RAX=>.text.lzma_d...
                             LAB_001028a9:                 ;XREF[1,0]:   00102877
 .text.microlz...31c0            XOR         EAX,EAX                                 
@@ -5492,7 +5501,7 @@
 .text.lzma_fi...bac0080000      MOV         EDX,0x8c0                               
 .text.lzma_fi...beb0020000      MOV         ESI,0x2b0                               
 .text.lzma_fi...488b7808        MOV         RDI,qword ptr [RAX + 0x8]               
-.text.lzma_fi...e867dbffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+.text.lzma_fi...e867dbffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_fi...4885c0          TEST        RAX,RAX                                 
 .text.lzma_fi...74e1            JZ          LAB_00103cdf                            
 .text.lzma_fi...488b13          MOV         RDX,qword ptr [RBX]                     
@@ -5799,6 +5808,15 @@
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
                             ;undefined resolve_imports()
+          ;fn__exit      void *             RAX                      ;XREF[7,0]:   001040d7,001040f1,0010410b,0010415e,00104248
+                                                                     ;             001042f1,0010430b
+          ;fn_setlogmask void *             RAX                      ;XREF[6,0]:   001040f1,0010410b,0010415e,00104248,001042f1
+                                                                     ;             0010430b
+          ;fn_setresgid  void *             RAX                      ;XREF[5,0]:   0010410b,0010415e,00104248,001042f1,0010430b
+          ;fn_BN_num_... long               RAX                      ;XREF[4,0]:   0010415e,00104248,001042f1,0010430b
+          ;fn_setresuid  undefined8         RAX                      ;XREF[3,0]:   00104248,001042f1,0010430b
+          ;fn_system     undefined8         RAX                      ;XREF[2,0]:   001042f1,0010430b
+          ;fn_shutdown   undefined8         RAX                      ;XREF[1,0]:   0010430b
           ;local_30      undefined8         -30                      ;XREF[2,0]:   00104229,00104252
           ;local_38      undefined8         -38                      ;XREF[2,0]:   0010423c,0010424d
           ;local_40      undefined8         -40                      ;XREF[2,0]:   0010407e,0010432d
@@ -5807,6 +5825,7 @@
           ;local_58      undefined8         -58                      ;XREF[5,0]:   0010412a,00104134,00104154,001041a8,00104320
           ;local_60      undefined8         -60                      ;XREF[7,0]:   001040bd,001040c7,001040e7,00104101,00104237
                                                                      ;             001042dc,00104301
+          ;ctx           ctx *          HASH...                      
                                                           ;XREF[2,0]:   00105317,_elfSectionHeaders::00001d90
 .text.lzma_de...f30f1efa        ENDBR64                                             
 .text.lzma_de...4157            PUSH        R15                                     
@@ -5839,72 +5858,73 @@
 .text.lzma_de...4889ce          MOV         RSI,RCX                                 
 .text.lzma_de...48894110        MOV         qword ptr [RCX + 0x10],RAX              
 .text.lzma_de...e83c8f0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_de...48894318        MOV         qword ptr [RBX + 0x18],RAX              
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
+.text.lzma_de...48894318        MOV         qword ptr [RBX + 0x18],fn__exit         
+.text.lzma_de...4885c0          TEST        fn__exit,fn__exit                       
 .text.lzma_de...7402            JZ          LAB_001040e7                            
 .text.lzma_de...ff03            INC         dword ptr [RBX]                         
                             LAB_001040e7:                 ;XREF[1,0]:   001040e3
 .text.lzma_de...488b742408      MOV         RSI,qword ptr [RSP + local_60+0x68]     
 .text.lzma_de...bf28040000      MOV         EDI,0x428                               
 .text.lzma_de...e8228f0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_de...48894358        MOV         qword ptr [RBX + 0x58],RAX              
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
+.text.lzma_de...48894358        MOV         qword ptr [RBX + 0x58],fn_setlogmask    
+.text.lzma_de...4885c0          TEST        fn_setlogmask,fn_setlogmask             
 .text.lzma_de...7402            JZ          LAB_00104101                            
 .text.lzma_de...ff03            INC         dword ptr [RBX]                         
                             LAB_00104101:                 ;XREF[1,0]:   001040fd
 .text.lzma_de...488b742408      MOV         RSI,qword ptr [RSP + local_60+0x68]     
 .text.lzma_de...bff0050000      MOV         EDI,0x5f0                               
 .text.lzma_de...e8088f0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_de...48894320        MOV         qword ptr [RBX + 0x20],RAX              
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
+.text.lzma_de...48894320        MOV         qword ptr [RBX + 0x20],fn_setresgid     
+.text.lzma_de...4885c0          TEST        fn_setresgid,fn_setresgid               
 .text.lzma_de...7402            JZ          LAB_0010411b                            
 .text.lzma_de...ff03            INC         dword ptr [RBX]                         
                             LAB_0010411b:                 ;XREF[1,0]:   00104117
 .text.lzma_de...bf01000000      MOV         EDI,0x1                                 
 .text.lzma_de...e81bffffff      CALL        .text.stream_decoder_memconfia:get_lz...;undefined get_lzma_allocator()
 .text.lzma_de...be600a0000      MOV         ESI,0xa60                               
-.text.lzma_de...4889442410      MOV         qword ptr [RSP + local_58+0x68],RAX     
-.text.lzma_de...498b442408      MOV         RAX,qword ptr [R12 + 0x8]               
+.text.lzma_de...4889442410      MOV         qword ptr [RSP +...,fn_setresgid        
+.text.lzma_de...498b442408      MOV         fn_setresgid,qword ptr [R12 + 0x8]      
 .text.lzma_de...488b4c2410      MOV         RCX,qword ptr [RSP + local_58+0x68]     
-.text.lzma_de...488b5020        MOV         RDX,qword ptr [RAX + 0x20]              
-.text.lzma_de...488b7808        MOV         RDI,qword ptr [RAX + 0x8]               
+.text.lzma_de...488b5020        MOV         RDX,qword ptr [fn_setresgid + 0x20]     
+.text.lzma_de...488b7808        MOV         RDI,qword ptr [fn_setresgid + 0x8]      
 .text.lzma_de...48895110        MOV         qword ptr [RCX + 0x10],RDX              
 .text.lzma_de...33d2            XOR         EDX,EDX                                 
-.text.lzma_de...e814d7ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
-.text.lzma_de...4989c7          MOV         R15,RAX                                 
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
+                            ;Returns "_dl_audit_preinit"
+.text.lzma_de...e814d7ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
+.text.lzma_de...4989c7          MOV         R15,fn_setresgid                        
+.text.lzma_de...4885c0          TEST        fn_setresgid,fn_setresgid               
 .text.lzma_de...745e            JZ          LAB_001041b2                            
 .text.lzma_de...488b742410      MOV         RSI,qword ptr [RSP + local_58+0x68]     
 .text.lzma_de...bfe0040000      MOV         EDI,0x4e0                               
 .text.lzma_de...e8b58e0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_de...49894668        MOV         qword ptr [R14 + 0x68],RAX              
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
+.text.lzma_de...49894668        MOV         qword ptr [R14 + 0x68],fn_BN_num_bits   
+.text.lzma_de...4885c0          TEST        fn_BN_num_bits,fn_BN_num_bits           
 .text.lzma_de...7407            JZ          LAB_00104173                            
 .text.lzma_de...41ff86200...    INC         dword ptr [R14 + 0x120]                 
                             LAB_00104173:                 ;XREF[1,0]:   0010416a
-.text.lzma_de...498b442408      MOV         RAX,qword ptr [R12 + 0x8]               
+.text.lzma_de...498b442408      MOV         fn_BN_num_bits,qword ptr [R12 + 0x8]    
 .text.lzma_de...498b5710        MOV         RDX,qword ptr [R15 + 0x10]              
 .text.lzma_de...b904000000      MOV         ECX,0x4                                 
-.text.lzma_de...488b7808        MOV         RDI,qword ptr [RAX + 0x8]               
-.text.lzma_de...498b4708        MOV         RAX,qword ptr [R15 + 0x8]               
-.text.lzma_de...480307          ADD         RAX,qword ptr [RDI]                     
-.text.lzma_de...4889c6          MOV         RSI,RAX                                 
-.text.lzma_de...4889442418      MOV         qword ptr [RSP + local_50+0x68],RAX     
+.text.lzma_de...488b7808        MOV         RDI,qword ptr [fn_BN_num_bits + 0x8]    
+.text.lzma_de...498b4708        MOV         fn_BN_num_bits,qword ptr [R15 + 0x8]    
+.text.lzma_de...480307          ADD         fn_BN_num_bits,qword ptr [RDI]          
+.text.lzma_de...4889c6          MOV         RSI,fn_BN_num_bits                      
+.text.lzma_de...4889442418      MOV         qword ptr [RSP +...,fn_BN_num_bits      
 .text.lzma_de...e8e7d1ffff      CALL        .text.parse_bcz:process_elf_seg         ;undefined process_elf_seg()
 .text.lzma_de...498d95600...    LEA         RDX,[R13 + 0x960]                       
-.text.lzma_de...85c0            TEST        EAX,EAX                                 
+.text.lzma_de...85c0            TEST        fn_BN_num_bits,fn_BN_num_bits           
 .text.lzma_de...752c            JNZ         LAB_001041d0                            
                             LAB_001041a4:                 ;XREF[2,0]:   001041d5,00104223
 .text.lzma_de...498b7e68        MOV         RDI,qword ptr [R14 + 0x68]              
 .text.lzma_de...488b742410      MOV         RSI,qword ptr [RSP + local_58+0x68]     
 .text.lzma_de...e85e8e0000      CALL        EXTERNAL:<EXTERNAL>::lzma_free          ;undefined lzma_free()
                             LAB_001041b2:                 ;XREF[4,0]:   00104099,00104152,001042ab,001042d1
-.text.lzma_de...31c0            XOR         EAX,EAX                                 
+.text.lzma_de...31c0            XOR         fn_BN_num_bits,fn_BN_num_bits           
 .text.lzma_de...e981010000      JMP         LAB_0010433a                            
                             LAB_001041b9:                 ;XREF[1,0]:   001041d3
 .text.lzma_de...4d8b4c2408      MOV         R9,qword ptr [R12 + 0x8]                
-.text.lzma_de...498b4118        MOV         RAX,qword ptr [R9 + 0x18]               
-.text.lzma_de...488b4850        MOV         RCX,qword ptr [RAX + 0x50]              
+.text.lzma_de...498b4118        MOV         fn_BN_num_bits,qword ptr [R9 + 0x18]    
+.text.lzma_de...488b4850        MOV         RCX,qword ptr [fn_BN_num_bits + 0x50]   
 .text.lzma_de...49394d00        CMP         qword ptr [R13],RCX                     
 .text.lzma_de...740b            JZ          LAB_001041d7                            
                             LAB_001041cc:                 ;XREF[1,0]:   001041df
@@ -5914,23 +5934,23 @@
 .text.lzma_de...75e4            JNZ         LAB_001041b9                            
 .text.lzma_de...ebcd            JMP         LAB_001041a4                            
                             LAB_001041d7:                 ;XREF[1,0]:   001041ca
-.text.lzma_de...488b4058        MOV         RAX,qword ptr [RAX + 0x58]              
-.text.lzma_de...49394508        CMP         qword ptr [R13 + 0x8],RAX               
+.text.lzma_de...488b4058        MOV         fn_BN_num_bits,qword ptr [fn_BN_num_b...
+.text.lzma_de...49394508        CMP         qword ptr [R13 + 0x8],fn_BN_num_bits    
 .text.lzma_de...75eb            JNZ         LAB_001041cc                            
-.text.lzma_de...498b0424        MOV         RAX,qword ptr [R12]                     
+.text.lzma_de...498b0424        MOV         fn_BN_num_bits,qword ptr [R12]          
 .text.lzma_de...4d8d5518        LEA         R10,[R13 + 0x18]                        
 .text.lzma_de...31c9            XOR         ECX,ECX                                 
 .text.lzma_de...4883caff        OR          RDX,-0x1                                
-.text.lzma_de...488b7010        MOV         RSI,qword ptr [RAX + 0x10]              
-.text.lzma_de...498d4568        LEA         RAX,[R13 + 0x68]                        
+.text.lzma_de...488b7010        MOV         RSI,qword ptr [fn_BN_num_bits + 0x10]   
+.text.lzma_de...498d4568        LEA         fn_BN_num_bits,[R13 + 0x68]             
 .text.lzma_de...eb21            JMP         LAB_0010421a                            
                             LAB_001041f9:                 ;XREF[1,0]:   0010421d
 .text.lzma_de...488b3e          MOV         RDI,qword ptr [RSI]                     
 .text.lzma_de...4c39d7          CMP         RDI,R10                                 
 .text.lzma_de...7215            JC          LAB_00104216                            
-.text.lzma_de...483bc2          CMP         RAX,RDX                                 
+.text.lzma_de...483bc2          CMP         fn_BN_num_bits,RDX                      
 .text.lzma_de...4989d3          MOV         R11,RDX                                 
-.text.lzma_de...4c0f46d8        CMOVBE      R11,RAX                                 
+.text.lzma_de...4c0f46d8        CMOVBE      R11,fn_BN_num_bits                      
 .text.lzma_de...4c39df          CMP         RDI,R11                                 
 .text.lzma_de...480f42ce        CMOVC       RCX,RSI                                 
 .text.lzma_de...480f42d7        CMOVC       RDX,RDI                                 
@@ -5942,77 +5962,77 @@
 .text.lzma_de...4883faff        CMP         RDX,-0x1                                
 .text.lzma_de...0f847bffffff    JZ          LAB_001041a4                            
 .text.lzma_de...48894c2438      MOV         qword ptr [RSP + local_30+0x68],RCX     
-.text.lzma_de...498b4110        MOV         RAX,qword ptr [R9 + 0x10]               
+.text.lzma_de...498b4110        MOV         fn_BN_num_bits,qword ptr [R9 + 0x10]    
 .text.lzma_de...bfb80a0000      MOV         EDI,0xab8                               
 .text.lzma_de...488b4c2408      MOV         RCX,qword ptr [RSP + local_60+0x68]     
 .text.lzma_de...4889542430      MOV         qword ptr [RSP + local_38+0x68],RDX     
-.text.lzma_de...48894110        MOV         qword ptr [RCX + 0x10],RAX              
+.text.lzma_de...48894110        MOV         qword ptr [RCX + 0x10],fn_BN_num_bits   
 .text.lzma_de...4889ce          MOV         RSI,RCX                                 
 .text.lzma_de...e8cb8d0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
 .text.lzma_de...488b542430      MOV         RDX,qword ptr [RSP + local_38+0x68]     
 .text.lzma_de...488b4c2438      MOV         RCX,qword ptr [RSP + local_30+0x68]     
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
-.text.lzma_de...48894328        MOV         qword ptr [RBX + 0x28],RAX              
+.text.lzma_de...4885c0          TEST        fn_setresuid,fn_setresuid               
+.text.lzma_de...48894328        MOV         qword ptr [RBX + 0x28],fn_setresuid     
 .text.lzma_de...7402            JZ          LAB_00104262                            
 .text.lzma_de...ff03            INC         dword ptr [RBX]                         
                             LAB_00104262:                 ;XREF[1,0]:   0010425e
 .text.lzma_de...498b3c24        MOV         RDI,qword ptr [R12]                     
 .text.lzma_de...488b7710        MOV         RSI,qword ptr [RDI + 0x10]              
 .text.lzma_de...482bd6          SUB         RDX,RSI                                 
-.text.lzma_de...488bc6          MOV         RAX,RSI                                 
+.text.lzma_de...488bc6          MOV         fn_setresuid,RSI                        
 .text.lzma_de...4989d5          MOV         R13,RDX                                 
-.text.lzma_de...4829c8          SUB         RAX,RCX                                 
+.text.lzma_de...4829c8          SUB         fn_setresuid,RCX                        
 .text.lzma_de...4839f1          CMP         RCX,RSI                                 
 .text.lzma_de...7206            JC          LAB_00104281                            
-.text.lzma_de...488bc1          MOV         RAX,RCX                                 
-.text.lzma_de...482bc6          SUB         RAX,RSI                                 
+.text.lzma_de...488bc1          MOV         fn_setresuid,RCX                        
+.text.lzma_de...482bc6          SUB         fn_setresuid,RSI                        
                             LAB_00104281:                 ;XREF[1,0]:   00104279
 .text.lzma_de...488b4c2420      MOV         RCX,qword ptr [RSP + local_48+0x68]     
-.text.lzma_de...8bc0            MOV         EAX,EAX                                 
-.text.lzma_de...48034718        ADD         RAX,qword ptr [RDI + 0x18]              
+.text.lzma_de...8bc0            MOV         fn_setresuid,fn_setresuid               
+.text.lzma_de...48034718        ADD         fn_setresuid,qword ptr [RDI + 0x18]     
 .text.lzma_de...4c89ea          MOV         RDX,R13                                 
 .text.lzma_de...488b7c2418      MOV         RDI,qword ptr [RSP + local_50+0x68]     
 .text.lzma_de...488b742418      MOV         RSI,qword ptr [RSP + local_50+0x68]     
-.text.lzma_de...488981f80...    MOV         qword ptr [RCX + 0xf8],RAX              
+.text.lzma_de...488981f80...    MOV         qword ptr [RCX + 0xf8],fn_setresuid     
 .text.lzma_de...49037710        ADD         RSI,qword ptr [R15 + 0x10]              
 .text.lzma_de...e8e7cbffff      CALL        .text.lzma_raw_encodea:.Llzma_raw_enc...;undefined .Llzma_raw_encoder.0()
-.text.lzma_de...85c0            TEST        EAX,EAX                                 
+.text.lzma_de...85c0            TEST        fn_setresuid,fn_setresuid               
 .text.lzma_de...0f8401ffffff    JZ          LAB_001041b2                            
-.text.lzma_de...488b442420      MOV         RAX,qword ptr [RSP + local_48+0x68]     
+.text.lzma_de...488b442420      MOV         fn_setresuid,qword ptr [RSP + local_4...
 .text.lzma_de...4c89ea          MOV         RDX,R13                                 
-.text.lzma_de...488bb8000...    MOV         RDI,qword ptr [RAX + 0x100]             
-.text.lzma_de...488bb0080...    MOV         RSI,qword ptr [RAX + 0x108]             
+.text.lzma_de...488bb8000...    MOV         RDI,qword ptr [fn_setresuid + 0x100]    
+.text.lzma_de...488bb0080...    MOV         RSI,qword ptr [fn_setresuid + 0x108]    
 .text.lzma_de...4803f7          ADD         RSI,RDI                                 
 .text.lzma_de...e8c1cbffff      CALL        .text.lzma_raw_encodea:.Llzma_raw_enc...;undefined .Llzma_raw_encoder.0()
-.text.lzma_de...85c0            TEST        EAX,EAX                                 
+.text.lzma_de...85c0            TEST        fn_setresuid,fn_setresuid               
 .text.lzma_de...0f84dbfeffff    JZ          LAB_001041b2                            
-.text.lzma_de...498b442408      MOV         RAX,qword ptr [R12 + 0x8]               
+.text.lzma_de...498b442408      MOV         fn_setresuid,qword ptr [R12 + 0x8]      
 .text.lzma_de...488b4c2408      MOV         RCX,qword ptr [RSP + local_60+0x68]     
 .text.lzma_de...bff8090000      MOV         EDI,0x9f8                               
-.text.lzma_de...488b4010        MOV         RAX,qword ptr [RAX + 0x10]              
+.text.lzma_de...488b4010        MOV         fn_setresuid,qword ptr [fn_setresuid ...
 .text.lzma_de...488bf1          MOV         RSI,RCX                                 
-.text.lzma_de...48894110        MOV         qword ptr [RCX + 0x10],RAX              
+.text.lzma_de...48894110        MOV         qword ptr [RCX + 0x10],fn_setresuid     
 .text.lzma_de...e8228d0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_de...48894330        MOV         qword ptr [RBX + 0x30],RAX              
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
+.text.lzma_de...48894330        MOV         qword ptr [RBX + 0x30],fn_system        
+.text.lzma_de...4885c0          TEST        fn_system,fn_system                     
 .text.lzma_de...7402            JZ          LAB_00104301                            
 .text.lzma_de...ff03            INC         dword ptr [RBX]                         
                             LAB_00104301:                 ;XREF[1,0]:   001042fd
 .text.lzma_de...488b742408      MOV         RSI,qword ptr [RSP + local_60+0x68]     
 .text.lzma_de...bf60070000      MOV         EDI,0x760                               
 .text.lzma_de...e8088d0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_de...48894360        MOV         qword ptr [RBX + 0x60],RAX              
-.text.lzma_de...4885c0          TEST        RAX,RAX                                 
+.text.lzma_de...48894360        MOV         qword ptr [RBX + 0x60],fn_shutdown      
+.text.lzma_de...4885c0          TEST        fn_shutdown,fn_shutdown                 
 .text.lzma_de...7402            JZ          LAB_0010431b                            
 .text.lzma_de...ff03            INC         dword ptr [RBX]                         
                             LAB_0010431b:                 ;XREF[1,0]:   00104317
-.text.lzma_de...498b442408      MOV         RAX,qword ptr [R12 + 0x8]               
+.text.lzma_de...498b442408      MOV         fn_shutdown,qword ptr [R12 + 0x8]       
 .text.lzma_de...488b5c2410      MOV         RBX,qword ptr [RSP + local_58+0x68]     
-.text.lzma_de...488b4020        MOV         RAX,qword ptr [RAX + 0x20]              
-.text.lzma_de...48894310        MOV         qword ptr [RBX + 0x10],RAX              
-.text.lzma_de...488b442428      MOV         RAX,qword ptr [RSP + local_40+0x68]     
-.text.lzma_de...4c8928          MOV         qword ptr [RAX],R13                     
-.text.lzma_de...b801000000      MOV         EAX,0x1                                 
+.text.lzma_de...488b4020        MOV         fn_shutdown,qword ptr [fn_shutdown + ...
+.text.lzma_de...48894310        MOV         qword ptr [RBX + 0x10],fn_shutdown      
+.text.lzma_de...488b442428      MOV         fn_shutdown,qword ptr [RSP + local_40...
+.text.lzma_de...4c8928          MOV         qword ptr [fn_shutdown],R13             
+.text.lzma_de...b801000000      MOV         fn_shutdown,0x1                         
                             LAB_0010433a:                 ;XREF[1,0]:   001041b4
 .text.lzma_de...4883c440        ADD         RSP,0x40                                
 .text.lzma_de...5b              POP         RBX                                     
@@ -6057,7 +6077,8 @@
 .text.lzma_fi...31d2            XOR         EDX,EDX                                 
 .text.lzma_fi...48893c24        MOV         qword ptr [RSP]=>local_b8,RDI           
 .text.lzma_fi...4889442430      MOV         qword ptr [RSP + local_88+0xb8],RAX     
-.text.lzma_fi...e8d6d4ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "_rtld_global_ro"
+.text.lzma_fi...e8d6d4ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_fi...4885c0          TEST        RAX,RAX                                 
 .text.lzma_fi...0f849c010000    JZ          LAB_0010452f                            
 .text.lzma_fi...488b3c24        MOV         RDI,qword ptr [RSP]=>local_b8           
@@ -6072,7 +6093,8 @@
 .text.lzma_fi...31d2            XOR         EDX,EDX                                 
 .text.lzma_fi...bed0090000      MOV         ESI,0x9d0                               
 .text.lzma_fi...4c89f7          MOV         RDI,R14                                 
-.text.lzma_fi...e895d4ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "DSA_get0_pqg"
+.text.lzma_fi...e895d4ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_fi...488b3c24        MOV         RDI,qword ptr [RSP]=>local_b8           
 .text.lzma_fi...488d742430      LEA         RSI=>local_88,[RSP + 0x30]              
 .text.lzma_fi...4989c5          MOV         R13,RAX                                 
@@ -6215,47 +6237,53 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined .Llzma_index_buffer_encode.0()
+                            ;undefined .Llzma_index_buffer_encode.0(Elf64_Ehdr * * p_elf, undefined * elf_info, ctx * ctx)
+          ;p_elf         Elf64_Ehdr * *     RDI                      
+          ;elf_info      undefined *        RSI                      
+          ;ctx           ctx *              RDX                      
+          ;lzma_alloc... undefined8         RAX                      ;XREF[3,0]:   001045da,001045fd,00104615
+          ;fn_read       void *             RAX                      ;XREF[2,0]:   001045fd,00104615
+          ;fn___errno... void *             RAX                      ;XREF[1,0]:   00104615
                                                           ;XREF[2,0]:   001049f4,_elfSectionHeaders::00001e90
 .text.lzma_in...f30f1efa        ENDBR64                                             
 .text.lzma_in...4156            PUSH        R14                                     
-.text.lzma_in...4989fe          MOV         R14,RDI                                 
-.text.lzma_in...bf01000000      MOV         EDI,0x1                                 
+.text.lzma_in...4989fe          MOV         R14,p_elf                               
+.text.lzma_in...bf01000000      MOV         p_elf,0x1                               
 .text.lzma_in...4155            PUSH        R13                                     
 .text.lzma_in...4154            PUSH        R12                                     
-.text.lzma_in...4989f4          MOV         R12,RSI                                 
+.text.lzma_in...4989f4          MOV         R12,elf_info                            
 .text.lzma_in...53              PUSH        RBX                                     
-.text.lzma_in...4889d3          MOV         RBX,RDX                                 
+.text.lzma_in...4889d3          MOV         RBX,ctx                                 
 .text.lzma_in...51              PUSH        RCX                                     
 .text.lzma_in...e861faffff      CALL        .text.stream_decoder_memconfia:get_lz...;undefined get_lzma_allocator()
-.text.lzma_in...498b3e          MOV         RDI,qword ptr [R14]                     
-.text.lzma_in...4c89e6          MOV         RSI,R12                                 
-.text.lzma_in...4989c5          MOV         R13,RAX                                 
+.text.lzma_in...498b3e          MOV         p_elf,qword ptr [R14]                   
+.text.lzma_in...4c89e6          MOV         elf_info,R12                            
+.text.lzma_in...4989c5          MOV         R13,lzma_allocator                      
 .text.lzma_in...e8c3cdffff      CALL        .text.get_literal_prica:parse_elf       ;undefined parse_elf()
-.text.lzma_in...85c0            TEST        EAX,EAX                                 
+.text.lzma_in...85c0            TEST        lzma_allocator,lzma_allocator           
 .text.lzma_in...743c            JZ          LAB_0010462d                            
 .text.lzma_in...4d896510        MOV         qword ptr [R13 + 0x10],R12              
-.text.lzma_in...4c89ee          MOV         RSI,R13                                 
-.text.lzma_in...bf08030000      MOV         EDI,0x308                               
+.text.lzma_in...4c89ee          MOV         elf_info,R13                            
+.text.lzma_in...bf08030000      MOV         p_elf,0x308                             
 .text.lzma_in...e8168a0000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_in...48894348        MOV         qword ptr [RBX + 0x48],RAX              
-.text.lzma_in...4885c0          TEST        RAX,RAX                                 
+.text.lzma_in...48894348        MOV         qword ptr [RBX + 0x48],fn_read          
+.text.lzma_in...4885c0          TEST        fn_read,fn_read                         
 .text.lzma_in...7402            JZ          LAB_0010460d                            
 .text.lzma_in...ff03            INC         dword ptr [RBX]                         
                             LAB_0010460d:                 ;XREF[1,0]:   00104609
-.text.lzma_in...4c89ee          MOV         RSI,R13                                 
-.text.lzma_in...bf78080000      MOV         EDI,0x878                               
+.text.lzma_in...4c89ee          MOV         elf_info,R13                            
+.text.lzma_in...bf78080000      MOV         p_elf,0x878                             
 .text.lzma_in...e8fe890000      CALL        EXTERNAL:<EXTERNAL>::lzma_alloc         ;undefined lzma_alloc()
-.text.lzma_in...48894350        MOV         qword ptr [RBX + 0x50],RAX              
-.text.lzma_in...4885c0          TEST        RAX,RAX                                 
+.text.lzma_in...48894350        MOV         qword ptr [RBX +...,fn___errno_location 
+.text.lzma_in...4885c0          TEST        fn___errno_location,fn___errno_location 
 .text.lzma_in...7402            JZ          LAB_00104625                            
 .text.lzma_in...ff03            INC         dword ptr [RBX]                         
                             LAB_00104625:                 ;XREF[1,0]:   00104621
-.text.lzma_in...31c0            XOR         EAX,EAX                                 
+.text.lzma_in...31c0            XOR         fn___errno_location,fn___errno_location 
 .text.lzma_in...833b02          CMP         dword ptr [RBX],0x2                     
-.text.lzma_in...0f94c0          SETZ        AL                                      
+.text.lzma_in...0f94c0          SETZ        fn___errno_location                     
                             LAB_0010462d:                 ;XREF[1,0]:   001045ef
-.text.lzma_in...5a              POP         RDX                                     
+.text.lzma_in...5a              POP         ctx                                     
 .text.lzma_in...5b              POP         RBX                                     
 .text.lzma_in...415c            POP         R12                                     
 .text.lzma_in...415d            POP         R13                                     
@@ -6282,7 +6310,8 @@
 .text.lzma_in...488b4608        MOV         RAX,qword ptr [RSI + 0x8]               
 .text.lzma_in...beb8050000      MOV         ESI,0x5b8                               
 .text.lzma_in...488b7808        MOV         RDI,qword ptr [RAX + 0x8]               
-.text.lzma_in...e8ecd1ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "_rtld_global"
+.text.lzma_in...e8ecd1ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_in...4989c5          MOV         R13,RAX                                 
 .text.lzma_in...4885c0          TEST        RAX,RAX                                 
 .text.lzma_in...7543            JNZ         LAB_001046bf                            
@@ -6556,7 +6585,7 @@
 .text.lzma_in...4883ec40        SUB         RSP,0x40                                
 .text.lzma_in...488b4708        MOV         RAX,qword ptr [RDI + 0x8]               
 .text.lzma_in...488b7808        MOV         RDI,qword ptr [RAX + 0x8]               
-.text.lzma_in...e81dceffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+.text.lzma_in...e81dceffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_in...31d2            XOR         EDX,EDX                                 
 .text.lzma_in...4885c0          TEST        RAX,RAX                                 
 .text.lzma_in...7465            JZ          LAB_00104aaf                            
@@ -7205,7 +7234,8 @@
 .text.lzma_lz...498b4508        MOV         RAX,qword ptr [R13 + 0x8]               
 .text.lzma_lz...488b7820        MOV         RDI,qword ptr [RAX + 0x20]              
 .text.lzma_lz...49897e10        MOV         qword ptr [R14 + 0x10],RDI              
-.text.lzma_lz...e846c6ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EC_POINT_point2oct"
+.text.lzma_lz...e846c6ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...498b5508        MOV         RDX,qword ptr [R13 + 0x8]               
 .text.lzma_lz...488b4a18        MOV         RCX,qword ptr [RDX + 0x18]              
 .text.lzma_lz...83794c00        CMP         dword ptr [RCX + 0x4c],0x0              
@@ -7230,7 +7260,8 @@
 .text.lzma_lz...31d2            XOR         EDX,EDX                                 
 .text.lzma_lz...be68020000      MOV         ESI,0x268                               
 .text.lzma_lz...488b7820        MOV         RDI,qword ptr [RAX + 0x20]              
-.text.lzma_lz...e8e7c5ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EC_KEY_get0_public_key"
+.text.lzma_lz...e8e7c5ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...4c89f6          MOV         RSI,R14                                 
 .text.lzma_lz...bfe8070000      MOV         EDI,0x7e8                               
 .text.lzma_lz...4889442408      MOV         qword ptr [RSP + local_30+0x38],RAX     
@@ -7253,7 +7284,8 @@
 .text.lzma_lz...488b7908        MOV         RDI,qword ptr [RCX + 0x8]               
 .text.lzma_lz...33d2            XOR         EDX,EDX                                 
 .text.lzma_lz...bec8090000      MOV         ESI,0x9c8                               
-.text.lzma_lz...e893c5ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "_dl_audit_symbind_alt"
+.text.lzma_lz...e893c5ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...4885c0          TEST        RAX,RAX                                 
 .text.lzma_lz...0f84de000000    JZ          LAB_001053b4                            
 .text.lzma_lz...498b5508        MOV         RDX,qword ptr [R13 + 0x8]               
@@ -7458,12 +7490,14 @@
 .text.lzma_lz...be08040000      MOV         ESI,0x408                               
 .text.lzma_lz...4c89ef          MOV         RDI,R13                                 
 .text.lzma_lz...4889442420      MOV         qword ptr [RSP + local_c8+0xe8],RAX     
-.text.lzma_lz...e8d1c2ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EVP_DigestVerify"
+.text.lzma_lz...e8d1c2ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...31d2            XOR         EDX,EDX                                 
 .text.lzma_lz...be88010000      MOV         ESI,0x188                               
 .text.lzma_lz...4c89ef          MOV         RDI,R13                                 
 .text.lzma_lz...4989c7          MOV         R15,RAX                                 
-.text.lzma_lz...e8bfc2ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EVP_sm"
+.text.lzma_lz...e8bfc2ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...4885c0          TEST        RAX,RAX                                 
 .text.lzma_lz...0f8433020000    JZ          LAB_001057dd                            
 .text.lzma_lz...488b3c24        MOV         RDI,qword ptr [RSP]=>local_e8           
@@ -8037,7 +8071,8 @@
 .text.microlz...488bfb          MOV         RDI,RBX                                 
 .text.microlz...31d2            XOR         EDX,EDX                                 
 .text.microlz...be98070000      MOV         ESI,0x798                               
-.text.microlz...e804bbffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "RSA_get0_key"
+.text.microlz...e804bbffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...488b742420      MOV         RSI,qword ptr [RSP + local_b38+0xb58]   
 .text.microlz...bff80a0000      MOV         EDI,0xaf8                               
 .text.microlz...4889c3          MOV         RBX,RAX                                 
@@ -8090,7 +8125,8 @@
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...33d2            XOR         EDX,EDX                                 
 .text.microlz...be400c0000      MOV         ESI,0xc40                               
-.text.microlz...e8fcb9ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "BN_bin2bn"
+.text.microlz...e8fcb9ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...4989c6          MOV         R14,RAX                                 
                             LAB_00105e67:                 ;XREF[1,0]:   00105e4e
 .text.microlz...488bbc240...    MOV         RDI,qword ptr [RSP + local_950+0xb58]   
@@ -8113,14 +8149,16 @@
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...bed0060000      MOV         ESI,0x6d0                               
 .text.microlz...4531e4          XOR         R12D,R12D                               
-.text.microlz...e802bcffff      CALL        .text.crc64_generia:table_lookup_ex     ;undefined table_lookup_ex()
+                            ;Returns "BN_bn2bin"
+.text.microlz...e802bcffff      CALL        .text.crc64_generia:table_lookup_ex     ;char * table_lookup_ex(long * param_...
 .text.microlz...498985a00...    MOV         qword ptr [R13 + 0x3a0],RAX             
 .text.microlz...4885c0          TEST        RAX,RAX                                 
 .text.microlz...7456            JZ          LAB_00105f40                            
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...33d2            XOR         EDX,EDX                                 
 .text.microlz...be58090000      MOV         ESI,0x958                               
-.text.microlz...e862b9ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "BN_dup"
+.text.microlz...e862b9ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...4885c0          TEST        RAX,RAX                                 
 .text.microlz...7415            JZ          LAB_00105f20                            
@@ -8131,7 +8169,8 @@
                             LAB_00105f20:                 ;XREF[1,0]:   00105f09
 .text.microlz...31d2            XOR         EDX,EDX                                 
 .text.microlz...be18090000      MOV         ESI,0x918                               
-.text.microlz...e834b9ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "RSA_new"
+.text.microlz...e834b9ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...4983bdb00...    CMP         qword ptr [R13 + 0x3b0],0x0             
 .text.microlz...4989c4          MOV         R12,RAX                                 
 .text.microlz...7407            JZ          LAB_00105f40                            
@@ -8140,7 +8179,8 @@
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...33d2            XOR         EDX,EDX                                 
 .text.microlz...bec00a0000      MOV         ESI,0xac0                               
-.text.microlz...e80cb9ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "RSA_free"
+.text.microlz...e80cb9ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...be40050000      MOV         ESI,0x540                               
 .text.microlz...4889442410      MOV         qword ptr [RSP + local_b48+0xb58],RAX   
@@ -8154,7 +8194,8 @@
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...33d2            XOR         EDX,EDX                                 
 .text.microlz...bef8080000      MOV         ESI,0x8f8                               
-.text.microlz...e8cab8ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "RSA_sign"
+.text.microlz...e8cab8ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...4989c1          MOV         R9,RAX                                  
 .text.microlz...4885db          TEST        RBX,RBX                                 
 .text.microlz...741d            JZ          LAB_00105fbb                            
@@ -8212,7 +8253,8 @@
 .text.microlz...bef0030000      MOV         ESI,0x3f0                               
 .text.microlz...33db            XOR         EBX,EBX                                 
 .text.microlz...4531e4          XOR         R12D,R12D                               
-.text.microlz...e8d3b7ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EVP_DecryptUpdate"
+.text.microlz...e8d3b7ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...4531d2          XOR         R10D,R10D                               
 .text.microlz...4531db          XOR         R11D,R11D                               
 .text.microlz...31d2            XOR         EDX,EDX                                 
@@ -8539,7 +8581,8 @@
 .text.microlz...488bbc242...    MOV         RDI,qword ptr [RSP + local_930+0xb58]   
 .text.microlz...31d2            XOR         EDX,EDX                                 
 .text.microlz...bea8020000      MOV         ESI,0x2a8                               
-.text.microlz...e8a2b2ffff      CALL        .text.crc_inia:table_lookup_multi       ;undefined table_lookup_multi()
+                            ;Returns "EVP_DecryptFinal_ex"
+.text.microlz...e8a2b2ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.microlz...488b542408      MOV         RDX,qword ptr [RSP + local_b50+0xb58]   
 .text.microlz...488bbc240...    MOV         RDI,qword ptr [RSP + local_950+0xb58]   
 .text.microlz...488db424b...    LEA         RSI=>local_3a8,[RSP + 0x7b0]            
@@ -9373,19 +9416,23 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined FUN_00107190()
+                            ;bool mem_empty(uint64_t * ptr, uint n)
+          ;ptr           uint64_t *         RDI                      
+          ;n             uint               ESI                      
+          ;i             undefined8         RAX                      ;XREF[1,0]:   00107192
+          ;p             undefined8     HASH...                      
                                                           ;XREF[3,0]:   00107202,00107883,00108575
 .text.bt_find...31c0            XOR         EAX,EAX                                 
                             LAB_00107192:                 ;XREF[1,0]:   0010719f
-.text.bt_find...39f0            CMP         EAX,ESI                                 
+.text.bt_find...39f0            CMP         i,n                                     
 .text.bt_find...7311            JNC         LAB_001071a7                            
-.text.bt_find...48ffc0          INC         RAX                                     
-.text.bt_find...48837cc7f800    CMP         qword ptr [RDI + RAX*0x8 + -0x8],0x0    
+.text.bt_find...48ffc0          INC         i                                       
+.text.bt_find...48837cc7f800    CMP         qword ptr [ptr + i*0x8 + -0x8],0x0      
 .text.bt_find...75f1            JNZ         LAB_00107192                            
-.text.bt_find...b801000000      MOV         EAX,0x1                                 
+.text.bt_find...b801000000      MOV         i,0x1                                   
 .text.bt_find...c3              RET                                                 
                             LAB_001071a7:                 ;XREF[1,0]:   00107194
-.text.bt_find...31c0            XOR         EAX,EAX                                 
+.text.bt_find...31c0            XOR         i,i                                     
 .text.bt_find...c3              RET                                                 
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
@@ -9428,7 +9475,7 @@
 .text.lzma_de...4989fd          MOV         R13,RDI                                 
 .text.lzma_de...be06000000      MOV         ESI,0x6                                 
 .text.lzma_de...498db9a00...    LEA         RDI,[R9 + 0xa0]                         
-.text.lzma_de...e889ffffff      CALL        .text.bt_find_funa:FUN_00107190         ;undefined FUN_00107190()
+.text.lzma_de...e889ffffff      CALL        .text.bt_find_funa:mem_empty            ;bool mem_empty(uint64_t * ptr, uint n)
 .text.lzma_de...85c0            TEST        EAX,EAX                                 
 .text.lzma_de...75c9            JNZ         LAB_001071d4                            
 .text.lzma_de...41ff91a00...    CALL        qword ptr [R9 + 0xa0]                   
@@ -10001,7 +10048,7 @@
                             LAB_0010787a:                 ;XREF[1,0]:   00107727
 .text.lzma_in...488d7b70        LEA         param_1,[RBX + 0x70]                    
 .text.lzma_in...be06000000      MOV         param_2,0x6                             
-.text.lzma_in...e808f9ffff      CALL        .text.bt_find_funa:FUN_00107190         ;undefined FUN_00107190()
+.text.lzma_in...e808f9ffff      CALL        .text.bt_find_funa:mem_empty            ;bool mem_empty(uint64_t * ptr, uint n)
 .text.lzma_in...85c0            TEST        EAX,EAX                                 
 .text.lzma_in...0f8593000000    JNZ         LAB_00107923                            
 .text.lzma_in...48837c240800    CMP         qword ptr [RSP + local_f0+0xf8],0x0     
@@ -11247,7 +11294,7 @@
 .text.lzip_de...0f84c5030000    JZ          LAB_0010892e                            
 .text.lzip_de...498dbed00...    LEA         RDI,[R14 + 0xd0]                        
 .text.lzip_de...be09000000      MOV         ESI,0x9                                 
-.text.lzip_de...e816ecffff      CALL        .text.bt_find_funa:FUN_00107190         ;undefined FUN_00107190()
+.text.lzip_de...e816ecffff      CALL        .text.bt_find_funa:mem_empty            ;bool mem_empty(uint64_t * ptr, uint n)
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
 .text.lzip_de...0f85ac030000    JNZ         LAB_0010892e                            
 .text.lzip_de...488d8de8f...    LEA         RCX=>local_920,[RBP + -0x918]           
