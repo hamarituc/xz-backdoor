@@ -9221,11 +9221,13 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined FUN_00107070()
+                            ;undefined strnlen(char * z, undefined8 maxlen)
+          ;z             char *             RDI                      
+          ;maxlen        undefined8         RSI                      
                                                           ;XREF[1,0]:   00108025
-.text.parse_o...4889f0          MOV         RAX,RSI                                 
+.text.parse_o...4889f0          MOV         RAX,maxlen                              
 .text.parse_o...ba00000000      MOV         EDX,0x0                                 
-.text.parse_o...4885f6          TEST        RSI,RSI                                 
+.text.parse_o...4885f6          TEST        maxlen,maxlen                           
 .text.parse_o...750b            JNZ         LAB_00107088                            
 .text.parse_o...eb13            JMP         LAB_00107092                            
                             LAB_0010707f:                 ;XREF[1,0]:   0010708c
@@ -9233,7 +9235,7 @@
 .text.parse_o...4839d0          CMP         RAX,RDX                                 
 .text.parse_o...7409            JZ          LAB_00107091                            
                             LAB_00107088:                 ;XREF[1,0]:   0010707b
-.text.parse_o...803c1700        CMP         byte ptr [RDI + RDX*0x1],0x0            
+.text.parse_o...803c1700        CMP         byte ptr [z + RDX*0x1],0x0              
 .text.parse_o...75f1            JNZ         LAB_0010707f                            
 .text.parse_o...4889d0          MOV         RAX,RDX                                 
                             LAB_00107091:                 ;XREF[1,0]:   00107086
@@ -10743,7 +10745,7 @@
 .text.worker_...7272            JC          LAB_00108091                            
 .text.worker_...4c89f6          MOV         RSI,R14                                 
 .text.worker_...4889df          MOV         RDI,RBX                                 
-.text.worker_...e846f0ffff      CALL        .text.parse_optiona:FUN_00107070        ;undefined FUN_00107070()
+.text.worker_...e846f0ffff      CALL        .text.parse_optiona:strnlen             ;undefined strnlen(char * z, undefine...
 .text.worker_...4889c2          MOV         RDX,RAX                                 
 .text.worker_...31c0            XOR         EAX,EAX                                 
 .text.worker_...4c39f2          CMP         RDX,R14                                 
