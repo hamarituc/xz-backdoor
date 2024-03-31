@@ -6879,7 +6879,7 @@
 .text.lzma_in...488b7c2468      MOV         RDI,qword ptr [RSP + local_40+0xa8]     
 .text.lzma_in...4881ffff0...    CMP         RDI,0xff                                
 .text.lzma_in...7709            JA          LAB_00104e43                            
-.text.lzma_in...e8415a0000      CALL        .text.lzma_outq_inia:.Llz_stream_decode ;undefined .Llz_stream_decode()
+.text.lzma_in...e8415a0000      CALL        .text.lzma_outq_inia:count_one_bits     ;undefined count_one_bits(undefined8 ...
 .text.lzma_in...ffc8            DEC         EAX                                     
 .text.lzma_in...740a            JZ          LAB_00104e4d                            
                             LAB_00104e43:                 ;XREF[2,0]:   00104e38,00104e6e
@@ -13769,18 +13769,20 @@
 .text._get_cp...5d              POP         RBP                                     
 .text._get_cp...c3              RET                                                 
                             ;************************************************************************************************
-                            ;*                                           FUNCTION                                           *
+                            ;*                              Count number of one bits in value                               *
                             ;************************************************************************************************
-                            ;undefined .Llz_stream_decode()
+                            ;undefined count_one_bits(undefined8 value)
+          ;value         undefined8         RDI                      
+          ;nbits         undefined4         EAX                      ;XREF[1,0]:   0010a88f
                                                           ;XREF[3,0]:   00104e3a,0010a93b,_elfSectionHeaders::00003090
 .text.lzma_ou...f30f1efa        ENDBR64                                             
 .text.lzma_ou...31c0            XOR         EAX,EAX                                 
                             LAB_0010a886:                 ;XREF[1,0]:   0010a894
-.text.lzma_ou...4885ff          TEST        RDI,RDI                                 
+.text.lzma_ou...4885ff          TEST        value,value                             
 .text.lzma_ou...740b            JZ          LAB_0010a896                            
-.text.lzma_ou...488d57ff        LEA         RDX,[RDI + -0x1]                        
-.text.lzma_ou...ffc0            INC         EAX                                     
-.text.lzma_ou...4821d7          AND         RDI,RDX                                 
+.text.lzma_ou...488d57ff        LEA         RDX,[value + -0x1]                      
+.text.lzma_ou...ffc0            INC         nbits                                   
+.text.lzma_ou...4821d7          AND         value,RDX                               
 .text.lzma_ou...ebf0            JMP         LAB_0010a886                            
                             LAB_0010a896:                 ;XREF[1,0]:   0010a889
 .text.lzma_ou...c3              RET                                                 
@@ -13840,7 +13842,7 @@
 .text.simple_...a801            TEST        AL,0x1                                  
 .text.simple_...7467            JZ          LAB_0010a99f                            
 .text.simple_...488b3e          MOV         RDI,qword ptr [RSI]=>.rodata.crc64_cl...
-.text.simple_...e840ffffff      CALL        .text.lzma_outq_inia:.Llz_stream_decode ;undefined .Llz_stream_decode()
+.text.simple_...e840ffffff      CALL        .text.lzma_outq_inia:count_one_bits     ;undefined count_one_bits(undefined8 ...
                             LAB_0010a940:                 ;XREF[1,0]:   0010a923
 .text.simple_...0fb6c9          MOVZX       ECX,CL                                  
                             LAB_0010a943:                 ;XREF[1,0]:   0010a954
@@ -27439,7 +27441,7 @@ _elfSectionHe...000000000...    Elf64_Sh...                                     
       |__elfSectionHe...sh_name         ddw         C46h                                    
       |__elfSectionHe...sh_type         Elf_Sect...SHT_PROGBITS                            
       |__elfSectionHe...sh_flags        dq          6h                                      
-      |__elfSectionHe...sh_addr         dq          .text.lzma_outq_inia:.Llz_stream_decode 
+      |__elfSectionHe...sh_addr         dq          .text.lzma_outq_inia:count_one_bits     
       |__elfSectionHe...sh_offset       dq          A8C0h                                   
       |__elfSectionHe...sh_size         dq          17h                                     
       |__elfSectionHe...sh_link         ddw         0h                                      

@@ -4192,7 +4192,7 @@ LAB_00104d89:
           }
         }
         if ((byte)uVar14 == bVar8) {
-          if ((local_40 < 0x100) && (iVar3 = _Llz_stream_decode(), iVar3 == 1)) {
+          if ((local_40 < 0x100) && (iVar3 = count_one_bits(), iVar3 == 1)) {
             uVar14 = *(uint *)(param_2 + 2);
             uVar15 = param_2[6];
             lVar10 = **param_1;
@@ -8568,16 +8568,18 @@ _get_cpuid(uint param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4
 
 
 
-int _Llz_stream_decode(ulong param_1)
+// Count number of one bits in value
+
+int count_one_bits(ulong value)
 
 {
-  int iVar1;
+  int nbits;
   
-  iVar1 = 0;
-  for (; param_1 != 0; param_1 = param_1 & param_1 - 1) {
-    iVar1 = iVar1 + 1;
+  nbits = 0;
+  for (; value != 0; value = value & value - 1) {
+    nbits = nbits + 1;
   }
-  return iVar1;
+  return nbits;
 }
 
 
@@ -8623,7 +8625,7 @@ _Lsimple_coder_update_0(byte *param_1,byte *param_2,undefined8 param_3,undefined
         uVar13 = puVar10[1];
         uVar9 = uVar9 - 0x40;
         if ((uVar13 >> ((byte)uVar9 & 0x3f) & 1) == 0) break;
-        uVar7 = _Llz_stream_decode(*puVar10);
+        uVar7 = count_one_bits(*puVar10);
       }
       while( true ) {
         lVar3 = 0;
