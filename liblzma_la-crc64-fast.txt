@@ -2412,33 +2412,38 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined FUN_00101b10()
+                            ;void * memmove(byte * dst, undefined8 src, long n)
+          ;dst           byte *             RDI                      
+          ;src           undefined8         RSI                      
+          ;n             long               RDX                      
+          ;lVar1         long               RCX                      ;XREF[2,0]:   00101b31,00101b3c
+          ;sVar1         long               RCX                      ;XREF[1,0]:   00101b3c
                                                           ;XREF[1,0]:   001073ed
-.text.crc64_g...4889f8          MOV         RAX,RDI                                 
-.text.crc64_g...4839fe          CMP         RSI,RDI                                 
+.text.crc64_g...4889f8          MOV         RAX,dst                                 
+.text.crc64_g...4839fe          CMP         src,dst                                 
 .text.crc64_g...7324            JNC         LAB_00101b3c                            
-.text.crc64_g...488d0c16        LEA         RCX,[RSI + RDX*0x1]                     
-.text.crc64_g...4839cf          CMP         RDI,RCX                                 
+.text.crc64_g...488d0c16        LEA         RCX,[src + n*0x1]                       
+.text.crc64_g...4839cf          CMP         dst,RCX                                 
 .text.crc64_g...731b            JNC         LAB_00101b3c                            
-.text.crc64_g...488d4aff        LEA         RCX,[RDX + -0x1]                        
-.text.crc64_g...4885d2          TEST        RDX,RDX                                 
+.text.crc64_g...488d4aff        LEA         RCX,[n + -0x1]                          
+.text.crc64_g...4885d2          TEST        n,n                                     
 .text.crc64_g...742d            JZ          LAB_00101b57                            
                             LAB_00101b2a:                 ;XREF[1,0]:   00101b39
-.text.crc64_g...0fb6140e        MOVZX       EDX,byte ptr [RSI + RCX*0x1]            
-.text.crc64_g...881408          MOV         byte ptr [RAX + RCX*0x1],DL             
-.text.crc64_g...4883e901        SUB         RCX,0x1                                 
-.text.crc64_g...4883f9ff        CMP         RCX,-0x1                                
+.text.crc64_g...0fb6140e        MOVZX       n,byte ptr [src + RCX*0x1]              
+.text.crc64_g...881408          MOV         byte ptr [RAX + RCX*0x1],n              
+.text.crc64_g...4883e901        SUB         lVar1,0x1                               
+.text.crc64_g...4883f9ff        CMP         lVar1,-0x1                              
 .text.crc64_g...75ef            JNZ         LAB_00101b2a                            
 .text.crc64_g...c3              RET                                                 
                             LAB_00101b3c:                 ;XREF[2,0]:   00101b16,00101b1f
-.text.crc64_g...b900000000      MOV         ECX,0x0                                 
-.text.crc64_g...4885d2          TEST        RDX,RDX                                 
+.text.crc64_g...b900000000      MOV         sVar1,0x0                               
+.text.crc64_g...4885d2          TEST        n,n                                     
 .text.crc64_g...7412            JZ          LAB_00101b58                            
                             LAB_00101b46:                 ;XREF[1,0]:   00101b55
-.text.crc64_g...0fb63c0e        MOVZX       EDI,byte ptr [RSI + RCX*0x1]            
-.text.crc64_g...40883c08        MOV         byte ptr [RAX + RCX*0x1],DIL            
-.text.crc64_g...4883c101        ADD         RCX,0x1                                 
-.text.crc64_g...4839ca          CMP         RDX,RCX                                 
+.text.crc64_g...0fb63c0e        MOVZX       dst,byte ptr [src + sVar1*0x1]          
+.text.crc64_g...40883c08        MOV         byte ptr [RAX + sVar1*0x1],dst          
+.text.crc64_g...4883c101        ADD         sVar1,0x1                               
+.text.crc64_g...4839ca          CMP         n,sVar1                                 
 .text.crc64_g...75ef            JNZ         LAB_00101b46                            
                             LAB_00101b57:                 ;XREF[1,0]:   00101b28
 .text.crc64_g...c3              RET                                                 
@@ -9602,7 +9607,7 @@
 .text.lzma_bl...498d7d04        LEA         RDI,[R13 + 0x4]                         
 .text.lzma_bl...4889ea          MOV         RDX,RBP                                 
 .text.lzma_bl...4c89fe          MOV         RSI,R15                                 
-.text.lzma_bl...e81ea7ffff      CALL        .text.crc64_generia:FUN_00101b10        ;undefined FUN_00101b10()
+.text.lzma_bl...e81ea7ffff      CALL        .text.crc64_generia:memmove             ;void * memmove(byte * dst, undefined...
                             LAB_001073f2:                 ;XREF[1,0]:   001073e1
 .text.lzma_bl...4883c504        ADD         RBP,0x4                                 
 .text.lzma_bl...0fcb            BSWAP       EBX                                     

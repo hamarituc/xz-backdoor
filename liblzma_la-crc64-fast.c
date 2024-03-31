@@ -4,6 +4,7 @@ typedef unsigned char    byte;
 typedef unsigned int    dword;
 typedef unsigned long    qword;
 typedef unsigned int    uint;
+typedef unsigned long    ulong;
 typedef unsigned char    undefined1;
 typedef unsigned short    undefined2;
 typedef unsigned int    undefined4;
@@ -104,6 +105,8 @@ struct Elf64_Sym {
     qword st_value;
     qword st_size;
 };
+
+typedef ulong size_t;
 
 
 
@@ -1552,32 +1555,33 @@ long _Lcrc64_generic_0(long *param_1,undefined8 param_2)
 
 
 
-void FUN_00101b10(ulong param_1,ulong param_2,long param_3)
+void * memmove(byte *dst,byte *src,long n)
 
 {
   long lVar1;
+  long sVar1;
   
-  if ((param_2 < param_1) && (param_1 < param_2 + param_3)) {
-    lVar1 = param_3 + -1;
-    if (param_3 != 0) {
+  if ((src < dst) && (dst < src + n)) {
+    lVar1 = n + -1;
+    if (n != 0) {
       do {
-        *(undefined *)(param_1 + lVar1) = *(undefined *)(param_2 + lVar1);
+        dst[lVar1] = src[lVar1];
         lVar1 = lVar1 + -1;
       } while (lVar1 != -1);
-      return;
+      return dst;
     }
   }
   else {
-    lVar1 = 0;
-    if (param_3 == 0) {
-      return;
+    sVar1 = 0;
+    if (n == 0) {
+      return dst;
     }
     do {
-      *(undefined *)(param_1 + lVar1) = *(undefined *)(param_2 + lVar1);
-      lVar1 = lVar1 + 1;
-    } while (param_3 != lVar1);
+      dst[sVar1] = src[sVar1];
+      sVar1 = sVar1 + 1;
+    } while (n != sVar1);
   }
-  return;
+  return dst;
 }
 
 
@@ -5713,25 +5717,25 @@ undefined8 FUN_00107340(uint *param_1,ulong param_2,long *param_3,long param_4,l
 {
   uint uVar1;
   int iVar2;
-  ulong uVar3;
+  ulong n;
   
   if (((param_5 != 0 && 5 < param_2) && (param_4 != 0)) && (*(long *)(param_5 + 0x100) != 0)) {
     *param_3 = 0;
     if (((*(code **)(param_5 + 0x68) != (code *)0x0) &&
         (uVar1 = (**(code **)(param_5 + 0x68))(param_4), uVar1 < 0x4001)) &&
-       ((uVar1 = uVar1 + 7 >> 3, uVar1 != 0 && (uVar3 = (ulong)uVar1, uVar3 <= param_2 - 6)))) {
+       ((uVar1 = uVar1 + 7 >> 3, uVar1 != 0 && (n = (ulong)uVar1, n <= param_2 - 6)))) {
       *(undefined *)(param_1 + 1) = 0;
       iVar2 = (**(code **)(param_5 + 0x100))(param_4,(long)param_1 + 5);
-      if ((long)iVar2 == uVar3) {
+      if ((long)iVar2 == n) {
         if (*(char *)((long)param_1 + 5) < '\0') {
-          uVar3 = uVar3 + 1;
+          n = n + 1;
           uVar1 = uVar1 + 1;
         }
         else {
-          FUN_00101b10(param_1 + 1,(long)param_1 + 5,uVar3);
+          memmove((byte *)(param_1 + 1),(long)param_1 + 5,n);
         }
         *param_1 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
-        *param_3 = uVar3 + 4;
+        *param_3 = n + 4;
         return 1;
       }
     }
