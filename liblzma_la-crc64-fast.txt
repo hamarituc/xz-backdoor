@@ -9200,7 +9200,7 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined FUN_00107050()
+                            ;undefined strlen()
                                                           ;XREF[2,0]:   0010a462,_elfSectionHeaders::00002310
 .text.parse_o...803f00          CMP         byte ptr [RDI],0x0                      
 .text.parse_o...7410            JZ          LAB_00107065                            
@@ -13434,7 +13434,7 @@
 .text.parse_l...0f84a1020000    JZ          LAB_0010a700                            
                             LAB_0010a45f:                 ;XREF[1,0]:   0010a452
 .text.parse_l...4889ef          MOV         RDI,RBP                                 
-.text.parse_l...e8e9cbffff      CALL        .text.parse_optiona:FUN_00107050        ;undefined FUN_00107050()
+.text.parse_l...e8e9cbffff      CALL        .text.parse_optiona:strlen              ;undefined strlen()
 .text.parse_l...4c8d640500      LEA         R12,[RBP + RAX*0x1]                     
                             LAB_0010a46c:                 ;XREF[1,0]:   0010a6f5
 .text.parse_l...4c39e5          CMP         RBP,R12                                 
@@ -26852,7 +26852,7 @@ _elfSectionHe...000000000...    Elf64_Sh...                                     
       |__elfSectionHe...sh_name         ddw         8E3h                                    
       |__elfSectionHe...sh_type         Elf_Sect...SHT_PROGBITS                            
       |__elfSectionHe...sh_flags        dq          6h                                      
-      |__elfSectionHe...sh_addr         dq          .text.parse_optiona:FUN_00107050        
+      |__elfSectionHe...sh_addr         dq          .text.parse_optiona:strlen              
       |__elfSectionHe...sh_offset       dq          7090h                                   
       |__elfSectionHe...sh_size         dq          43h                                     
       |__elfSectionHe...sh_link         ddw         0h                                      

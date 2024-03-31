@@ -5532,7 +5532,7 @@ undefined8 _Llzma_delta_props_encoder(undefined8 *param_1)
 
 
 
-long FUN_00107050(char *param_1)
+long strlen(char *param_1)
 
 {
   long lVar1;
@@ -8296,7 +8296,7 @@ void _Llzma12_mode_map_part_1(undefined4 param_1,undefined8 param_2,ulong param_
     if ((*(long *)(piVar2 + 0x12) != 0) && (*(long *)(piVar2 + 0x14) == 0)) {
       return;
     }
-    lVar7 = FUN_00107050(param_3);
+    lVar7 = strlen(param_3);
     uVar1 = param_3 + lVar7;
     while( true ) {
       if (uVar1 <= param_3) {
