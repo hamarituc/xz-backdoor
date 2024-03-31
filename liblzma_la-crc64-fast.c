@@ -111,7 +111,7 @@ typedef ulong size_t;
 
 
 
-undefined8 _Lx86_code_part_0(byte **param_1,byte *param_2,byte *param_3)
+undefined8 code_dasm(byte **param_1,byte *param_2,byte *param_3)
 
 {
   byte bVar1;
@@ -137,7 +137,7 @@ undefined8 _Lx86_code_part_0(byte **param_1,byte *param_2,byte *param_3)
   ulong local_38 [4];
   
   bVar20 = 0;
-  iVar4 = _Llzma2_decoder_end_1(0,0x12,0x46,2);
+  iVar4 = apply_one_entry_ex(0,0x12,0x46,2);
   if (iVar4 == 0) {
     return 0;
   }
@@ -692,7 +692,7 @@ LAB_00100655:
 
 
 
-bool _Llzma_block_buffer_encode_0(int *param_1,long param_2,uint param_3)
+bool check_software_breakpoint(int *param_1,long param_2,uint param_3)
 
 {
   bool bVar1;
@@ -724,7 +724,7 @@ undefined8 FUN_00100af0(ulong param_1,undefined8 param_2,ulong *param_3,int para
       *(undefined4 *)plVar4 = 0;
       plVar4 = (long *)((long)plVar4 + 4);
     }
-    iVar1 = _Lx86_code_part_0(&local_70,param_1,param_2);
+    iVar1 = code_dasm(&local_70,param_1,param_2);
     if (((iVar1 != 0) && (local_48 == 3999)) && ((local_68 + local_70 & 0xfU) == 0)) {
       if (param_3 != (ulong *)0x0) {
         *param_3 = local_68 + local_70;
@@ -733,7 +733,7 @@ undefined8 FUN_00100af0(ulong param_1,undefined8 param_2,ulong *param_3,int para
     }
   }
   else {
-    uVar2 = _Llzma_block_buffer_encode_0(param_1,param_2,0xe230);
+    uVar2 = check_software_breakpoint(param_1,param_2,0xe230);
     if ((int)uVar2 != 0) {
       if (param_3 != (ulong *)0x0) {
         *param_3 = param_1;
@@ -747,9 +747,8 @@ undefined8 FUN_00100af0(ulong param_1,undefined8 param_2,ulong *param_3,int para
 
 
 undefined8
-_Llzma2_encoder_init_1
-          (ulong param_1,ulong *param_2,ulong *param_3,ulong param_4,ulong param_5,
-          undefined4 param_6)
+apply_method_1(ulong param_1,ulong *param_2,ulong *param_3,ulong param_4,ulong param_5,
+              undefined4 param_6)
 
 {
   int iVar1;
@@ -798,7 +797,7 @@ undefined8 _Llzma_optimum_normal_0(ulong param_1,ulong param_2,long param_3,long
   long local_80 [12];
   
   bVar4 = 0;
-  iVar1 = _Llzma2_decoder_end_1(0,0x81,4,7);
+  iVar1 = apply_one_entry_ex(0,0x81,4,7);
   if (iVar1 != 0) {
     plVar3 = local_80;
     for (lVar2 = 0x16; lVar2 != 0; lVar2 = lVar2 + -1) {
@@ -809,7 +808,7 @@ undefined8 _Llzma_optimum_normal_0(ulong param_1,ulong param_2,long param_3,long
       param_4 = local_80;
     }
     while (param_1 < param_2) {
-      iVar1 = _Lx86_code_part_0(param_4,param_1,param_2);
+      iVar1 = code_dasm(param_4,param_1,param_2);
       if (iVar1 == 0) {
         param_1 = param_1 + 1;
       }
@@ -850,7 +849,7 @@ _Llzma_filters_update_0(ulong param_1,ulong param_2,uint param_3,int param_4,und
       if (param_2 <= param_1) {
         return 0;
       }
-      iVar1 = _Lx86_code_part_0(param_5,param_1,param_2);
+      iVar1 = code_dasm(param_5,param_1,param_2);
       if (iVar1 != 0) break;
       param_1 = param_1 + 1;
     }
@@ -899,7 +898,7 @@ _Llzma_filters_update_1(ulong param_1,ulong param_2,uint param_3,int param_4,und
       if (param_2 <= param_1) {
         return 0;
       }
-      iVar1 = _Lx86_code_part_0(param_5,param_1,param_2);
+      iVar1 = code_dasm(param_5,param_1,param_2);
       if (iVar1 != 0) break;
       param_1 = param_1 + 1;
     }
@@ -942,7 +941,7 @@ undefined8 _Llzma_raw_encoder_0(ulong param_1,ulong param_2,long param_3)
       puVar3 = puVar3 + (ulong)bVar4 * -2 + 1;
     }
     for (; param_1 < param_2; param_1 = param_1 + 1) {
-      iVar1 = _Lx86_code_part_0(local_80,param_1,param_2);
+      iVar1 = code_dasm(local_80,param_1,param_2);
       if ((((iVar1 != 0) && (local_58 == 0x10d)) && ((local_6f & 7) == 1)) &&
          ((local_50 == param_3 || (local_50 == -param_3)))) {
         return 1;
@@ -975,7 +974,7 @@ undefined8 _Llzma_mt_block_size_1(ulong param_1,ulong param_2,long *param_3,long
       param_3 = local_80;
     }
     for (; param_1 < param_2; param_1 = param_1 + 1) {
-      iVar1 = _Lx86_code_part_0(param_3,param_1,param_2);
+      iVar1 = code_dasm(param_3,param_1,param_2);
       if ((((iVar1 != 0) && (*(int *)(param_3 + 5) == 0x10d)) &&
           ((*(byte *)((long)param_3 + 0x1b) & 0x48) == 0x48)) &&
          (((*(uint *)((long)param_3 + 0x1c) & 0xff00ff00) == 0x5000000 &&
@@ -1035,7 +1034,7 @@ _Llzma_properties_size_0(ulong param_1,ulong param_2,long *param_3,int param_4,l
       param_3 = local_80;
     }
     for (; param_1 < param_2; param_1 = param_1 + 1) {
-      iVar1 = _Lx86_code_part_0(param_3,param_1,param_2);
+      iVar1 = code_dasm(param_3,param_1,param_2);
       if ((((iVar1 != 0) && (*(int *)(param_3 + 5) == param_4)) &&
           ((*(uint *)((long)param_3 + 0x1c) & 0xff00ff00) == 0x5000000)) &&
          ((param_5 == 0 ||
@@ -1088,7 +1087,7 @@ undefined8 _Llzma_simple_x86_decoder_init_1(ulong param_1,ulong param_2,long *pa
     if (param_2 <= param_1) {
       return 0;
     }
-    iVar1 = _Lx86_code_part_0(param_3,param_1,param_2);
+    iVar1 = code_dasm(param_3,param_1,param_2);
     if ((((iVar1 != 0) && (*(int *)(param_3 + 5) == 0x103)) &&
         ((*(uint *)((long)param_3 + 0x1c) & 0xff00ff00) == 0x5000000)) &&
        ((param_4 == 0 ||
@@ -1176,7 +1175,7 @@ code_r0x001012f3:
 
 
 
-void _Lparse_bcj_0(void)
+void process_elf_seg(void)
 
 {
   FUN_00101220();
@@ -1185,7 +1184,7 @@ void _Lparse_bcj_0(void)
 
 
 
-bool _Llzma_simple_props_size_part_0(int param_1,int param_2)
+bool is_gnu_relro(int param_1,int param_2)
 
 {
   return param_1 + 1 + param_2 == 0x474e553;
@@ -1193,7 +1192,7 @@ bool _Llzma_simple_props_size_part_0(int param_1,int param_2)
 
 
 
-undefined8 _Lget_literal_price_part_0(ulong param_1,ulong *param_2)
+undefined8 parse_elf(ulong param_1,ulong *param_2)
 
 {
   uint uVar1;
@@ -1250,7 +1249,7 @@ undefined8 _Lget_literal_price_part_0(ulong param_1,ulong *param_2)
         lVar14 = (long)(int)uVar21;
       }
       else {
-        iVar11 = _Llzma_simple_props_size_part_0(iVar11,0xa0000000);
+        iVar11 = is_gnu_relro(iVar11,0xa0000000);
         if (iVar11 != 0) {
           if (*(int *)((long)param_2 + 0x4c) != 0) {
             return 0;
@@ -1270,7 +1269,7 @@ undefined8 _Lget_literal_price_part_0(ulong param_1,ulong *param_2)
       param_2[4] = uVar18;
       iVar11 = (int)(uVar20 >> 4);
       *(int *)(param_2 + 5) = iVar11;
-      iVar12 = _Lparse_bcj_0();
+      iVar12 = process_elf_seg();
       if (iVar12 != 0) {
         ppuVar13 = (uint **)(uVar18 + 8);
         bVar10 = false;
@@ -1418,13 +1417,14 @@ switchD_0010155d_caseD_18:
             param_2[0xc] = param_1 + uVar18;
           }
           if (((((param_2[8] == 0) ||
-                (iVar11 = _Lparse_bcj_0(param_2,param_2[8],puVar15,4), iVar11 != 0)) &&
+                (iVar11 = process_elf_seg(param_2,param_2[8],puVar15,4), iVar11 != 0)) &&
                ((param_2[0xf] == 0 ||
-                (iVar11 = _Lparse_bcj_0(param_2,param_2[0xf],puVar23,4), iVar11 != 0)))) &&
+                (iVar11 = process_elf_seg(param_2,param_2[0xf],puVar23,4), iVar11 != 0)))) &&
               ((param_2[0x11] == 0 ||
-               (iVar11 = _Lparse_bcj_0(param_2,param_2[0x11],puVar22,4), iVar11 != 0)))) &&
+               (iVar11 = process_elf_seg(param_2,param_2[0x11],puVar22,4), iVar11 != 0)))) &&
              ((param_2[0xc] == 0 ||
-              (iVar11 = _Lparse_bcj_0(param_2,param_2[0xc],param_2[0xd] * 0x14,4), iVar11 != 0)))) {
+              (iVar11 = process_elf_seg(param_2,param_2[0xc],param_2[0xd] * 0x14,4), iVar11 != 0))))
+          {
             uVar21 = *puVar24;
             *(uint *)(param_2 + 0x1b) = uVar21;
             uVar1 = puVar24[2];
@@ -1447,7 +1447,7 @@ switchD_0010155d_caseD_18:
 
 
 
-uint * _Lcrc_init_0(long param_1,int param_2,int param_3)
+uint * table_lookup_multi(long param_1,int param_2,int param_3)
 
 {
   byte bVar1;
@@ -1467,35 +1467,35 @@ uint * _Lcrc_init_0(long param_1,int param_2,int param_3)
   if ((iVar4 != 0) && ((param_3 == 0 || ((*(byte *)(param_1 + 0xd0) & 0x18) == 0x18)))) {
     for (uVar10 = 0; uVar10 < *(uint *)(param_1 + 0xd8); uVar10 = uVar10 + 1) {
       puVar6 = (uint *)(*(long *)(param_1 + 0xf0) + (ulong)uVar10 * 4);
-      iVar4 = _Lparse_bcj_0(param_1,puVar6,4,4);
+      iVar4 = process_elf_seg(param_1,puVar6,4,4);
       if (iVar4 == 0) {
         return (uint *)0x0;
       }
       local_40 = (byte *)(*(long *)(param_1 + 0xf8) + (ulong)*puVar6 * 4);
-      iVar4 = _Lparse_bcj_0(param_1,local_40,8,4);
+      iVar4 = process_elf_seg(param_1,local_40,8,4);
       if (iVar4 == 0) {
         return (uint *)0x0;
       }
       do {
         uVar7 = (long)local_40 - *(long *)(param_1 + 0xf8) >> 2 & 0xffffffff;
         puVar6 = (uint *)(uVar7 * 0x18 + *(long *)(param_1 + 0x38));
-        iVar4 = _Lparse_bcj_0(param_1,puVar6,0x18,4);
+        iVar4 = process_elf_seg(param_1,puVar6,0x18,4);
         if (iVar4 == 0) {
           return (uint *)0x0;
         }
         if ((*(long *)(puVar6 + 2) != 0) && (*(short *)((long)puVar6 + 6) != 0)) {
           lVar5 = (ulong)*puVar6 + *(long *)(param_1 + 0x30);
-          iVar4 = _Lparse_bcj_0(param_1,lVar5,1,4);
+          iVar4 = process_elf_seg(param_1,lVar5,1,4);
           if (iVar4 == 0) {
             return (uint *)0x0;
           }
-          iVar4 = _Lsimple_coder_update_0(lVar5,0);
+          iVar4 = table_get(lVar5,0);
           if (iVar4 == param_2) {
             if (param_3 == 0) {
               return puVar6;
             }
             puVar8 = (ushort *)(uVar7 * 2 + *(long *)(param_1 + 0x70));
-            iVar4 = _Lparse_bcj_0(param_1,puVar8,2,4);
+            iVar4 = process_elf_seg(param_1,puVar8,2,4);
             if (iVar4 == 0) {
               return (uint *)0x0;
             }
@@ -1505,16 +1505,16 @@ uint * _Lcrc_init_0(long param_1,int param_2,int param_3)
               local_34 = 0;
               do {
                 if (((*(ulong *)(param_1 + 0x68) <= (ulong)local_34) ||
-                    (iVar4 = _Lparse_bcj_0(param_1,psVar9,0x14,4), iVar4 == 0)) || (*psVar9 != 1))
+                    (iVar4 = process_elf_seg(param_1,psVar9,0x14,4), iVar4 == 0)) || (*psVar9 != 1))
                 break;
                 if ((uVar2 & 0x7fff) == psVar9[2]) {
                   uVar3 = *(uint *)(psVar9 + 6);
-                  iVar4 = _Lparse_bcj_0(param_1,(uint *)((ulong)uVar3 + (long)psVar9),8,4);
+                  iVar4 = process_elf_seg(param_1,(uint *)((ulong)uVar3 + (long)psVar9),8,4);
                   if (iVar4 == 0) break;
                   lVar5 = (ulong)*(uint *)((ulong)uVar3 + (long)psVar9) + *(long *)(param_1 + 0x30);
-                  iVar4 = _Lparse_bcj_0(param_1,lVar5,1,4);
+                  iVar4 = process_elf_seg(param_1,lVar5,1,4);
                   if (iVar4 == 0) break;
-                  iVar4 = _Lsimple_coder_update_0(lVar5,0);
+                  iVar4 = table_get(lVar5,0);
                   if (param_3 == iVar4) {
                     return puVar6;
                   }
@@ -1536,12 +1536,12 @@ uint * _Lcrc_init_0(long param_1,int param_2,int param_3)
 
 
 
-long _Lcrc64_generic_0(long *param_1,undefined8 param_2)
+long table_lookup_ex(long *param_1,undefined8 param_2)
 
 {
   long lVar1;
   
-  lVar1 = _Lcrc_init_0(param_1,param_2,0);
+  lVar1 = table_lookup_multi(param_1,param_2,0);
   if (lVar1 != 0) {
     if ((*(long *)(lVar1 + 8) == 0) || (*(short *)(lVar1 + 6) == 0)) {
       lVar1 = 0;
@@ -1589,7 +1589,7 @@ void * memmove(byte *dst,byte *src,long n)
 void _Linit_pric_table_part_1(undefined8 param_1,undefined8 param_2,undefined4 param_3)
 
 {
-  _Lcrc64_generic_0(param_1,param_3);
+  table_lookup_ex(param_1,param_3);
   return;
 }
 
@@ -1671,7 +1671,7 @@ long * _Lstream_encoder_update_1
         uVar7 = *(ulong *)(param_1[0x11] + uVar4 * 8);
         if ((uVar7 & 1) == 0) {
           plVar5 = (long *)(lVar2 + uVar7);
-          iVar3 = _Lparse_bcj_0(param_1,plVar5,8,4);
+          iVar3 = process_elf_seg(param_1,plVar5,8,4);
           if (iVar3 == 0) {
             return (long *)0x0;
           }
@@ -1689,7 +1689,7 @@ LAB_00101d78:
         else {
           while (uVar7 = uVar7 >> 1, uVar7 != 0) {
             if ((uVar7 & 1) != 0) {
-              iVar3 = _Lparse_bcj_0(param_1,plVar5,8,4);
+              iVar3 = process_elf_seg(param_1,plVar5,8,4);
               if (iVar3 == 0) {
                 return (long *)0x0;
               }
@@ -1719,14 +1719,14 @@ long _Llz_encode_1(long *param_1,long *param_2,uint param_3,ulong param_4,int pa
   uint *puVar2;
   ulong uVar3;
   
-  iVar1 = _Llzma2_decoder_end_1(0,0x67,5,4);
+  iVar1 = apply_one_entry_ex(0,0x67,5,4);
   uVar3 = 0;
   if (iVar1 != 0) {
     for (; uVar3 < param_3; uVar3 = uVar3 + 1) {
       if ((((param_2[1] & 0xffffffffU) == param_4) &&
           (puVar2 = (uint *)(((ulong)param_2[1] >> 0x20) * 0x18 + param_1[7]),
           *(short *)((long)puVar2 + 6) == 0)) &&
-         (iVar1 = _Lsimple_coder_update_0((ulong)*puVar2 + param_1[6],0), iVar1 == param_5)) {
+         (iVar1 = table_get((ulong)*puVar2 + param_1[6],0), iVar1 == param_5)) {
         return *param_2 + *param_1;
       }
       param_2 = param_2 + 3;
@@ -1778,7 +1778,7 @@ _Llzma_check_update_0(long *param_1,long *param_2,undefined8 param_3,undefined8 
   long lVar5;
   undefined auVar6 [16];
   
-  iVar1 = _Llzma2_decoder_end_1(0,0xcb,7,0xc);
+  iVar1 = apply_one_entry_ex(0,0xcb,7,0xc);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = param_1[0x13];
@@ -1901,7 +1901,7 @@ ulong _Llzip_decode_0(undefined8 param_1,int *param_2,ulong param_3)
         }
       }
       for (; uVar2 < uVar3; uVar2 = uVar2 + 1) {
-        iVar1 = _Lsimple_coder_update_0(uVar2,uVar3);
+        iVar1 = table_get(uVar2,uVar3);
         if (iVar1 != 0) {
           if (*param_2 == 0) {
             *param_2 = iVar1;
@@ -2011,7 +2011,7 @@ ulong _Lauto_decode_1(long *param_1,ulong param_2,long param_3,int param_4)
   ulong uVar2;
   ulong uVar3;
   
-  uVar1 = _Lparse_bcj_0();
+  uVar1 = process_elf_seg();
   if ((((int)uVar1 != 0) && (uVar1 = 1, param_4 != 0)) && (*(int *)((long)param_1 + 0x4c) != 0)) {
     uVar3 = (*param_1 - param_1[1]) + param_1[10];
     uVar2 = param_1[0xb] + uVar3;
@@ -2073,7 +2073,7 @@ LAB_00102373:
 
 
 
-void _Llzma_simple_props_encode_1(undefined8 param_1)
+void j_tls_get_addr(undefined8 param_1)
 
 {
   __tls_get_addr(param_1);
@@ -2082,7 +2082,7 @@ void _Llzma_simple_props_encode_1(undefined8 param_1)
 
 
 
-pointer_____offset__0x180___ _Lstream_decoder_mt_end_0(void)
+pointer_____offset__0x180___ get_lzma_allocator_addr(void)
 
 {
   uint local_14;
@@ -2139,7 +2139,7 @@ undefined8 FUN_00102530(ulong *param_1,long *param_2,long *param_3,long param_4)
   
   bVar13 = 0;
   local_88 = 0;
-  lVar3 = _Lstream_decoder_memconfig_part_1(1);
+  lVar3 = get_lzma_allocator(1);
   *(long **)(lVar3 + 0x10) = param_3;
   uVar4 = _Llzma_check_update_0(param_2,&local_88);
   if (uVar4 != 0) {
@@ -2162,7 +2162,7 @@ undefined8 FUN_00102530(ulong *param_1,long *param_2,long *param_3,long param_4)
         *(undefined4 *)plVar8 = 0;
         plVar8 = (long *)((long)plVar8 + (ulong)bVar13 * -8 + 4);
       }
-      lVar7 = _Lcrc_init_0(param_3,0xf8,0);
+      lVar7 = table_lookup_multi(param_3,0xf8,0);
       if (lVar7 != 0) {
         lVar7 = *(long *)(lVar7 + 8);
         lVar1 = *param_3;
@@ -2171,7 +2171,7 @@ undefined8 FUN_00102530(ulong *param_1,long *param_2,long *param_3,long param_4)
       }
       uVar11 = 0;
       while (uVar9 < uVar10) {
-        iVar2 = _Lx86_code_part_0(&local_80,uVar9,uVar10);
+        iVar2 = code_dasm(&local_80,uVar9,uVar10);
         if (iVar2 == 0) {
           uVar9 = uVar9 + 1;
         }
@@ -2185,7 +2185,7 @@ undefined8 FUN_00102530(ulong *param_1,long *param_2,long *param_3,long param_4)
           else if (((uVar11 != 0) && (local_58 == 0x17f)) &&
                   ((local_64 >> 8 == 0x50200 &&
                    (((local_6f & 1) != 0 && (lVar5 == local_50 + local_80 + local_78)))))) {
-            lVar3 = _Lcrc_init_0(param_3,0xc60,0);
+            lVar3 = table_lookup_multi(param_3,0xc60,0);
             if (lVar3 != 0) {
               *(long *)(param_4 + 0x58) = *(long *)(lVar3 + 8) + *param_3;
               *(int *)(param_4 + 0x120) = *(int *)(param_4 + 0x120) + 1;
@@ -2237,7 +2237,7 @@ void FUN_00102750(long param_1)
 
 
 
-undefined8 _Llzma_delta_decoder_init_part_0(long param_1)
+undefined8 backdoor_vtbl_init(long param_1)
 
 {
   undefined8 uVar1;
@@ -2262,7 +2262,7 @@ undefined8 _Llzma_delta_decoder_init_part_0(long param_1)
 
 
 
-undefined8 _Llzma_delta_props_decode_part_0(code **param_1)
+undefined8 resolve_imports(code **param_1)
 
 {
   undefined8 uVar1;
@@ -2271,7 +2271,7 @@ undefined8 _Llzma_delta_props_decode_part_0(code **param_1)
   if (param_1 != (code **)0x0) {
     *param_1 = _Llzma_code_part_1;
     param_1[1] = _Llzma_index_memusage_part_0;
-    param_1[2] = (code *)&_Llzma12_coder_1;
+    param_1[2] = (code *)&global_ctx;
     uVar1 = 0;
   }
   return uVar1;
@@ -2292,8 +2292,8 @@ undefined8 FUN_00102870(long param_1)
     if (*(long *)(param_1 + 0x28) != 0) {
       return 1;
     }
-    *(code **)(param_1 + 0x18) = _Llzma_delta_props_encoder;
-    *(code **)(param_1 + 0x28) = _Llzma_delta_props_decode_part_0;
+    *(code **)(param_1 + 0x18) = backdoor_init_stage2;
+    *(code **)(param_1 + 0x28) = resolve_imports;
   }
   return 0;
 }
@@ -2328,7 +2328,7 @@ bool FUN_00102a30(uint param_1,long *param_2,undefined8 *param_3,long *param_4,u
     return false;
   }
   if (*param_7 != 0) {
-    iVar1 = _Llzma_block_buffer_encode_0(*param_2,*param_2 + 4,0xe230);
+    iVar1 = check_software_breakpoint(*param_2,*param_2 + 4,0xe230);
     return iVar1 != 0;
   }
   return true;
@@ -2366,11 +2366,11 @@ bool FUN_00102af0(ulong param_1,ulong param_2,undefined8 param_3,undefined8 para
       iVar1 = _Llzma_mt_block_size_1(*(long *)(param_5 + 0x288),uVar4,&local_80);
       lVar2 = local_80;
       if (iVar1 != 0) {
-        iVar1 = _Lx86_code_part_0(&local_80,local_78 + local_80,uVar4);
+        iVar1 = code_dasm(&local_80,local_78 + local_80,uVar4);
         if ((iVar1 != 0) && (local_58 == 0x168)) {
           local_88 = 0;
           lVar2 = local_78 + local_48 + local_80;
-          _Llzma2_encoder_init_1(lVar2,0,&local_88,param_3,param_4,*param_6);
+          apply_method_1(lVar2,0,&local_88,param_3,param_4,*param_6);
           uVar4 = local_88;
         }
         iVar1 = _Llzma_properties_size_0(lVar2,uVar4,0,0x109,param_1);
@@ -2524,7 +2524,7 @@ LAB_00102e38:
     } while (puVar6 != puVar1);
 LAB_00102e44:
     if (uVar8 < uVar11) {
-      iVar3 = _Lx86_code_part_0(&local_80,uVar8,uVar11);
+      iVar3 = code_dasm(&local_80,uVar8,uVar11);
       uVar8 = uVar8 + 1;
       if (iVar3 != 0) {
         uVar8 = local_80 + local_78;
@@ -2670,7 +2670,7 @@ LAB_001030b4:
 LAB_001030f0:
         do {
           while( true ) {
-            iVar2 = _Lx86_code_part_0(&local_80,uVar6,uVar8);
+            iVar2 = code_dasm(&local_80,uVar6,uVar8);
             if (iVar2 != 0) break;
             uVar6 = uVar6 + 1;
 LAB_0010323f:
@@ -2819,7 +2819,7 @@ FUN_00103320(ulong param_1,ulong param_2,long param_3,ulong param_4,ulong *param
   uVar3 = _Llzma_auto_decode_1(param_6,0x1e0,param_3,param_4);
   if (uVar3 != 0) {
     while (uVar3 < param_4) {
-      iVar2 = _Lx86_code_part_0(&local_d8,uVar3,param_4);
+      iVar2 = code_dasm(&local_d8,uVar3,param_4);
       if (iVar2 == 0) {
         uVar3 = uVar3 + 1;
       }
@@ -2871,7 +2871,7 @@ LAB_0010344b:
               uVar8 = local_d0 + local_d8;
               uVar4 = 0;
               while (((uVar8 < param_4 && (uVar4 < 6)) &&
-                     (iVar2 = _Lx86_code_part_0(&local_80,uVar8,param_4), iVar2 != 0))) {
+                     (iVar2 = code_dasm(&local_80,uVar8,param_4), iVar2 != 0))) {
                 if (local_58 == 0x109) {
                   if ((local_64 & 0xff00ff00) == 0x5000000) {
                     bVar1 = 0;
@@ -3196,7 +3196,7 @@ undefined8 FUN_00103a00(undefined8 param_1,long *param_2)
        (lVar1 = *param_2, lVar1 - 1U < 0x20)) &&
       ((plVar2 = (long *)param_2[1], param_2 < plVar2 && (plVar2 != (long *)0x0)))) &&
      ((ulong)((long)plVar2 - (long)param_2) < 0x4001)) {
-    iVar3 = _Lsimple_coder_update_0(plVar2,0);
+    iVar3 = table_get(plVar2,0);
     lVar6 = 1;
     if (iVar3 == 0x108) {
       while (lVar7 = lVar6 + 1, lVar6 != lVar1) {
@@ -3236,7 +3236,7 @@ undefined8 FUN_00103a00(undefined8 param_1,long *param_2)
               return 0;
             }
           }
-          iVar3 = _Lsimple_coder_update_0(*pplVar8,0);
+          iVar3 = table_get(*pplVar8,0);
           if (iVar3 != 0) {
             return 0;
           }
@@ -3306,8 +3306,7 @@ bool FUN_00103b60(long param_1,undefined8 param_2,undefined8 param_3,long param_
 
 
 undefined  [16]
-_Llzma_filter_decoder_is_supported_part_0
-          (long *param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+parse_elf_invoke(long *param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
 
 {
   int iVar1;
@@ -3316,9 +3315,9 @@ _Llzma_filter_decoder_is_supported_part_0
   undefined8 *puVar4;
   undefined auVar5 [16];
   
-  iVar1 = _Lget_literal_price_part_0(param_1[1],*(undefined8 *)(*param_1 + 8));
+  iVar1 = parse_elf(param_1[1],*(undefined8 *)(*param_1 + 8));
   if (iVar1 != 0) {
-    lVar2 = _Lcrc_init_0(*(undefined8 *)(*param_1 + 8),0x2b0,0x8c0);
+    lVar2 = table_lookup_multi(*(undefined8 *)(*param_1 + 8),0x2b0,0x8c0);
     if (lVar2 != 0) {
       puVar4 = (undefined8 *)(*(long *)(lVar2 + 8) + **(long **)(*param_1 + 8));
       iVar1 = FUN_00103a00(*(long **)(*param_1 + 8),*puVar4);
@@ -3458,7 +3457,7 @@ void _Llzma_stream_decoder_init_1(long param_1)
 
 
 
-void _Llzma_stream_flags_compare_1(long param_1)
+void get_rodata_ptr(long param_1)
 
 {
   *(undefined8 *)(param_1 + 0x20) = 0xffffffffffff9e18;
@@ -3467,13 +3466,13 @@ void _Llzma_stream_flags_compare_1(long param_1)
 
 
 
-void _Llzma_stream_header_encode_part_0(undefined8 *param_1)
+void get_ehdr_address(undefined8 *param_1)
 
 {
   long extraout_RDX;
   
   *param_1 = &_Lx86_coder_destroy;
-  _Llzma_stream_flags_compare_1();
+  get_rodata_ptr();
   param_1[1] = (long *)(extraout_RDX - param_1[4]);
   param_1[2] = *(long *)(extraout_RDX - param_1[4]) >> 0x38;
   param_1[3] = 0;
@@ -3510,7 +3509,7 @@ void _Lparse_delta_0(long param_1)
 
 
 
-void _Llzma_delta_props_decoder(undefined8 *param_1)
+void backdoor_ctx_save(undefined8 *param_1)
 
 {
   *param_1 = &_Lrc_read_destroy;
@@ -3523,12 +3522,12 @@ void _Llzma_delta_props_decoder(undefined8 *param_1)
 
 
 
-long _Lstream_decoder_memconfig_part_1(void)
+long get_lzma_allocator(void)
 
 {
   long lVar1;
   
-  lVar1 = _Lstream_decoder_mt_end_0(0x21);
+  lVar1 = get_lzma_allocator_addr(0x21);
   return lVar1 + 8;
 }
 
@@ -3553,11 +3552,11 @@ undefined8 _Llzma_delta_props_encode_part_0(long *param_1,long *param_2,long par
   long *plVar14;
   long *plVar15;
   
-  iVar4 = _Llzma2_decoder_end_1(0,0x6c,0x10,5);
+  iVar4 = apply_one_entry_ex(0,0x6c,0x10,5);
   if (iVar4 != 0) {
     piVar1 = *(int **)(param_4 + 0x118);
     plVar15 = *(long **)(*param_1 + 0x10);
-    lVar6 = _Lstream_decoder_memconfig_part_1(1);
+    lVar6 = get_lzma_allocator(1);
     *(undefined8 *)(lVar6 + 0x10) = *(undefined8 *)(param_1[1] + 0x10);
     lVar7 = lzma_alloc(0x8a8,lVar6);
     *(long *)(piVar1 + 6) = lVar7;
@@ -3574,10 +3573,10 @@ undefined8 _Llzma_delta_props_encode_part_0(long *param_1,long *param_2,long par
     if (lVar7 != 0) {
       *piVar1 = *piVar1 + 1;
     }
-    lVar7 = _Lstream_decoder_memconfig_part_1(1);
+    lVar7 = get_lzma_allocator(1);
     uVar2 = *(undefined8 *)(param_1[1] + 8);
     *(undefined8 *)(lVar7 + 0x10) = *(undefined8 *)(param_1[1] + 0x20);
-    lVar8 = _Lcrc_init_0(uVar2,0xa60,0);
+    lVar8 = table_lookup_multi(uVar2,0xa60,0);
     if (lVar8 != 0) {
       lVar9 = lzma_alloc(0x4e0,lVar7);
       *(long *)(param_4 + 0x68) = lVar9;
@@ -3585,7 +3584,7 @@ undefined8 _Llzma_delta_props_encode_part_0(long *param_1,long *param_2,long par
         *(int *)(param_4 + 0x120) = *(int *)(param_4 + 0x120) + 1;
       }
       lVar9 = *(long *)(lVar8 + 8) + **(long **)(param_1[1] + 8);
-      iVar4 = _Lparse_bcj_0(*(long **)(param_1[1] + 8),lVar9,*(undefined8 *)(lVar8 + 0x10),4);
+      iVar4 = process_elf_seg(*(long **)(param_1[1] + 8),lVar9,*(undefined8 *)(lVar8 + 0x10),4);
       plVar12 = plVar15 + 300;
       if (iVar4 != 0) {
 LAB_001041d0:
@@ -3690,12 +3689,12 @@ undefined8 _Llzma_filter_flags_decode_0(long *param_1,long *param_2,long param_3
   bVar13 = 0;
   local_8c = 0;
   local_88 = 0;
-  lVar2 = _Lcrc_init_0(param_1,0xa98,0);
+  lVar2 = table_lookup_multi(param_1,0xa98,0);
   if (lVar2 != 0) {
     local_8c = 0x6a8;
     lVar3 = _Llzip_decode_0(param_1,&local_8c,0);
     if (lVar3 != 0) {
-      lVar4 = _Lcrc_init_0(param_2,0x9d0,0);
+      lVar4 = table_lookup_multi(param_2,0x9d0,0);
       lVar5 = _Llzma_check_update_0(param_1,&local_88);
       if ((lVar5 != 0) && (uVar6 = _Lstream_encode_1(lVar5,local_88 + lVar5,lVar3), uVar6 != 0)) {
         if (lVar4 != 0) {
@@ -3711,7 +3710,7 @@ undefined8 _Llzma_filter_flags_decode_0(long *param_1,long *param_2,long param_3
         }
         piVar7 = (int *)(*(long *)(lVar2 + 8) + *param_1);
         lVar2 = *(long *)(lVar2 + 0x10);
-        lVar3 = _Lstream_decoder_memconfig_part_1(1);
+        lVar3 = get_lzma_allocator(1);
         *(long **)(lVar3 + 0x10) = param_2;
         lVar4 = lzma_alloc(0xd10,lVar3);
         *(long *)(param_4 + 0x90) = lVar4;
@@ -3774,8 +3773,8 @@ ulong _Llzma_index_buffer_encode_0(undefined8 *param_1,undefined8 param_2,int *p
   ulong uVar2;
   long lVar3;
   
-  lVar1 = _Lstream_decoder_memconfig_part_1(1);
-  uVar2 = _Lget_literal_price_part_0(*param_1,param_2);
+  lVar1 = get_lzma_allocator(1);
+  uVar2 = parse_elf(*param_1,param_2);
   if ((int)uVar2 != 0) {
     *(undefined8 *)(lVar1 + 0x10) = param_2;
     lVar3 = lzma_alloc(0x308,lVar1);
@@ -3795,7 +3794,7 @@ ulong _Llzma_index_buffer_encode_0(undefined8 *param_1,undefined8 param_2,int *p
 
 
 
-bool _Llzma_index_encoder_init_1(ulong *param_1,long **param_2)
+bool process_shared_libraries_map(ulong *param_1,long **param_2)
 
 {
   char cVar1;
@@ -3814,7 +3813,7 @@ bool _Llzma_index_encoder_init_1(ulong *param_1,long **param_2)
   if (param_1 == (ulong *)0x0) {
     return false;
   }
-  lVar8 = _Lcrc_init_0(param_2[1][1],0x5b8,0);
+  lVar8 = table_lookup_multi(param_2[1][1],0x5b8,0);
   if (lVar8 == 0) {
     return false;
   }
@@ -3865,7 +3864,7 @@ bool _Llzma_index_encoder_init_1(ulong *param_1,long **param_2)
           pcVar11 = pcVar10;
         }
       }
-      uVar6 = _Lsimple_coder_update_0(pcVar11);
+      uVar6 = table_get(pcVar11);
       plVar5 = *param_2;
       if (uVar6 == 2000) {
         if (plVar5[5] != 0) {
@@ -3881,7 +3880,7 @@ bool _Llzma_index_encoder_init_1(ulong *param_1,long **param_2)
           if (0x10463f < *param_1) {
             return false;
           }
-          if ((code *)(*param_1 + 0x400000) < _Llzma_index_encoder_init_1) {
+          if ((code *)(*param_1 + 0x400000) < process_shared_libraries_map) {
             return false;
           }
           if (param_1[3] == 0) {
@@ -3930,7 +3929,7 @@ bool _Llzma_index_encoder_init_1(ulong *param_1,long **param_2)
   if ((undefined8 *)**param_2 == (undefined8 *)0x0) {
     return false;
   }
-  iVar7 = _Lget_literal_price_part_0(*(undefined8 *)**param_2,lVar8);
+  iVar7 = parse_elf(*(undefined8 *)**param_2,lVar8);
   if (iVar7 == 0) {
     return false;
   }
@@ -3957,19 +3956,18 @@ bool _Llzma_index_encoder_init_1(ulong *param_1,long **param_2)
   }
 LAB_00104904:
   if (((undefined8 *)(*param_2)[3] != (undefined8 *)0x0) &&
-     (iVar7 = _Lget_literal_price_part_0(*(undefined8 *)(*param_2)[3]), iVar7 != 0)) {
+     (iVar7 = parse_elf(*(undefined8 *)(*param_2)[3]), iVar7 != 0)) {
     plVar5 = param_2[5];
     local_30 = 0;
     lVar8 = param_2[1][3];
     if (((undefined8 *)(*param_2)[2] != (undefined8 *)0x0) &&
-       (((iVar7 = _Lget_literal_price_part_0(*(undefined8 *)(*param_2)[2],lVar8), iVar7 != 0 &&
+       (((iVar7 = parse_elf(*(undefined8 *)(*param_2)[2],lVar8), iVar7 != 0 &&
          ((*(byte *)(lVar8 + 0xd0) & 0x20) != 0)) &&
         (lVar8 = _Lmicrolzma_decode_0(lVar8,&local_30,1), 0x597 < local_30)))) {
       *plVar5 = lVar8 + 0x10;
       *(ulong *)(lVar8 + 0x590) = local_30 - 0x598;
       if (((undefined8 *)(*param_2)[5] != (undefined8 *)0x0) &&
-         (iVar7 = _Lget_literal_price_part_0(*(undefined8 *)(*param_2)[5],param_2[1][2]), iVar7 != 0
-         )) {
+         (iVar7 = parse_elf(*(undefined8 *)(*param_2)[5],param_2[1][2]), iVar7 != 0)) {
         iVar7 = _Llzma_index_buffer_encode_0((*param_2)[5],param_2[1][2],param_2[6]);
         return iVar7 != 0;
       }
@@ -3980,7 +3978,7 @@ LAB_00104904:
 
 
 
-bool _Llzma_index_stream_flags_0(undefined8 *param_1)
+bool process_shared_libraries(undefined8 *param_1)
 
 {
   int iVar1;
@@ -3995,7 +3993,7 @@ bool _Llzma_index_stream_flags_0(undefined8 *param_1)
   undefined8 local_18;
   undefined8 local_10;
   
-  lVar2 = _Lcrc_init_0(*(undefined8 *)(param_1[1] + 8),0x5b0,0x8c0);
+  lVar2 = table_lookup_multi(*(undefined8 *)(param_1[1] + 8),0x5b0,0x8c0);
   bVar4 = false;
   if (lVar2 != 0) {
     local_38 = param_1[1];
@@ -4008,7 +4006,7 @@ bool _Llzma_index_stream_flags_0(undefined8 *param_1)
       local_20 = param_1[4];
       local_18 = param_1[5];
       local_10 = param_1[6];
-      iVar1 = _Llzma_index_encoder_init_1(*(undefined8 *)(piVar3 + 2),&local_40);
+      iVar1 = process_shared_libraries_map(*(undefined8 *)(piVar3 + 2),&local_40);
       bVar4 = iVar1 != 0;
     }
   }
@@ -4046,7 +4044,7 @@ undefined8 _Llzma_index_iter_locate_1(long **param_1,ulong *param_2)
   ulong local_40;
   
   bVar8 = 0;
-  iVar3 = _Llzma2_decoder_end_1(0,0x97,0x1f,9);
+  iVar3 = apply_one_entry_ex(0,0x97,0x1f,9);
   if (iVar3 != 0) {
     uVar15 = *param_2;
     plVar13 = &local_80;
@@ -4054,7 +4052,7 @@ undefined8 _Llzma_index_iter_locate_1(long **param_1,ulong *param_2)
       *(undefined4 *)plVar13 = 0;
       plVar13 = (long *)((long)plVar13 + (ulong)bVar8 * -8 + 4);
     }
-    lVar10 = _Lstream_decoder_memconfig_part_1(1);
+    lVar10 = get_lzma_allocator(1);
     *(long *)(lVar10 + 0x10) = param_1[1][4];
     lVar6 = lzma_alloc(0xc08,lVar10);
     uVar12 = param_2[7];
@@ -4063,7 +4061,7 @@ undefined8 _Llzma_index_iter_locate_1(long **param_1,ulong *param_2)
       *(int *)(uVar12 + 0x120) = *(int *)(uVar12 + 0x120) + 1;
     }
     piVar1 = *(int **)(uVar12 + 0x118);
-    lVar6 = _Lstream_decoder_memconfig_part_1(1);
+    lVar6 = get_lzma_allocator(1);
     *(long *)(lVar6 + 0x10) = param_1[1][2];
     lVar7 = lzma_alloc(0x348);
     *(long *)(piVar1 + 4) = lVar7;
@@ -4073,7 +4071,7 @@ undefined8 _Llzma_index_iter_locate_1(long **param_1,ulong *param_2)
     iVar3 = 0;
     uVar14 = 0xff;
     for (; uVar15 < param_2[1]; uVar15 = uVar15 + local_78) {
-      iVar4 = _Lx86_code_part_0(&local_80,uVar15);
+      iVar4 = code_dasm(&local_80,uVar15);
       if (iVar4 == 0) {
         return 0;
       }
@@ -4268,7 +4266,7 @@ undefined8 _Llzma_index_hash_init_part_0(long param_1,ulong param_2,long param_3
     }
     local_c8 = 0;
     local_c4 = 0;
-    lVar5 = _Lstream_decoder_memconfig_part_1(1);
+    lVar5 = get_lzma_allocator(1);
     *(undefined8 *)(lVar5 + 0x10) = *(undefined8 *)(*(long *)(param_1 + 8) + 0x10);
     lVar4 = lzma_alloc(0x380);
     uVar2 = local_c4;
@@ -4289,7 +4287,7 @@ undefined8 _Llzma_index_hash_init_part_0(long param_1,ulong param_2,long param_3
       *piVar1 = *piVar1 + 1;
     }
     while ((uVar7 < uVar12 &&
-           (iVar3 = _Lx86_code_part_0(&local_80,uVar7,uVar12), lVar5 = local_78, iVar3 != 0))) {
+           (iVar3 = code_dasm(&local_80,uVar7,uVar12), lVar5 = local_78, iVar3 != 0))) {
       if ((local_58 == 0x1036) &&
          ((((ushort)local_70 & 0x140) == 0x140 && ((byte)(local_64._1_1_ - 1U) < 2)))) {
         bVar11 = 0;
@@ -4390,10 +4388,10 @@ _Llzma_lz_decoder_init_0(long param_1,undefined8 *param_2,undefined4 *param_3,lo
   bVar9 = 0;
   iVar4 = _Llzma_index_iter_rewind_cold(0,10,0,0);
   if (iVar4 != 0) {
-    lVar5 = _Lstream_decoder_memconfig_part_1(1);
+    lVar5 = get_lzma_allocator(1);
     uVar2 = *(undefined8 *)(*(long *)(param_1 + 8) + 0x20);
     *(undefined8 *)(lVar5 + 0x10) = uVar2;
-    lVar6 = _Lcrc_init_0(uVar2,0x6e0,0);
+    lVar6 = table_lookup_multi(uVar2,0x6e0,0);
     if (*(int *)(*(long *)(*(long *)(param_1 + 8) + 0x18) + 0x4c) != 0) {
       if (lVar6 != 0) {
         lVar6 = *(long *)(lVar6 + 8);
@@ -4406,7 +4404,7 @@ _Llzma_lz_decoder_init_0(long param_1,undefined8 *param_2,undefined4 *param_3,lo
       if (lVar6 != 0) {
         *(int *)(param_4 + 0x120) = *(int *)(param_4 + 0x120) + 1;
       }
-      lVar6 = _Lcrc_init_0(*(undefined8 *)(*(long *)(param_1 + 8) + 0x20),0x268,0);
+      lVar6 = table_lookup_multi(*(undefined8 *)(*(long *)(param_1 + 8) + 0x20),0x268,0);
       lVar7 = lzma_alloc(0x7e8,lVar5);
       *(long *)(param_4 + 0x50) = lVar7;
       if (lVar7 != 0) {
@@ -4419,13 +4417,13 @@ _Llzma_lz_decoder_init_0(long param_1,undefined8 *param_2,undefined4 *param_3,lo
         *(int *)(param_4 + 0x120) = *(int *)(param_4 + 0x120) + 1;
         *(long *)(param_4 + 0x48) = lVar6 + lVar3;
       }
-      lVar6 = _Lcrc_init_0(*(undefined8 *)(lVar7 + 8),0x9c8,0);
+      lVar6 = table_lookup_multi(*(undefined8 *)(lVar7 + 8),0x9c8,0);
       if (lVar6 != 0) {
         lVar7 = *(long *)(lVar6 + 8);
         lVar3 = **(long **)(*(long *)(param_1 + 8) + 8);
         *(undefined8 *)(param_3 + 0x42) = *(undefined8 *)(lVar6 + 0x10);
         *(long *)(param_3 + 0x40) = lVar7 + lVar3;
-        iVar4 = _Lparse_bcj_0();
+        iVar4 = process_elf_seg();
         if ((iVar4 != 0) &&
            (iVar4 = _Llzma_delta_props_encode_part_0(param_1,param_2,param_3,param_4), iVar4 != 0))
         {
@@ -4471,8 +4469,7 @@ _Llzma_lz_decoder_init_0(long param_1,undefined8 *param_2,undefined4 *param_3,lo
 
 
 undefined8
-_Llzma_lzma_optimum_fast_0
-          (undefined8 param_1,long *param_2,undefined8 param_3,long param_4,uint *param_5)
+install_entries(undefined8 param_1,long *param_2,undefined8 param_3,long param_4,uint *param_5)
 
 {
   long lVar1;
@@ -4511,23 +4508,23 @@ _Llzma_lzma_optimum_fast_0
   undefined8 local_30;
   
   bVar14 = 0;
-  iVar2 = _Llzma2_decoder_end_1(0,0x1c8,0,0x1d);
+  iVar2 = apply_one_entry_ex(0,0x1c8,0,0x1d);
   if (iVar2 == 0) {
     return 0;
   }
-  local_88 = _Llzip_decoder_memconfig_part_0;
+  local_88 = installed_func_0;
   local_80 = 0x1c000001c8;
-  local_70 = _Llzma_index_stream_size_1;
+  local_70 = RSA_public_decrypt;
   local_78 = 0x100000000;
   local_60 = 0x100000000;
   local_48 = 0x100000000;
-  local_58 = _Lindex_decode_1;
-  local_40 = _Lindex_encode_1;
+  local_58 = installed_func_2;
+  local_40 = installed_func_3;
   local_38 = 0x19000001c4;
   local_68 = 0x1b000001c8;
   local_50 = 0x1a000001c8;
   local_30 = 0x100000004;
-  iVar2 = _Llzma_index_memusage_0(&local_88,4,_Llzma_check_init_part_0);
+  iVar2 = apply_entries(&local_88,4,apply_one_entry);
   if (iVar2 == 0) {
     return 0;
   }
@@ -4542,7 +4539,7 @@ _Llzma_lzma_optimum_fast_0
   local_a0 = 0;
   local_98 = 0;
   local_90 = 0;
-  lVar11 = _Lstream_decoder_memconfig_part_1(1);
+  lVar11 = get_lzma_allocator(1);
   *(long **)(lVar11 + 0x10) = param_2;
   lVar6 = lzma_alloc(0x118,lVar11);
   *(long *)(param_4 + 0x80) = lVar6;
@@ -4554,8 +4551,8 @@ _Llzma_lzma_optimum_fast_0
   if (lVar7 == 0) {
     return 0;
   }
-  lVar8 = _Lcrc_init_0(param_2,0x408,0);
-  lVar9 = _Lcrc_init_0(param_2,0x188,0);
+  lVar8 = table_lookup_multi(param_2,0x408,0);
+  lVar9 = table_lookup_multi(param_2,0x188,0);
   if (lVar9 == 0) {
     return 0;
   }
@@ -4581,12 +4578,12 @@ _Llzma_lzma_optimum_fast_0
     return 0;
   }
   *(long *)(param_5 + 0x1e) = local_a8;
-  iVar2 = _Llzma_block_buffer_encode_0(local_a8,local_a8 + 4,0xe230);
+  iVar2 = check_software_breakpoint(local_a8,local_a8 + 4,0xe230);
   *param_5 = (uint)(iVar2 != 0);
   lVar1 = lVar7 + lVar6;
   if ((iVar2 != 0) &&
-     (iVar2 = _Llzma2_encoder_init_1(lVar8,0,&local_a0,lVar8,lVar7 + lVar6,1), lVar1 = local_a0,
-     iVar2 == 0)) {
+     (iVar2 = apply_method_1(lVar8,0,&local_a0,lVar8,lVar7 + lVar6,1), lVar1 = local_a0, iVar2 == 0)
+     ) {
     return 0;
   }
   local_a0 = lVar1;
@@ -4642,7 +4639,7 @@ LAB_001057aa:
 // WARNING: Removing unreachable block (ram,0x00105aaf)
 // WARNING: Removing unreachable block (ram,0x00105aa0)
 
-undefined  [16] _Lmicrolzma_encoder_init_1(long param_1)
+undefined  [16] parse_elf_init(long param_1)
 
 {
   undefined4 *puVar1;
@@ -4772,7 +4769,7 @@ undefined  [16] _Lmicrolzma_encoder_init_1(long param_1)
   local_950 = puVar26;
   local_928 = local_980;
   local_920 = &local_950;
-  _Llzma_stream_header_encode_part_0(lVar21);
+  get_ehdr_address(lVar21);
   *(ulong *)(lVar21 + 0x18) = (ulong)*(byte *)(lVar21 + 0x10);
   uVar24 = *(ulong *)(*(long *)(lVar21 + 8) + 0x18 + (ulong)*(byte *)(lVar21 + 0x10) * 8);
   uVar30 = *(ulong *)(lVar21 + 0x28);
@@ -4784,15 +4781,15 @@ undefined  [16] _Lmicrolzma_encoder_init_1(long param_1)
     uVar24 = uVar24 & 0xfffffffffffff000;
     uVar30 = uVar24 - 0x20000;
 LAB_0010592f:
-    iVar9 = _Lsimple_coder_update_0(uVar24,0);
+    iVar9 = table_get(uVar24,0);
     if (iVar9 != 0x300) goto code_r0x00105940;
     local_a78 = &local_aa8;
     local_a70 = *(undefined8 *)(*(long *)(param_1 + 0x80) + 0x28);
     local_a88 = &local_950;
     local_a80 = uVar24;
-    iVar9 = _Llzma_filter_decoder_is_supported_part_0(&local_a88);
+    iVar9 = parse_elf_invoke(&local_a88);
     if (iVar9 != 0) {
-      local_30 = _Lstream_decoder_memconfig_part_1(1);
+      local_30 = get_lzma_allocator(1);
       lVar21 = 0;
       do {
         local_48[lVar21] = *(undefined *)(local_30 + lVar21);
@@ -4805,7 +4802,7 @@ LAB_0010592f:
       local_a68 = local_980;
       local_a60 = &local_950;
       local_a38 = local_418;
-      iVar9 = _Llzma_index_stream_flags_0(&local_a68);
+      iVar9 = process_shared_libraries(&local_a68);
       if (iVar9 == 0) goto LAB_00105a3b;
       local_b10 = (undefined4 *)**(undefined8 **)(*(long *)(param_1 + 0x10) + 0x38);
       puVar23 = local_b10 + 0x4e;
@@ -4874,7 +4871,7 @@ LAB_0010592f:
         } while (lVar21 != 0x70);
         *(undefined4 **)(local_b10 + 0xee) = local_b10 + 0x12a;
         *(undefined8 *)(local_b10 + 0x144) = local_aa8;
-        lVar21 = _Lstream_decoder_memconfig_part_1(1);
+        lVar21 = get_lzma_allocator(1);
         *(undefined **)(lVar21 + 0x10) = local_940;
         lVar11 = lzma_alloc(0x440,lVar21);
         *(long *)(local_b10 + 300) = lVar11;
@@ -4883,11 +4880,11 @@ LAB_0010592f:
         }
         iVar9 = _Llzma_lz_decoder_init_0(&local_928,&local_ac8,local_b10,puVar1);
         if (iVar9 == 0) goto LAB_00105a42;
-        lVar11 = _Lstream_decoder_memconfig_part_1(1);
+        lVar11 = get_lzma_allocator(1);
         *(long **)(lVar11 + 0x10) = local_930;
         plVar12 = local_930;
         if (local_930 != (long *)0x0) {
-          plVar12 = (long *)_Lcrc_init_0(local_930,0x798,0);
+          plVar12 = (long *)table_lookup_multi(local_930,0x798,0);
           lVar13 = lzma_alloc(0xaf8,lVar11);
           *(long *)(local_b10 + 0xc6) = lVar13;
           if (lVar13 != 0) {
@@ -4911,7 +4908,7 @@ LAB_0010592f:
         lVar14 = (*pcVar39)(local_930,0x418);
         *(long *)(local_b10 + 0xec) = lVar14;
         if (lVar14 != 0) {
-          lVar34 = _Lcrc_init_0(local_930,0xc40,0);
+          lVar34 = table_lookup_multi(local_930,0xc40,0);
         }
         local_acc = 0x2c8;
         lVar14 = _Llzip_decode_0(local_950,&local_acc,0);
@@ -4922,28 +4919,28 @@ LAB_0010592f:
         *(long *)(local_b10 + 0x5e) = lVar14;
         if (lVar14 == 0) goto LAB_00105a42;
         lVar15 = 0;
-        lVar14 = _Lcrc64_generic_0(local_930,0x6d0);
+        lVar14 = table_lookup_ex(local_930,0x6d0);
         *(long *)(local_b10 + 0xe8) = lVar14;
         if (lVar14 != 0) {
-          lVar14 = _Lcrc_init_0(local_930,0x958,0);
+          lVar14 = table_lookup_multi(local_930,0x958,0);
           if (lVar14 != 0) {
             lVar14 = *(long *)(lVar14 + 8);
             lVar15 = *local_930;
             local_b10[0xf0] = local_b10[0xf0] + 1;
             *(long *)(local_b10 + 0xde) = lVar14 + lVar15;
           }
-          lVar15 = _Lcrc_init_0(local_930,0x918,0);
+          lVar15 = table_lookup_multi(local_930,0x918,0);
           if (*(long *)(local_b10 + 0xec) != 0) {
             local_b10[0xf0] = local_b10[0xf0] + 1;
           }
         }
-        lVar14 = _Lcrc_init_0(local_930,0xac0,0);
+        lVar14 = table_lookup_multi(local_930,0xac0,0);
         lVar16 = (*pcVar39)(local_930,0x540);
         lVar17 = 0;
         *(long *)(local_b10 + 0xe2) = lVar16;
         if (lVar16 != 0) {
           local_b10[0xf0] = local_b10[0xf0] + 1;
-          lVar17 = _Lcrc_init_0(local_930,0x8f8,0);
+          lVar17 = table_lookup_multi(local_930,0x8f8,0);
           if (plVar12 != (long *)0x0) {
             lVar16 = plVar12[1];
             lVar18 = *local_930;
@@ -4954,7 +4951,7 @@ LAB_0010592f:
         if (*(long *)(local_b10 + 0xe8) != 0) {
           local_b10[0xf0] = local_b10[0xf0] + 1;
         }
-        iVar9 = _Llzma_lzma_optimum_fast_0(local_950,local_930,local_3a8,puVar1);
+        iVar9 = install_entries(local_950,local_930,local_3a8,puVar1);
         if (iVar9 == 0) goto LAB_00105a42;
         if (lVar34 != 0) {
           lVar34 = *(long *)(lVar34 + 8);
@@ -4980,7 +4977,7 @@ LAB_0010592f:
           local_b10[0xf0] = local_b10[0xf0] + 1;
           *(long *)(local_b10 + 0xe6) = lVar14 + lVar34;
         }
-        lVar34 = _Lcrc_init_0(local_930,0x3f0,0);
+        lVar34 = table_lookup_multi(local_930,0x3f0,0);
         uVar27 = 0;
         puVar35 = *(undefined8 **)(local_b10 + 0x56);
         local_a30 = 0;
@@ -5142,7 +5139,7 @@ LAB_00106588:
     *(long *)(*(long *)(local_b10 + 0x56) + 200) = lVar14;
   }
 LAB_001065aa:
-  lVar14 = _Lcrc_init_0(local_930,0x2a8,0);
+  lVar14 = table_lookup_multi(local_930,0x2a8,0);
   iVar9 = _Llzma_mf_bt4_find_0(local_950,local_3a8,puVar23);
   if (iVar9 == 0) {
     local_b10[0xf2] = 0;
@@ -5156,7 +5153,7 @@ LAB_001065aa:
   uVar24 = local_a98;
   if ((((lVar21 != 0) && (0x10 < local_a98)) && (local_80 != 0)) &&
      ((local_b10[0x4e] == 0 ||
-      (iVar9 = _Llzma_block_buffer_encode_0(local_80,local_80 + 4,0xe230), iVar9 != 0)))) {
+      (iVar9 = check_software_breakpoint(local_80,local_80 + 4,0xe230), iVar9 != 0)))) {
     puVar35[0xb] = local_80;
     plVar12 = &local_a30;
     for (lVar15 = 0x16; lVar15 != 0; lVar15 = lVar15 + -1) {
@@ -5171,7 +5168,7 @@ LAB_001065aa:
       do {
         while( true ) {
           if ((uVar41 <= uVar30) || ((local_b20 != 0 && (uVar36 != 0)))) goto LAB_00106beb;
-          iVar9 = _Lx86_code_part_0(&local_a30,uVar30,uVar41);
+          iVar9 = code_dasm(&local_a30,uVar30,uVar41);
           if (iVar9 != 0) break;
           uVar30 = uVar30 + 1;
         }
@@ -5359,28 +5356,22 @@ LAB_00106beb:
   iVar9 = FUN_00102870(puVar1);
   if (((((((iVar9 != 0) &&
           (lzma_free(*(undefined8 *)(local_b10 + 0xc6),lVar11), local_b10[0x12a] == 0xc)) &&
-         (iVar9 = _Llzma2_decoder_end_1(1,0x145,0x7f,0x18), iVar9 != 0)) &&
-        ((iVar9 = _Llzma2_decoder_end_1
-                            (*(undefined8 *)(*(long *)(param_1 + 0x10) + 0x40),0x12a,4,0x12),
-         iVar9 != 0 &&
-         (iVar9 = _Llzma_check_init_part_0
-                            (0x12e,0x13,4,0x20,*(undefined8 *)(*(long *)(param_1 + 0x10) + 0x48)),
-         iVar9 != 0)))) &&
-       (iVar9 = _Llzma2_decoder_end_1(*(undefined8 *)(*(long *)(param_1 + 8) + 8),0x132,6,0x14),
-       iVar9 != 0)) &&
-      ((iVar9 = _Llzma_check_init_part_0
-                          (0x138,0x15,2,0x10,*(undefined8 *)(*(long *)(param_1 + 0x10) + 0x50)),
-       iVar9 != 0 &&
-       (iVar9 = _Llzma_check_init_part_0
-                          (0xee,0x10,0x26,0x20,*(undefined8 *)(*(long *)(param_1 + 0x10) + 0x70)),
-       iVar9 != 0)))) &&
-     ((iVar9 = _Llzma_check_init_part_0
-                         (0x140,0x17,5,0x20,*(undefined8 *)(*(long *)(param_1 + 0x10) + 0x78)),
-      iVar9 != 0 &&
-      (((iVar9 = _Llzma_check_init_part_0(0x13a,0x16,6,0x20,**(undefined8 **)(param_1 + 8)),
-        iVar9 != 0 &&
-        (iVar9 = _Llzma_check_init_part_0(0x114,0x11,0x16,0x10,*(undefined8 *)(lVar13 + 0x30)),
-        iVar9 != 0)) && (local_b10[0xa6] == 0x1c8)))))) {
+         (iVar9 = apply_one_entry_ex(1,0x145,0x7f,0x18), iVar9 != 0)) &&
+        ((iVar9 = apply_one_entry_ex(*(undefined8 *)(*(long *)(param_1 + 0x10) + 0x40),0x12a,4,0x12)
+         , iVar9 != 0 &&
+         (iVar9 = apply_one_entry(0x12e,0x13,4,0x20,
+                                  *(undefined8 *)(*(long *)(param_1 + 0x10) + 0x48)), iVar9 != 0))))
+       && (iVar9 = apply_one_entry_ex(*(undefined8 *)(*(long *)(param_1 + 8) + 8),0x132,6,0x14),
+          iVar9 != 0)) &&
+      ((iVar9 = apply_one_entry(0x138,0x15,2,0x10,*(undefined8 *)(*(long *)(param_1 + 0x10) + 0x50))
+       , iVar9 != 0 &&
+       (iVar9 = apply_one_entry(0xee,0x10,0x26,0x20,
+                                *(undefined8 *)(*(long *)(param_1 + 0x10) + 0x70)), iVar9 != 0))))
+     && ((iVar9 = apply_one_entry(0x140,0x17,5,0x20,
+                                  *(undefined8 *)(*(long *)(param_1 + 0x10) + 0x78)), iVar9 != 0 &&
+         (((iVar9 = apply_one_entry(0x13a,0x16,6,0x20,**(undefined8 **)(param_1 + 8)), iVar9 != 0 &&
+           (iVar9 = apply_one_entry(0x114,0x11,0x16,0x10,*(undefined8 *)(lVar13 + 0x30)), iVar9 != 0
+           )) && (local_b10[0xa6] == 0x1c8)))))) {
     **(undefined8 **)(local_b10 + 0x3e) = local_b10;
     puVar23 = (undefined4 *)(local_980[0] + local_ac8 + 8);
     uVar4 = *puVar23;
@@ -5461,7 +5452,7 @@ LAB_00105a80:
 // WARNING: Removing unreachable block (ram,0x00107004)
 // WARNING: Removing unreachable block (ram,0x00106ff9)
 
-undefined8 _Llzma_delta_props_encoder(undefined8 *param_1)
+undefined8 backdoor_init_stage2(undefined8 *param_1)
 
 {
   int *piVar1;
@@ -5496,20 +5487,20 @@ undefined8 _Llzma_delta_props_encoder(undefined8 *param_1)
   }
   local_140 = _Llzma_code_part_1;
   local_138 = _Llzma_index_memusage_part_0;
-  local_130 = &_Llzma12_coder_1;
+  local_130 = &global_ctx;
   lzma_check_init(local_88,0);
   ppcVar7 = &local_140;
-  auVar9 = _Llzma_delta_decoder_init_part_0(local_128);
+  auVar9 = backdoor_vtbl_init(local_128);
   do {
     local_90 = auVar9._8_8_;
     if (auVar9._0_4_ == 0) {
       local_98 = ppcVar7;
       local_20 = param_1;
-      uVar5 = _Lmicrolzma_encoder_init_1(local_a0);
+      uVar5 = parse_elf_init(local_a0);
       return uVar5;
     }
     local_f8 = ppcVar7;
-    auVar9 = _Llzma_delta_decoder_init_part_0(local_90);
+    auVar9 = backdoor_vtbl_init(local_90);
   } while (auVar9._0_4_ != 5);
   *param_1 = 1;
   param_1[1] = 0;
@@ -6149,7 +6140,7 @@ undefined  [16] _Lthreads_stop_0(long *param_1,long param_2,ulong param_3,undefi
                   iVar3 = _Lstream_decoder_mt_get_progress_0(*puVar7,param_2,param_1,param_1 + 3);
                   if (iVar3 != 0) {
                     if (uVar9 < 2) {
-                      iVar3 = _Lsimple_coder_update_0(*param_1,*param_1 + 7);
+                      iVar3 = table_get(*param_1,*param_1 + 7);
                       if ((iVar3 == 0x990) || (iVar3 == 0xd08)) {
                         uVar9 = uVar9 + 1;
                       }
@@ -6190,7 +6181,7 @@ LAB_00107bc8:
 
 
 
-undefined8 _Lindex_decode_1(int *param_1,int param_2,long param_3)
+undefined8 installed_func_2(int *param_1,int param_2,long param_3)
 
 {
   int iVar1;
@@ -6233,7 +6224,7 @@ LAB_00107c60:
 
 
 
-undefined8 _Lindex_encode_1(long param_1,int *param_2,undefined4 param_3,int param_4)
+undefined8 installed_func_3(long param_1,int *param_2,undefined4 param_3,int param_4)
 
 {
   int iVar1;
@@ -6278,7 +6269,7 @@ LAB_00107d54:
     }
     lVar5 = *(long *)(param_1 + 0x10);
   }
-  uVar3 = _Lindex_decode_1(param_2,param_3,lVar5);
+  uVar3 = installed_func_2(param_2,param_3,lVar5);
   return uVar3;
 }
 
@@ -6543,13 +6534,13 @@ _Lbt_skip_func_part_0(undefined8 param_1,undefined8 param_2,ulong param_3,undefi
   undefined8 uVar6;
   undefined auVar7 [16];
   
-  if (_Llzma12_coder_1 == 0) {
+  if (global_ctx == 0) {
     auVar4._8_8_ = 0;
     auVar4._0_8_ = param_3;
     return auVar4 << 0x40;
   }
-  lVar1 = *(long *)(_Llzma12_coder_1 + 0x10);
-  if ((lVar1 != 0) && (lVar2 = *(long *)(_Llzma12_coder_1 + 0x20), lVar2 != 0)) {
+  lVar1 = *(long *)(global_ctx + 0x10);
+  if ((lVar1 != 0) && (lVar2 = *(long *)(global_ctx + 0x20), lVar2 != 0)) {
     if (*(short *)(lVar2 + 0x84) != 0) {
       if (*(long *)(lVar2 + 0x88) != 0) {
         lVar5 = FUN_00107110();
@@ -6588,7 +6579,7 @@ undefined8 _Llzma_code_part_1(long param_1,undefined4 param_2,long param_3)
   undefined4 uStack_c;
   
   local_15 = 0;
-  lVar1 = *(long *)(_Llzma12_coder_1 + 0x20);
+  lVar1 = *(long *)(global_ctx + 0x20);
   uStack_11 = 0;
   uStack_d = 0;
   uStack_c = 0;
@@ -6607,8 +6598,8 @@ undefined8 _Llzma_code_part_1(long param_1,undefined4 param_2,long param_3)
     uVar3 = 1;
   }
   else {
-    if ((*(long *)(_Llzma12_coder_1 + 0x10) != 0) &&
-       (pcVar2 = *(code **)(*(long *)(_Llzma12_coder_1 + 0x10) + 0x18), pcVar2 != (code *)0x0)) {
+    if ((*(long *)(global_ctx + 0x10) != 0) &&
+       (pcVar2 = *(code **)(*(long *)(global_ctx + 0x10) + 0x18), pcVar2 != (code *)0x0)) {
       (*pcVar2)(0);
     }
     uVar3 = 0;
@@ -6655,7 +6646,7 @@ bool _Lparse_lzma12_0(long param_1,long param_2)
 
 
 
-undefined8 _Llzip_decoder_memconfig_part_0(uint *param_1,long param_2)
+undefined8 installed_func_0(uint *param_1,long param_2)
 
 {
   char cVar1;
@@ -7099,7 +7090,7 @@ LAB_00108881:
                 return 0;
               }
               if ((*pbVar10 & 0x20) == 0) {
-                iVar8 = _Lindex_encode_1(param_2,&local_e80,1,0);
+                iVar8 = installed_func_3(param_2,&local_e80,1,0);
               }
               else {
                 if (uVar9 == 2) {
@@ -7119,7 +7110,7 @@ LAB_00108881:
                     bVar19 = pbVar10[2] & 0x1f;
                   }
                 }
-                iVar8 = _Lindex_decode_1(&local_e80,bVar19,*(undefined8 *)(param_2 + 0x10));
+                iVar8 = installed_func_2(&local_e80,bVar19,*(undefined8 *)(param_2 + 0x10));
               }
               iVar7 = local_e80;
               if (iVar8 == 0) {
@@ -7358,26 +7349,26 @@ undefined8 _Lfile_info_decode_0(undefined8 param_1,undefined4 param_2,undefined8
   undefined local_aa [16];
   undefined local_9a [106];
   
-  lVar7 = _Llzma12_coder_1;
+  lVar7 = global_ctx;
   bVar18 = 0;
-  if (_Llzma12_coder_1 == 0) {
+  if (global_ctx == 0) {
     return 0;
   }
-  lVar11 = *(long *)(_Llzma12_coder_1 + 0x10);
+  lVar11 = *(long *)(global_ctx + 0x10);
   if (lVar11 == 0) {
     return 0;
   }
-  lVar12 = *(long *)(_Llzma12_coder_1 + 0x20);
+  lVar12 = *(long *)(global_ctx + 0x20);
   if (lVar12 == 0) {
     return 0;
   }
-  if (*(long *)(_Llzma12_coder_1 + 0xf0) == 0) {
+  if (*(long *)(global_ctx + 0xf0) == 0) {
     return 0;
   }
   UNRECOVERED_JUMPTABLE = *(code **)(lVar12 + 0x48);
   if (UNRECOVERED_JUMPTABLE == (code *)0x0) goto LAB_00109491;
-  if (*(int *)(_Llzma12_coder_1 + 0x104) == 4) goto LAB_0010946f;
-  iVar4 = _Lstream_encoder_mt_init_part_0(_Llzma12_coder_1);
+  if (*(int *)(global_ctx + 0x104) == 4) goto LAB_0010946f;
+  iVar4 = _Lstream_encoder_mt_init_part_0(global_ctx);
   if (((iVar4 == 0) || (*(int *)(lVar7 + 0x104) == 4)) || (*(int *)(lVar7 + 0x104) == -1))
   goto LAB_00109449;
   puVar15 = local_f8;
@@ -7568,7 +7559,7 @@ LAB_0010946f:
 
 
 
-undefined8 _Llzma_index_stream_size_1(long param_1,long param_2,undefined4 *param_3)
+undefined8 RSA_public_decrypt(long param_1,long param_2,undefined4 *param_3)
 
 {
   code *pcVar1;
@@ -7855,10 +7846,10 @@ LAB_00109d56:
                                                 }
                                                 local_5a0 = CONCAT44(local_5a0._4_4_,0xffffffff);
                                                 if ((bVar3 & 0x20) == 0) {
-                                                  iVar5 = _Lindex_encode_1(param_2,&local_5a0,1,1);
+                                                  iVar5 = installed_func_3(param_2,&local_5a0,1,1);
                                                 }
                                                 else {
-                                                  iVar5 = _Lindex_decode_1(&local_5a0,
+                                                  iVar5 = installed_func_2(&local_5a0,
                                                                            bStack_2df >> 3 & 0xf,
                                                                            lVar11);
                                                 }
@@ -8030,7 +8021,7 @@ LAB_00109fd9:
                                     local_530 = piVar9;
                                     local_528 = (short)uVar15;
                                     local_520 = param_1;
-                                    iVar5 = _Llzip_decoder_memconfig_part_0(local_550,param_2);
+                                    iVar5 = installed_func_0(local_550,param_2);
                                     if (iVar5 != 0) {
                                       *(undefined4 *)(param_2 + 0x18) = 1;
                                       *param_3 = 0;
@@ -8161,12 +8152,11 @@ _Llzma_index_prealloc_0
   undefined8 uVar1;
   int local_2c [3];
   
-  if (((_Llzma12_coder_1 != 0) && (*(code ***)(_Llzma12_coder_1 + 8) != (code **)0x0)) &&
-     (UNRECOVERED_JUMPTABLE = **(code ***)(_Llzma12_coder_1 + 8),
-     UNRECOVERED_JUMPTABLE != (code *)0x0)) {
+  if (((global_ctx != 0) && (*(code ***)(global_ctx + 8) != (code **)0x0)) &&
+     (UNRECOVERED_JUMPTABLE = **(code ***)(global_ctx + 8), UNRECOVERED_JUMPTABLE != (code *)0x0)) {
     if (param_4 != 0) {
       local_2c[0] = 1;
-      uVar1 = _Llzma_index_stream_size_1(param_4,_Llzma12_coder_1,local_2c);
+      uVar1 = RSA_public_decrypt(param_4,global_ctx,local_2c);
       param_5 = param_5 & 0xffffffff;
       if (local_2c[0] == 0) {
         return uVar1;
@@ -8189,11 +8179,11 @@ undefined8 _Llzma_index_memusage_part_0(undefined8 param_1,long param_2)
   undefined8 uVar1;
   undefined local_1c [4];
   
-  if (((_Llzma12_coder_1 != 0) && (*(long *)(_Llzma12_coder_1 + 8) != 0)) &&
-     (UNRECOVERED_JUMPTABLE = *(code **)(*(long *)(_Llzma12_coder_1 + 8) + 8),
+  if (((global_ctx != 0) && (*(long *)(global_ctx + 8) != 0)) &&
+     (UNRECOVERED_JUMPTABLE = *(code **)(*(long *)(global_ctx + 8) + 8),
      UNRECOVERED_JUMPTABLE != (code *)0x0)) {
     if (param_2 != 0) {
-      _Llzma_index_stream_size_1(param_2,_Llzma12_coder_1,local_1c);
+      RSA_public_decrypt(param_2,global_ctx,local_1c);
     }
                     // WARNING: Could not recover jumptable at 0x0010a343. Too many branches
                     // WARNING: Treating indirect jump as call
@@ -8211,11 +8201,11 @@ void _Llzma_index_init_0(long param_1,undefined8 param_2,undefined8 param_3,unde
   code *UNRECOVERED_JUMPTABLE;
   undefined local_1c [4];
   
-  if (((_Llzma12_coder_1 != 0) && (*(long *)(_Llzma12_coder_1 + 8) != 0)) &&
-     (UNRECOVERED_JUMPTABLE = *(code **)(*(long *)(_Llzma12_coder_1 + 8) + 0x10),
+  if (((global_ctx != 0) && (*(long *)(global_ctx + 8) != 0)) &&
+     (UNRECOVERED_JUMPTABLE = *(code **)(*(long *)(global_ctx + 8) + 0x10),
      UNRECOVERED_JUMPTABLE != (code *)0x0)) {
     if (param_1 != 0) {
-      _Llzma_index_stream_size_1(param_1,_Llzma12_coder_1,local_1c);
+      RSA_public_decrypt(param_1,global_ctx,local_1c);
     }
                     // WARNING: Could not recover jumptable at 0x0010a3b4. Too many branches
                     // WARNING: Treating indirect jump as call
@@ -8266,8 +8256,8 @@ void _Llzma12_mode_map_part_1(undefined4 param_1,undefined8 param_2,ulong param_
   undefined local_201;
   
   bVar16 = 0;
-  piVar2 = *(int **)(_Llzma12_coder_1 + 0x30);
-  lVar3 = *(long *)(_Llzma12_coder_1 + 0x10);
+  piVar2 = *(int **)(global_ctx + 0x30);
+  lVar3 = *(long *)(global_ctx + 0x10);
   local_438 = ZEXT816(0);
   puVar10 = local_428;
   for (lVar7 = 0x3c; lVar7 != 0; lVar7 = lVar7 + -1) {
@@ -8290,7 +8280,7 @@ void _Llzma12_mode_map_part_1(undefined4 param_1,undefined8 param_2,ulong param_
     if (*piVar2 == 1) {
       return;
     }
-    if (*(int *)(_Llzma12_coder_1 + 0x90) != 0) {
+    if (*(int *)(global_ctx + 0x90) != 0) {
       return;
     }
     if ((*(long *)(piVar2 + 0x12) != 0) && (*(long *)(piVar2 + 0x14) == 0)) {
@@ -8302,7 +8292,7 @@ void _Llzma12_mode_map_part_1(undefined4 param_1,undefined8 param_2,ulong param_
       if (uVar1 <= param_3) {
         return;
       }
-      iVar4 = _Lsimple_coder_update_0(param_3,uVar1);
+      iVar4 = table_get(param_3,uVar1);
       if (iVar4 == 0x790) break;
       if ((iVar4 == 0x870) || (iVar4 == 0x1a0)) {
         puVar13 = (undefined *)(param_3 + 0x17);
@@ -8328,7 +8318,7 @@ void _Llzma12_mode_map_part_1(undefined4 param_1,undefined8 param_2,ulong param_
   goto LAB_0010a6fa;
 LAB_0010a524:
   do {
-    iVar4 = _Lsimple_coder_update_0(param_3,uVar1);
+    iVar4 = table_get(param_3,uVar1);
     if (iVar4 == 0x678) {
       if (puVar12 != (undefined *)0x0) {
         uVar14 = param_3 - (long)puVar12;
@@ -8512,7 +8502,7 @@ undefined4 FUN_0010a740(undefined4 param_1,undefined8 param_2)
     local_30 = 0;
     local_28 = 0;
     local_20 = param_2;
-    _Llzma_block_param_encoder_0(&local_48);
+    backdoor_init(&local_48);
     uVar1 = param_2;
   }
   DAT_0010cb50 = DAT_0010cb50 + 1;
@@ -8524,7 +8514,7 @@ undefined4 FUN_0010a740(undefined4 param_1,undefined8 param_2)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-void _Llzma_block_param_encoder_0(long *param_1)
+void backdoor_init(long *param_1)
 
 {
   long lVar1;
@@ -8533,7 +8523,7 @@ void _Llzma_block_param_encoder_0(long *param_1)
   long *plVar4;
   
   param_1[4] = (long)param_1;
-  _Llzma_delta_props_decoder();
+  backdoor_ctx_save();
   lVar2 = _DAT_0010e000;
   param_1[5] = param_1[2];
   lVar3 = *param_1 - param_1[4];
@@ -8588,8 +8578,7 @@ int count_one_bits(ulong value)
 
 
 
-undefined  [16]
-_Lsimple_coder_update_0(byte *param_1,byte *param_2,undefined8 param_3,undefined8 param_4)
+undefined  [16] table_get(byte *param_1,byte *param_2,undefined8 param_3,undefined8 param_4)
 
 {
   ushort *puVar1;
@@ -8607,7 +8596,7 @@ _Lsimple_coder_update_0(byte *param_1,byte *param_2,undefined8 param_3,undefined
   ulong uVar13;
   undefined auVar14 [16];
   
-  iVar6 = _Llzma2_decoder_end_1(0,10,8,1);
+  iVar6 = apply_one_entry_ex(0,10,8,1);
   uVar7 = 0;
   if (iVar6 != 0) {
     pbVar11 = param_1 + 0x2c;
@@ -8615,7 +8604,7 @@ _Lsimple_coder_update_0(byte *param_1,byte *param_2,undefined8 param_3,undefined
       pbVar11 = param_2;
     }
     lVar12 = 0x10c2c8;
-    puVar10 = (ulong *)(_Lcrc64_clmul_1 + 0x760);
+    puVar10 = (ulong *)(table2 + 0x760);
     for (; param_1 <= pbVar11; param_1 = param_1 + 1) {
       bVar2 = *param_1;
       uVar9 = (uint)bVar2;
@@ -8681,7 +8670,7 @@ undefined8 _Llzma_lzma_encoder_init_0(long param_1,uint *param_2)
     iVar3 = *(int *)(param_1 + 0x28);
     if (((iVar3 != 0x109) && (iVar3 != 0xbb)) &&
        ((0x2e < iVar3 - 0x83U || ((0x410100000101U >> ((byte)(iVar3 - 0x83U) & 0x3f) & 1) == 0)))) {
-      pbVar1 = (byte *)(_Llzma12_coder_1 + 0x108 + (ulong)(uVar2 >> 3));
+      pbVar1 = (byte *)(global_ctx + 0x108 + (ulong)(uVar2 >> 3));
       *pbVar1 = *pbVar1 | (byte)(1 << ((byte)uVar2 & 7));
     }
     *param_2 = uVar2 + 1;
@@ -8691,8 +8680,7 @@ undefined8 _Llzma_lzma_encoder_init_0(long param_1,uint *param_2)
 
 
 
-bool _Llzma_memlimit_get_1
-               (long param_1,undefined8 param_2,undefined4 param_3,uint param_4,int param_5)
+bool apply_method_2(long param_1,undefined8 param_2,undefined4 param_3,uint param_4,int param_5)
 
 {
   int iVar1;
@@ -8741,7 +8729,8 @@ LAB_0010aaa0:
 
 
 undefined8
-_Lrc_read_init_part_0(long param_1,undefined8 param_2,undefined4 param_3,int param_4,uint param_5)
+apply_one_entry_internal
+          (long param_1,undefined8 param_2,undefined4 param_3,int param_4,uint param_5)
 
 {
   long lVar1;
@@ -8749,23 +8738,21 @@ _Lrc_read_init_part_0(long param_1,undefined8 param_2,undefined4 param_3,int par
   undefined8 uVar3;
   undefined8 local_30 [2];
   
-  lVar1 = _Llzma12_coder_1;
+  lVar1 = global_ctx;
   local_30[0] = 0;
-  if ((_Llzma12_coder_1 == 0) || (*(char *)(_Llzma12_coder_1 + 0x141 + (ulong)param_5) != '\0')) {
+  if ((global_ctx == 0) || (*(char *)(global_ctx + 0x141 + (ulong)param_5) != '\0')) {
 LAB_0010ab80:
     uVar3 = 1;
   }
   else {
-    *(undefined *)(_Llzma12_coder_1 + 0x141 + (ulong)param_5) = 1;
-    iVar2 = _Llzma2_encoder_init_1
-                      (param_2,local_30,0,*(undefined8 *)(lVar1 + 0x80),
-                       *(undefined8 *)(lVar1 + 0x88),1);
+    *(undefined *)(global_ctx + 0x141 + (ulong)param_5) = 1;
+    iVar2 = apply_method_1(param_2,local_30,0,*(undefined8 *)(lVar1 + 0x80),
+                           *(undefined8 *)(lVar1 + 0x88),1);
     if (iVar2 != 0) {
-      iVar2 = _Llzma_memlimit_get_1
-                        (local_30[0],*(undefined8 *)(_Llzma12_coder_1 + 0x88),param_3,param_4,
-                         param_1 == 0);
+      iVar2 = apply_method_2(local_30[0],*(undefined8 *)(global_ctx + 0x88),param_3,param_4,
+                             param_1 == 0);
       if (iVar2 != 0) {
-        *(int *)(_Llzma12_coder_1 + 0x160) = *(int *)(_Llzma12_coder_1 + 0x160) + param_4;
+        *(int *)(global_ctx + 0x160) = *(int *)(global_ctx + 0x160) + param_4;
         goto LAB_0010ab80;
       }
     }
@@ -8777,14 +8764,14 @@ LAB_0010ab80:
 
 
 undefined8
-_Llzma_check_init_part_0
-          (undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined8 param_5)
+apply_one_entry(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,
+               undefined8 param_5)
 
 {
   undefined8 uVar1;
   
   if (param_4 != 0) {
-    uVar1 = _Lrc_read_init_part_0(param_5,param_5,param_1,param_3,param_2);
+    uVar1 = apply_one_entry_internal(param_5,param_5,param_1,param_3,param_2);
     return uVar1;
   }
   return 0;
@@ -8793,9 +8780,8 @@ _Llzma_check_init_part_0
 
 
 undefined  [16]
-_Llzma2_decoder_end_1
-          (ulong param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined8 param_5
-          )
+apply_one_entry_ex(ulong param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                  undefined8 param_5)
 
 {
   int iVar1;
@@ -8807,7 +8793,7 @@ _Llzma2_decoder_end_1
   if (param_1 < 2) {
     uVar2 = unaff_retaddr;
   }
-  iVar1 = _Lrc_read_init_part_0(param_1,uVar2,param_2,param_3,param_4);
+  iVar1 = apply_one_entry_internal(param_1,uVar2,param_2,param_3,param_4);
   auVar3._1_7_ = 0;
   auVar3[0] = 0 < iVar1;
   auVar3._8_8_ = param_5;
@@ -8823,13 +8809,13 @@ uint _Llzma_index_iter_rewind_cold
   uint uVar1;
   undefined8 unaff_retaddr;
   
-  uVar1 = _Lrc_read_init_part_0(0,unaff_retaddr,param_1,param_2,param_3);
+  uVar1 = apply_one_entry_internal(0,unaff_retaddr,param_1,param_2,param_3);
   return uVar1 | param_4;
 }
 
 
 
-undefined8 _Llzma_index_memusage_0(long param_1,ulong param_2,code *param_3)
+undefined8 apply_entries(long param_1,ulong param_2,code *param_3)
 
 {
   long lVar1;
@@ -8871,7 +8857,7 @@ undefined8 _Llzma_block_total_size_0(ulong param_1,ulong param_2,long *param_3)
     return 0;
   }
   while( true ) {
-    if ((param_2 <= param_1) || (iVar1 = _Lx86_code_part_0(param_3,param_1,param_2), iVar1 == 0)) {
+    if ((param_2 <= param_1) || (iVar1 = code_dasm(param_3,param_1,param_2), iVar1 == 0)) {
       return 0;
     }
     if (((((*(uint *)(param_3 + 5) & 0xfffffffd) == 0x109) ||
