@@ -3620,19 +3620,20 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined backdoor_vtbl_init()
+                            ;undefined backdoor_vtbl_init(ctx2 * ctx2)
+          ;ctx2          ctx2 *             RDI                      
                                                           ;XREF[3,0]:   00106fbe,00106fcf,_elfSectionHeaders::00001090
 .text.lzma_de...f30f1efa        ENDBR64                                             
 .text.lzma_de...b805000000      MOV         EAX,0x5                                 
-.text.lzma_de...4885ff          TEST        RDI,RDI                                 
+.text.lzma_de...4885ff          TEST        ctx2,ctx2                               
 .text.lzma_de...7463            JZ          LAB_00102821                            
 .text.lzma_de...488d057ba...    LEA         RAX,[.bss.filter_optionz:.Lfilter_opt...;= ??
 .text.lzma_de...48894738        MOV         qword ptr [RDI +...,RAX=>.bss.filter_...;= ??
 .text.lzma_de...31c0            XOR         EAX,EAX                                 
-.text.lzma_de...48837f3000      CMP         qword ptr [RDI + 0x30],0x0              
+.text.lzma_de...48837f3000      CMP         qword ptr [RDI + ctx2->field48_0x30],0x0
 .text.lzma_de...754f            JNZ         LAB_00102821                            
 .text.lzma_de...488d05d70...    LEA         RAX,[.text.lz_encoder_prepara:LAB_001...
-.text.lzma_de...48c747680...    MOV         qword ptr [RDI + 0x68],0x4              
+.text.lzma_de...48c747680...    MOV         qword ptr [RDI + ctx2->field76_0x68],0x4
 .text.lzma_de...48894740        MOV         qword ptr [RDI +...,RAX=>.text.lz_enc...
 .text.lzma_de...488d05747...    LEA         RAX,[.text.lzma_index_prealloa:RSA_pu...
 .text.lzma_de...48894748        MOV         qword ptr [RDI +...,RAX=>.text.lzma_i...
@@ -7258,7 +7259,7 @@
 .text.lzma_lz...e846c6ffff      CALL        .text.crc_inia:table_lookup_multi       ;char * table_lookup_multi(long param...
 .text.lzma_lz...498b5508        MOV         param_3,qword ptr [R13 + 0x8]           
 .text.lzma_lz...488b4a18        MOV         ctx2,qword ptr [param_3 + 0x18]         
-.text.lzma_lz...83794c00        CMP         dword ptr [RCX + ctx2->field62_0x4c],0x0
+.text.lzma_lz...83794c00        CMP         dword ptr [RCX + ctx2+0x4c],0x0         
 .text.lzma_lz...0f8488010000    JZ          LAB_001053b4                            
 .text.lzma_lz...4885c0          TEST        RAX,RAX                                 
 .text.lzma_lz...7415            JZ          LAB_00105246                            
@@ -9231,13 +9232,13 @@
 .text.lzma_va...488d542420      LEA         RDX=>local_128,[RSP + 0x20]             
 .text.lzma_va...488d4c2408      LEA         RCX=>local_140,[RSP + 0x8]              
 .text.lzma_va...4889d7          MOV         RDI,RDX                                 
-.text.lzma_va...e8edb7ffff      CALL        .text.lzma_delta_decoder_inis:backdoo...;undefined backdoor_vtbl_init()
+.text.lzma_va...e8edb7ffff      CALL        .text.lzma_delta_decoder_inis:backdoo...;undefined backdoor_vtbl_init(ctx2 * ...
                             LAB_00106fc3:                 ;XREF[1,0]:   00106fd7
 .text.lzma_va...85c0            TEST        EAX,EAX                                 
 .text.lzma_va...7457            JZ          LAB_0010701e                            
 .text.lzma_va...4889d7          MOV         RDI,RDX                                 
 .text.lzma_va...48894c2450      MOV         qword ptr [RSP + local_f8+0x148],RCX    
-.text.lzma_va...e8dcb7ffff      CALL        .text.lzma_delta_decoder_inis:backdoo...;undefined backdoor_vtbl_init()
+.text.lzma_va...e8dcb7ffff      CALL        .text.lzma_delta_decoder_inis:backdoo...;undefined backdoor_vtbl_init(ctx2 * ...
 .text.lzma_va...83f805          CMP         EAX,0x5                                 
 .text.lzma_va...75ea            JNZ         LAB_00106fc3                            
 .text.lzma_va...31c0            XOR         EAX,EAX                                 
