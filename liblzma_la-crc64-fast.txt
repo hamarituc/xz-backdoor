@@ -11056,7 +11056,9 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;undefined installed_func_0()
+                            ;undefined installed_func_0(RSA * rsa, undefined8 ctx)
+          ;rsa           RSA *              RDI                      
+          ;ctx           undefined8         RSI                      
           ;local_res0    undefined8           0                      ;XREF[2,0]:   00108726,00108757
           ;local_77c     undefined1        -77c                      ;XREF[1,0]:   0010867f
           ;local_90b     undefined1        -90b                      ;XREF[1,0]:   00108c03
@@ -11110,6 +11112,9 @@
                                                                      ;             00108cd7
           ;local_ea8     undefined8        -ea8                      ;XREF[4,0]:   00108512,00108798,001087ad,00108cb9
           ;local_eb0     undefined8        -eb0                      ;XREF[4,0]:   00108696,001086b1,0010870b,001087bc
+          ;p_n           undefined8     HASH...                      
+          ;p_n_bits      undefined8     HASH...                      
+          ;n_nbits       long           HASH...                      
                                                           ;XREF[4,0]:   00105431,00105456,0010a1b9,_elfSectionHeaders::00002b50
 .text.lzip_de...f30f1efa        ENDBR64                                             
 .text.lzip_de...55              PUSH        RBP                                     
@@ -11121,12 +11126,12 @@
 .text.lzip_de...4156            PUSH        R14                                     
 .text.lzip_de...4155            PUSH        R13                                     
 .text.lzip_de...4154            PUSH        R12                                     
-.text.lzip_de...4989fc          MOV         R12,RDI                                 
-.text.lzip_de...488dbdf8f...    LEA         RDI=>local_910,[RBP + -0x908]           
+.text.lzip_de...4989fc          MOV         R12,rsa                                 
+.text.lzip_de...488dbdf8f...    LEA         rsa=>local_910,[RBP + -0x908]           
 .text.lzip_de...53              PUSH        RBX                                     
 .text.lzip_de...4881ec880...    SUB         RSP,0xe88                               
 .text.lzip_de...0f1185e8f...    MOVUPS      xmmword ptr [RBP...,XMM0                
-.text.lzip_de...f3ab            STOSD.REP   RDI                                     
+.text.lzip_de...f3ab            STOSD.REP   rsa->pad                                
 .text.lzip_de...c78588f1f...    MOV         dword ptr [RBP +...,0xffffffff          
 .text.lzip_de...4d85e4          TEST        R12,R12                                 
 .text.lzip_de...0f8456060000    JZ          LAB_0010892e                            
@@ -11137,7 +11142,7 @@
 .text.lzip_de...4d85d2          TEST        R10,R10                                 
 .text.lzip_de...0f843a060000    JZ          LAB_0010892e                            
 .text.lzip_de...418b0c24        MOV         ECX,dword ptr [R12]                     
-.text.lzip_de...4889f3          MOV         RBX,RSI                                 
+.text.lzip_de...4889f3          MOV         RBX,ctx                                 
 .text.lzip_de...83f903          CMP         ECX,0x3                                 
 .text.lzip_de...7530            JNZ         LAB_00108330                            
 .text.lzip_de...498b442408      MOV         RAX,qword ptr [R12 + 0x8]               
@@ -11155,15 +11160,15 @@
 .text.lzip_de...4c8b7308        MOV         R14,qword ptr [RBX + 0x8]               
 .text.lzip_de...4d85f6          TEST        R14,R14                                 
 .text.lzip_de...0f84e8050000    JZ          LAB_0010892e                            
-.text.lzip_de...488b7b10        MOV         RDI,qword ptr [RBX + 0x10]              
-.text.lzip_de...4885ff          TEST        RDI,RDI                                 
+.text.lzip_de...488b7b10        MOV         rsa,qword ptr [RBX + 0x10]              
+.text.lzip_de...4885ff          TEST        rsa,rsa                                 
 .text.lzip_de...0f84db050000    JZ          LAB_0010892e                            
-.text.lzip_de...48837f4000      CMP         qword ptr [RDI + 0x40],0x0              
+.text.lzip_de...48837f4000      CMP         qword ptr [RDI + rsa->q],0x0            
 .text.lzip_de...0f84d0050000    JZ          LAB_0010892e                            
-.text.lzip_de...48837f5000      CMP         qword ptr [RDI + 0x50],0x0              
+.text.lzip_de...48837f5000      CMP         qword ptr [RDI + rsa->dmq1],0x0         
 .text.lzip_de...0f84c5050000    JZ          LAB_0010892e                            
-.text.lzip_de...488b7320        MOV         RSI,qword ptr [RBX + 0x20]              
-.text.lzip_de...833e00          CMP         dword ptr [RSI],0x0                     
+.text.lzip_de...488b7320        MOV         ctx,qword ptr [RBX + 0x20]              
+.text.lzip_de...833e00          CMP         dword ptr [ctx],0x0                     
 .text.lzip_de...754b            JNZ         LAB_001083bd                            
 .text.lzip_de...85c9            TEST        ECX,ECX                                 
 .text.lzip_de...0f84b4050000    JZ          LAB_0010892e                            
@@ -11172,7 +11177,7 @@
 .text.lzip_de...7524            JNZ         LAB_001083a8                            
 .text.lzip_de...f6400220        TEST        byte ptr [RAX + 0x2],0x20               
 .text.lzip_de...0f85a0050000    JNZ         LAB_0010892e                            
-.text.lzip_de...488b4e58        MOV         RCX,qword ptr [RSI + 0x58]              
+.text.lzip_de...488b4e58        MOV         RCX,qword ptr [ctx + 0x58]              
 .text.lzip_de...ba16000000      MOV         EDX,0x16                                
 .text.lzip_de...4885c9          TEST        RCX,RCX                                 
 .text.lzip_de...0f84cc000000    JZ          LAB_0010846c                            
@@ -11197,7 +11202,7 @@
 .text.lzip_de...85c9            TEST        ECX,ECX                                 
 .text.lzip_de...7418            JZ          LAB_001083ed                            
                             LAB_001083d5:                 ;XREF[1,0]:   001083b9
-.text.lzip_de...4c8b5e58        MOV         R11,qword ptr [RSI + 0x58]              
+.text.lzip_de...4c8b5e58        MOV         R11,qword ptr [ctx + 0x58]              
 .text.lzip_de...ba16000000      MOV         EDX,0x16                                
 .text.lzip_de...4d85db          TEST        R11,R11                                 
 .text.lzip_de...0f8480000000    JZ          LAB_00108467                            
@@ -11212,7 +11217,7 @@
 .text.lzip_de...0fb65002        MOVZX       EDX,byte ptr [RAX + 0x2]                
 .text.lzip_de...85d2            TEST        EDX,EDX                                 
 .text.lzip_de...7560            JNZ         LAB_0010845f                            
-.text.lzip_de...488b5658        MOV         RDX,qword ptr [RSI + 0x58]              
+.text.lzip_de...488b5658        MOV         RDX,qword ptr [ctx + 0x58]              
 .text.lzip_de...4885d2          TEST        RDX,RDX                                 
 .text.lzip_de...7530            JNZ         LAB_00108438                            
 .text.lzip_de...ba16000000      MOV         EDX,0x16                                
@@ -11221,14 +11226,14 @@
 .text.lzip_de...0fb65002        MOVZX       EDX,byte ptr [RAX + 0x2]                
 .text.lzip_de...85d2            TEST        EDX,EDX                                 
 .text.lzip_de...7568            JNZ         LAB_0010847f                            
-.text.lzip_de...488b4e58        MOV         RCX,qword ptr [RSI + 0x58]              
+.text.lzip_de...488b4e58        MOV         RCX,qword ptr [ctx + 0x58]              
 .text.lzip_de...ba16000000      MOV         EDX,0x16                                
 .text.lzip_de...4885c9          TEST        RCX,RCX                                 
 .text.lzip_de...745a            JZ          LAB_0010847f                            
 .text.lzip_de...8b51f8          MOV         EDX,dword ptr [RCX + -0x8]              
 .text.lzip_de...eb55            JMP         LAB_0010847f                            
                             LAB_0010842a:                 ;XREF[1,0]:   001083f3
-.text.lzip_de...488b5658        MOV         RDX,qword ptr [RSI + 0x58]              
+.text.lzip_de...488b5658        MOV         RDX,qword ptr [ctx + 0x58]              
 .text.lzip_de...4885d2          TEST        RDX,RDX                                 
 .text.lzip_de...741c            JZ          LAB_0010844f                            
 .text.lzip_de...8b52f8          MOV         EDX,dword ptr [RDX + -0x8]              
@@ -11265,7 +11270,7 @@
                             LAB_00108470:                 ;XREF[1,0]:   00108458
 .text.lzip_de...780d            JS          LAB_0010847f                            
                             LAB_00108472:                 ;XREF[1,0]:   00108463
-.text.lzip_de...488b8ec80...    MOV         RCX,qword ptr [RSI + 0xc8]              
+.text.lzip_de...488b8ec80...    MOV         RCX,qword ptr [ctx + 0xc8]              
 .text.lzip_de...c70103000000    MOV         dword ptr [RCX],0x3                     
                             LAB_0010847f:                 ;XREF[7,0]:   00108415,00108423,00108428,00108465
                                                           ;             0010846a,00108470,00108d58
@@ -11276,26 +11281,26 @@
 .text.lzip_de...0f8492000000    JZ          LAB_00108527                            
                             LAB_00108495:                 ;XREF[2,0]:   00108545,00108559
 .text.lzip_de...31c0            XOR         EAX,EAX                                 
-.text.lzip_de...488dbde8f...    LEA         RDI=>local_b20,[RBP + -0xb18]           
+.text.lzip_de...488dbde8f...    LEA         rsa=>local_b20,[RBP + -0xb18]           
 .text.lzip_de...0f57c0          XORPS       XMM0,XMM0                               
 .text.lzip_de...4c8b5b38        MOV         R11,qword ptr [RBX + 0x38]              
 .text.lzip_de...b969000000      MOV         ECX,0x69                                
 .text.lzip_de...0f1185c8f...    MOVUPS      xmmword ptr [RBP...,XMM0                
-.text.lzip_de...f3ab            STOSD.REP   RDI                                     
-.text.lzip_de...488dbdc8f...    LEA         RDI=>local_c40,[RBP + -0xc38]           
+.text.lzip_de...f3ab            STOSD.REP   rsa->pad                                
+.text.lzip_de...488dbdc8f...    LEA         rsa=>local_c40,[RBP + -0xc38]           
 .text.lzip_de...b947000000      MOV         ECX,0x47                                
 .text.lzip_de...c68587f1f...    MOV         byte ptr [RBP + local_e81+0x8],0x1      
-.text.lzip_de...f3ab            STOSD.REP   RDI                                     
-.text.lzip_de...31ff            XOR         EDI,EDI                                 
+.text.lzip_de...f3ab            STOSD.REP   rsa->pad                                
+.text.lzip_de...31ff            XOR         rsa,rsa                                 
 .text.lzip_de...b93c000000      MOV         ECX,0x3c                                
 .text.lzip_de...4d85db          TEST        R11,R11                                 
-.text.lzip_de...89bd8cf1ffff    MOV         dword ptr [RBP + local_e7c+0x8],EDI     
-.text.lzip_de...488dbdd8f...    LEA         RDI=>local_e30,[RBP + -0xe28]           
-.text.lzip_de...f3ab            STOSD.REP   RDI                                     
-.text.lzip_de...488dbdd8f...    LEA         RDI=>local_d30,[RBP + -0xd28]           
+.text.lzip_de...89bd8cf1ffff    MOV         dword ptr [RBP + local_e7c+0x8],rsa     
+.text.lzip_de...488dbdd8f...    LEA         rsa=>local_e30,[RBP + -0xe28]           
+.text.lzip_de...f3ab            STOSD.REP   rsa->pad                                
+.text.lzip_de...488dbdd8f...    LEA         rsa=>local_d30,[RBP + -0xd28]           
 .text.lzip_de...b93c000000      MOV         ECX,0x3c                                
 .text.lzip_de...0f1185a8f...    MOVUPS      xmmword ptr [RBP...,XMM0                
-.text.lzip_de...f3ab            STOSD.REP   RDI                                     
+.text.lzip_de...f3ab            STOSD.REP   rsa->pad                                
 .text.lzip_de...488d85e8f...    LEA         RAX=>local_b20,[RBP + -0xb18]           
 .text.lzip_de...0f1185b8f...    MOVUPS      xmmword ptr [RBP...,XMM0                
 .text.lzip_de...48898570f...    MOV         qword ptr [RBP + local_e98+0x8],RAX     
@@ -11307,11 +11312,11 @@
                             LAB_00108527:                 ;XREF[2,0]:   00108486,0010848f
 .text.lzip_de...f60040          TEST        byte ptr [RAX],0x40                     
 .text.lzip_de...7414            JZ          LAB_00108540                            
-.text.lzip_de...488b8ec00...    MOV         RCX,qword ptr [RSI + 0xc0]              
+.text.lzip_de...488b8ec00...    MOV         RCX,qword ptr [ctx + 0xc0]              
 .text.lzip_de...4885c9          TEST        RCX,RCX                                 
 .text.lzip_de...0f84f2030000    JZ          LAB_0010892e                            
-.text.lzip_de...31f6            XOR         ESI,ESI                                 
-.text.lzip_de...8931            MOV         dword ptr [RCX],ESI                     
+.text.lzip_de...31f6            XOR         ctx,ctx                                 
+.text.lzip_de...8931            MOV         dword ptr [RCX],ctx                     
                             LAB_00108540:                 ;XREF[1,0]:   0010852a
 .text.lzip_de...41833c2403      CMP         dword ptr [R12],0x3                     
 .text.lzip_de...0f854affffff    JNZ         LAB_00108495                            
@@ -11323,8 +11328,8 @@
                             LAB_0010855e:                 ;XREF[1,0]:   00108520
 .text.lzip_de...48837b4000      CMP         qword ptr [RBX + 0x40],0x0              
 .text.lzip_de...0f84c5030000    JZ          LAB_0010892e                            
-.text.lzip_de...498dbed00...    LEA         RDI,[R14 + 0xd0]                        
-.text.lzip_de...be09000000      MOV         ESI,0x9                                 
+.text.lzip_de...498dbed00...    LEA         rsa,[R14 + 0xd0]                        
+.text.lzip_de...be09000000      MOV         ctx,0x9                                 
 .text.lzip_de...e816ecffff      CALL        .text.bt_find_funa:mem_empty            ;bool mem_empty(uint64_t * ptr, uint n)
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
 .text.lzip_de...0f85ac030000    JNZ         LAB_0010892e                            
@@ -11333,12 +11338,12 @@
 .text.lzip_de...4531ed          XOR         R13D,R13D                               
 .text.lzip_de...8895ecf4ffff    MOV         byte ptr [RBP + local_b20[4]+0x8],DL    
 .text.lzip_de...48898d68f...    MOV         qword ptr [RBP + local_ea0+0x8],RCX     
-.text.lzip_de...488bbd68f...    MOV         RDI,qword ptr [RBP + local_ea0+0x8]     
+.text.lzip_de...488bbd68f...    MOV         rsa,qword ptr [RBP + local_ea0+0x8]     
 .text.lzip_de...b93a020000      MOV         ECX,0x23a                               
-.text.lzip_de...488db5c8f...    LEA         RSI=>local_e40,[RBP + -0xe38]           
+.text.lzip_de...488db5c8f...    LEA         ctx=>local_e40,[RBP + -0xe38]           
 .text.lzip_de...c785edf4f...    MOV         dword ptr [RBP +...,0x2000000           
-.text.lzip_de...f3ab            STOSD.REP   RDI                                     
-.text.lzip_de...488dbd4df...    LEA         RDI=>local_abb,[RBP + -0xab3]           
+.text.lzip_de...f3ab            STOSD.REP   rsa->pad                                
+.text.lzip_de...488dbd4df...    LEA         rsa=>local_abb,[RBP + -0xab3]           
 .text.lzip_de...c785fdf4f...    MOV         dword ptr [RBP +...,0x1c000000          
 .text.lzip_de...b940000000      MOV         ECX,0x40                                
 .text.lzip_de...4c899598f...    MOV         qword ptr [RBP + local_e70+0x8],R10     
@@ -11355,8 +11360,8 @@
 .text.lzip_de...c68547f5f...    MOV         byte ptr [RBP + local_ac1+0x8],0x1      
 .text.lzip_de...c78548f5f...    MOV         dword ptr [RBP +...,0x1010000           
 .text.lzip_de...0f11950df...    MOVUPS      xmmword ptr [RBP...,XMM2                
-.text.lzip_de...f3a5            MOVSD.REP   RDI,RSI                                 
-.text.lzip_de...be28060000      MOV         ESI,0x628                               
+.text.lzip_de...f3a5            MOVSD.REP   rsa->pad,ctx                            
+.text.lzip_de...be28060000      MOV         ctx,0x628                               
 .text.lzip_de...c78555f6f...    MOV         dword ptr [RBP +...,0x1000000           
 .text.lzip_de...c78581f6f...    MOV         dword ptr [RBP +...,0x7000000           
 .text.lzip_de...418b03          MOV         EAX,dword ptr [R11]                     
@@ -11369,19 +11374,19 @@
 .text.lzip_de...31c9            XOR         ECX,ECX                                 
 .text.lzip_de...488b9578f...    MOV         RDX,qword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...4d89f0          MOV         R8,R14                                  
-.text.lzip_de...4a8dbc2d8...    LEA         RDI=>local_77c,[RBP + R13*0x1 + -0x774] 
+.text.lzip_de...4a8dbc2d8...    LEA         rsa=>local_77c,[RBP + R13*0x1 + -0x774] 
 .text.lzip_de...48898d90f...    MOV         qword ptr [RBP + local_e78+0x8],RCX     
 .text.lzip_de...4a8b8cfd9...    MOV         RCX,qword ptr [RBP + R15*0x8 + local_...
-.text.lzip_de...4889b558f...    MOV         qword ptr [RBP + local_eb0+0x8],RSI     
+.text.lzip_de...4889b558f...    MOV         qword ptr [RBP + local_eb0+0x8],ctx     
 .text.lzip_de...e89eecffff      CALL        .text.lzma_block_decoder_inia:FUN_001...;undefined FUN_00107340()
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
 .text.lzip_de...0f8484020000    JZ          LAB_0010892e                            
 .text.lzip_de...488b8590f...    MOV         RAX,qword ptr [RBP + local_e78+0x8]     
-.text.lzip_de...488bb558f...    MOV         RSI,qword ptr [RBP + local_eb0+0x8]     
-.text.lzip_de...4839c6          CMP         RSI,RAX                                 
+.text.lzip_de...488bb558f...    MOV         ctx,qword ptr [RBP + local_eb0+0x8]     
+.text.lzip_de...4839c6          CMP         ctx,RAX                                 
 .text.lzip_de...0f826d020000    JC          LAB_0010892e                            
 .text.lzip_de...4901c5          ADD         R13,RAX                                 
-.text.lzip_de...4829c6          SUB         RSI,RAX                                 
+.text.lzip_de...4829c6          SUB         ctx,RAX                                 
 .text.lzip_de...4d85ff          TEST        R15,R15                                 
 .text.lzip_de...0f8517040000    JNZ         LAB_00108ae7                            
 .text.lzip_de...41bf01000000    MOV         R15D,0x1                                
@@ -11389,23 +11394,26 @@
                             LAB_001086d8:                 ;XREF[1,0]:   00108553
 .text.lzip_de...3c40            CMP         AL,0x40                                 
 .text.lzip_de...7516            JNZ         LAB_001086f2                            
-.text.lzip_de...488b4718        MOV         RAX,qword ptr [RDI + 0x18]              
+.text.lzip_de...488b4718        MOV         RAX,qword ptr [RDI + rsa->engine]       
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
 .text.lzip_de...0f8445020000    JZ          LAB_0010892e                            
-.text.lzip_de...31ff            XOR         EDI,EDI                                 
+.text.lzip_de...31ff            XOR         rsa,rsa                                 
 .text.lzip_de...ffd0            CALL        RAX                                     
 .text.lzip_de...e93c020000      JMP         LAB_0010892e                            
                             LAB_001086f2:                 ;XREF[1,0]:   001086da
 .text.lzip_de...6641837c2...    CMP         word ptr [R12 + 0x28],0x2f              
 .text.lzip_de...0f862f020000    JBE         LAB_0010892e                            
+                            ;Pointer to RSA modulus
 .text.lzip_de...4d8b7c2420      MOV         R15,qword ptr [R12 + 0x20]              
+                            ;Pointer to modulus bits
 .text.lzip_de...498b07          MOV         RAX,qword ptr [R15]                     
+                            ;Number of bit array entries
 .text.lzip_de...4d8b7708        MOV         R14,qword ptr [R15 + 0x8]               
 .text.lzip_de...48898558f...    MOV         qword ptr [RBP + local_eb0+0x8],RAX     
 .text.lzip_de...498d46ef        LEA         RAX,[R14 + -0x11]                       
 .text.lzip_de...483def3f0000    CMP         RAX,0x3fef                              
 .text.lzip_de...0f870c020000    JA          LAB_0010892e                            
-.text.lzip_de...488b5768        MOV         RDX,qword ptr [RDI + 0x68]              
+.text.lzip_de...488b5768        MOV         RDX,qword ptr [RDI + rsa+0x68]          
 .text.lzip_de...488d4508        LEA         RAX=>local_res0,[RBP + 0x8]             
 .text.lzip_de...4883e0f8        AND         RAX,-0x8                                
 .text.lzip_de...48899568f...    MOV         qword ptr [RBP + local_ea0+0x8],RDX     
@@ -11424,9 +11432,9 @@
                             LAB_0010876d:                 ;XREF[1,0]:   00108761
 .text.lzip_de...b801400000      MOV         EAX,0x4001                              
 .text.lzip_de...4889da          MOV         RDX,RBX                                 
-.text.lzip_de...4c89ef          MOV         RDI,R13                                 
+.text.lzip_de...4c89ef          MOV         rsa,R13                                 
 .text.lzip_de...4c29f0          SUB         RAX,R14                                 
-.text.lzip_de...4889c6          MOV         RSI,RAX                                 
+.text.lzip_de...4889c6          MOV         ctx,RAX                                 
 .text.lzip_de...48898578f...    MOV         qword ptr [RBP + local_e90+0x8],RAX     
 .text.lzip_de...e8c69bffff      CALL        .text.hc_find_funa:.Lhc_find_func.1     ;undefined .Lhc_find_func.1()
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
@@ -11448,8 +11456,8 @@
 .text.lzip_de...756c            JNZ         LAB_00108843                            
 .text.lzip_de...4c8b4308        MOV         R8,qword ptr [RBX + 0x8]                
 .text.lzip_de...b920000000      MOV         ECX,0x20                                
-.text.lzip_de...4c89f6          MOV         RSI,R14                                 
-.text.lzip_de...4c89ef          MOV         RDI,R13                                 
+.text.lzip_de...4c89f6          MOV         ctx,R14                                 
+.text.lzip_de...4c89ef          MOV         rsa,R13                                 
 .text.lzip_de...488b9578f...    MOV         RDX,qword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...e8deeaffff      CALL        .text.lzma_easy_encodea:FUN_001072d0    ;undefined FUN_001072d0()
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
@@ -11466,12 +11474,12 @@
 .text.lzip_de...75e4            JNZ         LAB_001087f8                            
 .text.lzip_de...31c0            XOR         EAX,EAX                                 
 .text.lzip_de...0f57c0          XORPS       XMM0,XMM0                               
-.text.lzip_de...488dbdf8f...    LEA         RDI=>local_b10,[RBP + -0xb08]           
-.text.lzip_de...4889de          MOV         RSI,RBX                                 
+.text.lzip_de...488dbdf8f...    LEA         rsa=>local_b10,[RBP + -0xb08]           
+.text.lzip_de...4889de          MOV         ctx,RBX                                 
 .text.lzip_de...b929000000      MOV         ECX,0x29                                
 .text.lzip_de...0f1185e8f...    MOVUPS      xmmword ptr [RBP...,XMM0                
-.text.lzip_de...f3aa            STOSB.REP   RDI                                     
-.text.lzip_de...4889d7          MOV         RDI,RDX                                 
+.text.lzip_de...f3aa            STOSB.REP   rsa->pad                                
+.text.lzip_de...4889d7          MOV         rsa,RDX                                 
 .text.lzip_de...e8b7f9ffff      CALL        .text.parse_lzma10:.Lparse_lzma12.0     ;undefined .Lparse_lzma12.0()
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
 .text.lzip_de...0f84ed000000    JZ          LAB_0010892e                            
@@ -11487,8 +11495,8 @@
 .text.lzip_de...48898570f...    MOV         qword ptr [RBP + local_e98+0x8],RAX     
 .text.lzip_de...488b9578f...    MOV         RDX,qword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...4d89f0          MOV         R8,R14                                  
-.text.lzip_de...4c89f7          MOV         RDI,R14                                 
-.text.lzip_de...8bb570f1ffff    MOV         ESI,dword ptr [RBP + local_e98+0x8]     
+.text.lzip_de...4c89f7          MOV         rsa,R14                                 
+.text.lzip_de...8bb570f1ffff    MOV         ctx,dword ptr [RBP + local_e98+0x8]     
 .text.lzip_de...e837e9ffff      CALL        .text.lzma_delta_encoder_inia:FUN_001...;undefined FUN_001071b0()
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
 .text.lzip_de...0f84ad000000    JZ          LAB_0010892e                            
@@ -11498,47 +11506,47 @@
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
 .text.lzip_de...0f849b000000    JZ          LAB_0010892e                            
 .text.lzip_de...f60020          TEST        byte ptr [RAX],0x20                     
-.text.lzip_de...488dbd88f...    LEA         RDI=>local_e80,[RBP + -0xe78]           
+.text.lzip_de...488dbd88f...    LEA         rsa=>local_e80,[RBP + -0xe78]           
 .text.lzip_de...7447            JZ          LAB_001088e6                            
 .text.lzip_de...83fa02          CMP         EDX,0x2                                 
 .text.lzip_de...742c            JZ          LAB_001088d0                            
 .text.lzip_de...7711            JA          LAB_001088b7                            
 .text.lzip_de...85d2            TEST        EDX,EDX                                 
-.text.lzip_de...408a7001        MOV         SIL,byte ptr [RAX + 0x1]                
+.text.lzip_de...408a7001        MOV         ctx,byte ptr [RAX + 0x1]                
 .text.lzip_de...751c            JNZ         LAB_001088ca                            
-.text.lzip_de...40c0ee03        SHR         SIL,0x3                                 
-.text.lzip_de...83e60f          AND         ESI,0xf                                 
+.text.lzip_de...40c0ee03        SHR         ctx,0x3                                 
+.text.lzip_de...83e60f          AND         ctx,0xf                                 
 .text.lzip_de...eb24            JMP         LAB_001088db                            
                             LAB_001088b7:                 ;XREF[1,0]:   001088a4
-.text.lzip_de...be01000000      MOV         ESI,0x1                                 
+.text.lzip_de...be01000000      MOV         ctx,0x1                                 
 .text.lzip_de...83fa03          CMP         EDX,0x3                                 
 .text.lzip_de...751a            JNZ         LAB_001088db                            
-.text.lzip_de...408a7002        MOV         SIL,byte ptr [RAX + 0x2]                
-.text.lzip_de...83e61f          AND         ESI,0x1f                                
+.text.lzip_de...408a7002        MOV         ctx,byte ptr [RAX + 0x2]                
+.text.lzip_de...83e61f          AND         ctx,0x1f                                
 .text.lzip_de...eb11            JMP         LAB_001088db                            
                             LAB_001088ca:                 ;XREF[1,0]:   001088ac
-.text.lzip_de...40c0ee02        SHR         SIL,0x2                                 
+.text.lzip_de...40c0ee02        SHR         ctx,0x2                                 
 .text.lzip_de...eb07            JMP         LAB_001088d7                            
                             LAB_001088d0:                 ;XREF[1,0]:   001088a2
-.text.lzip_de...408a7001        MOV         SIL,byte ptr [RAX + 0x1]                
-.text.lzip_de...40d0ee          SHR         SIL,0x1                                 
+.text.lzip_de...408a7001        MOV         ctx,byte ptr [RAX + 0x1]                
+.text.lzip_de...40d0ee          SHR         ctx,0x1                                 
                             LAB_001088d7:                 ;XREF[1,0]:   001088ce
-.text.lzip_de...400fb6f6        MOVZX       ESI,SIL                                 
+.text.lzip_de...400fb6f6        MOVZX       ctx,ctx                                 
                             LAB_001088db:                 ;XREF[3,0]:   001088b5,001088bf,001088c8
 .text.lzip_de...488b5310        MOV         RDX,qword ptr [RBX + 0x10]              
 .text.lzip_de...e8fcf2ffff      CALL        .text.index_decoda:installed_func_2     ;undefined installed_func_2()
 .text.lzip_de...eb12            JMP         LAB_001088f8                            
                             LAB_001088e6:                 ;XREF[1,0]:   0010889d
-.text.lzip_de...4889fe          MOV         RSI,RDI                                 
+.text.lzip_de...4889fe          MOV         ctx,rsa                                 
 .text.lzip_de...31c9            XOR         ECX,ECX                                 
 .text.lzip_de...ba01000000      MOV         EDX,0x1                                 
-.text.lzip_de...4889df          MOV         RDI,RBX                                 
+.text.lzip_de...4889df          MOV         rsa,RBX                                 
 .text.lzip_de...e888f3ffff      CALL        .text.index_encoda:installed_func_3     ;undefined installed_func_3()
                             LAB_001088f8:                 ;XREF[1,0]:   001088e4
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
 .text.lzip_de...7432            JZ          LAB_0010892e                            
 .text.lzip_de...8b8588f1ffff    MOV         EAX,dword ptr [RBP + local_e80+0x8]     
-.text.lzip_de...488dbdc8f...    LEA         RDI=>local_c40,[RBP + -0xc38]           
+.text.lzip_de...488dbdc8f...    LEA         rsa=>local_c40,[RBP + -0xc38]           
 .text.lzip_de...b912000000      MOV         ECX,0x12                                
 .text.lzip_de...4d8b6c2408      MOV         R13,qword ptr [R12 + 0x8]               
 .text.lzip_de...458b3c24        MOV         R15D,dword ptr [R12]                    
@@ -11546,7 +11554,7 @@
 .text.lzip_de...898578f1ffff    MOV         dword ptr [RBP + local_e90+0x8],EAX     
 .text.lzip_de...31c0            XOR         EAX,EAX                                 
 .text.lzip_de...83bd78f1f...    CMP         dword ptr [RBP + local_e90+0x8],0x0     
-.text.lzip_de...f3ab            STOSD.REP   RDI                                     
+.text.lzip_de...f3ab            STOSD.REP   rsa->pad                                
 .text.lzip_de...7907            JNS         LAB_00108935                            
                             LAB_0010892e:                 ;XREF[45,0]:  001082d2,001082e0,001082ee,00108311
                                                           ;             0010831d,0010832a,00108333,00108340
@@ -11576,8 +11584,8 @@
 .text.lzip_de...41f6450220      TEST        byte ptr [R13 + 0x2],0x20               
 .text.lzip_de...741d            JZ          LAB_00108976                            
                             LAB_00108959:                 ;XREF[1,0]:   0010894a
-.text.lzip_de...4889de          MOV         RSI,RBX                                 
-.text.lzip_de...488dbdc8f...    LEA         RDI=>local_c40,[RBP + -0xc38]           
+.text.lzip_de...4889de          MOV         ctx,RBX                                 
+.text.lzip_de...488dbdc8f...    LEA         rsa=>local_c40,[RBP + -0xc38]           
 .text.lzip_de...e8d8f0ffff      CALL        .text.threads_stoz:.Lthreads_stop.0     ;undefined .Lthreads_stop.0()
 .text.lzip_de...85c0            TEST        EAX,EAX                                 
 .text.lzip_de...74c2            JZ          LAB_0010892e                            
@@ -11586,9 +11594,9 @@
 .text.lzip_de...894350          MOV         dword ptr [RBX + 0x50],EAX              
                             LAB_00108976:                 ;XREF[2,0]:   00108950,00108957
 .text.lzip_de...488b9570f...    MOV         RDX,qword ptr [RBP + local_e98+0x8]     
-.text.lzip_de...8bbd78f1ffff    MOV         EDI,dword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...8bbd78f1ffff    MOV         rsa,dword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...4c89e1          MOV         RCX,R12                                 
-.text.lzip_de...4c89f6          MOV         RSI,R14                                 
+.text.lzip_de...4c89f6          MOV         ctx,R14                                 
 .text.lzip_de...e882e7ffff      CALL        .text.bt_find_funa:FUN_00107110         ;undefined FUN_00107110()
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
 .text.lzip_de...789b            JS          LAB_0010892e                            
@@ -11597,11 +11605,11 @@
 .text.lzip_de...4183ff03        CMP         R15D,0x3                                
 .text.lzip_de...7430            JZ          LAB_001089ce                            
                             LAB_0010899e:                 ;XREF[2,0]:   00108a42,00108a53
-.text.lzip_de...8bbd78f1ffff    MOV         EDI,dword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...8bbd78f1ffff    MOV         rsa,dword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...31c0            XOR         EAX,EAX                                 
 .text.lzip_de...4c89e1          MOV         RCX,R12                                 
 .text.lzip_de...ba04000000      MOV         EDX,0x4                                 
-.text.lzip_de...488db5c8f...    LEA         RSI=>local_d40,[RBP + -0xd38]           
+.text.lzip_de...488db5c8f...    LEA         ctx=>local_d40,[RBP + -0xd38]           
 .text.lzip_de...8985c8f2ffff    MOV         dword ptr [RBP + local_d40[0]+0x8],EAX  
 .text.lzip_de...e8e0e6ffff      CALL        .text.auto_decoder_inia:FUN_001070a0    ;undefined FUN_001070a0()
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
@@ -11613,8 +11621,8 @@
                             LAB_001089d5:                 ;XREF[1,0]:   00108996
 .text.lzip_de...488b9de0f...    MOV         RBX,qword ptr [RBP + local_c28+0x8]     
 .text.lzip_de...b840000000      MOV         EAX,0x40                                
-.text.lzip_de...8bbd78f1ffff    MOV         EDI,dword ptr [RBP + local_e90+0x8]     
-.text.lzip_de...488db5e8f...    LEA         RSI=>local_b20,[RBP + -0xb18]           
+.text.lzip_de...8bbd78f1ffff    MOV         rsa,dword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...488db5e8f...    LEA         ctx=>local_b20,[RBP + -0xb18]           
 .text.lzip_de...4c89e1          MOV         RCX,R12                                 
 .text.lzip_de...ba05000000      MOV         EDX,0x5                                 
 .text.lzip_de...c685ecf4f...    MOV         byte ptr [RBP + local_b20[4]+0x8],0x0   
@@ -11626,8 +11634,8 @@
 .text.lzip_de...e8fce6ffff      CALL        .text.bt_find_funa:FUN_00107110         ;undefined FUN_00107110()
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
 .text.lzip_de...0f8811ffffff    JS          LAB_0010892e                            
-.text.lzip_de...488bb5c8f...    MOV         RSI,qword ptr [RBP + local_c40+0x8]     
-.text.lzip_de...8bbd78f1ffff    MOV         EDI,dword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...488bb5c8f...    MOV         ctx,qword ptr [RBP + local_c40+0x8]     
+.text.lzip_de...8bbd78f1ffff    MOV         rsa,dword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...4c89e1          MOV         RCX,R12                                 
 .text.lzip_de...4889da          MOV         RDX,RBX                                 
 .text.lzip_de...e8dbe6ffff      CALL        .text.bt_find_funa:FUN_00107110         ;undefined FUN_00107110()
@@ -11653,8 +11661,8 @@
 .text.lzip_de...0f84a2feffff    JZ          LAB_0010892e                            
                             LAB_00108a8c:                 ;XREF[2,0]:   00108ab3,00108ac3
 .text.lzip_de...ba00020000      MOV         EDX,0x200                               
-.text.lzip_de...8bbd78f1ffff    MOV         EDI,dword ptr [RBP + local_e90+0x8]     
-.text.lzip_de...4c89ee          MOV         RSI,R13                                 
+.text.lzip_de...8bbd78f1ffff    MOV         rsa,dword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...4c89ee          MOV         ctx,R13                                 
 .text.lzip_de...4839d3          CMP         RBX,RDX                                 
 .text.lzip_de...480f46d3        CMOVBE      RDX,RBX                                 
 .text.lzip_de...41ff542448      CALL        qword ptr [R12 + 0x48]                  
@@ -11674,7 +11682,7 @@
 .text.lzip_de...498b442418      MOV         RAX,qword ptr [R12 + 0x18]              
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
 .text.lzip_de...0f8455feffff    JZ          LAB_0010892e                            
-.text.lzip_de...31ff            XOR         EDI,EDI                                 
+.text.lzip_de...31ff            XOR         rsa,rsa                                 
 .text.lzip_de...ffd0            CALL        RAX                                     
                             LAB_00108add:                 ;XREF[2,0]:   00108a4d,00108ac9
 .text.lzip_de...b801000000      MOV         EAX,0x1                                 
@@ -11683,9 +11691,9 @@
 .text.lzip_de...4981fd280...    CMP         R13,0x628                               
 .text.lzip_de...0f873afeffff    JA          LAB_0010892e                            
 .text.lzip_de...418d450b        LEA         EAX,[R13 + 0xb]                         
-.text.lzip_de...488bbd68f...    MOV         RDI,qword ptr [RBP + local_ea0+0x8]     
+.text.lzip_de...488bbd68f...    MOV         rsa,qword ptr [RBP + local_ea0+0x8]     
 .text.lzip_de...b969000000      MOV         ECX,0x69                                
-.text.lzip_de...488bb570f...    MOV         RSI,qword ptr [RBP + local_e98+0x8]     
+.text.lzip_de...488bb570f...    MOV         ctx,qword ptr [RBP + local_e98+0x8]     
 .text.lzip_de...0fc8            BSWAP       EAX                                     
 .text.lzip_de...89857df6ffff    MOV         dword ptr [RBP + local_98b+0x8],EAX     
 .text.lzip_de...418d85a70...    LEA         EAX,[R13 + 0x2a7]                       
@@ -11695,35 +11703,35 @@
 .text.lzip_de...0fc8            BSWAP       EAX                                     
 .text.lzip_de...8985e8f4ffff    MOV         dword ptr [RBP + local_b20[0]+0x8],EAX  
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
-.text.lzip_de...f3a5            MOVSD.REP   RDI,RSI                                 
+.text.lzip_de...f3a5            MOVSD.REP   rsa->pad,ctx                            
 .text.lzip_de...ff90d0000000    CALL        qword ptr [RAX + 0xd0]                  
 .text.lzip_de...48898578f...    MOV         qword ptr [RBP + local_e90+0x8],RAX     
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
 .text.lzip_de...0f84e1fdffff    JZ          LAB_0010892e                            
 .text.lzip_de...488d8587f...    LEA         RAX=>local_e81,[RBP + -0xe79]           
 .text.lzip_de...31d2            XOR         EDX,EDX                                 
-.text.lzip_de...be01000000      MOV         ESI,0x1                                 
+.text.lzip_de...be01000000      MOV         ctx,0x1                                 
 .text.lzip_de...48898570f...    MOV         qword ptr [RBP + local_e98+0x8],RAX     
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
-.text.lzip_de...488bbd70f...    MOV         RDI,qword ptr [RBP + local_e98+0x8]     
+.text.lzip_de...488bbd70f...    MOV         rsa,qword ptr [RBP + local_e98+0x8]     
 .text.lzip_de...ff90e0000000    CALL        qword ptr [RAX + 0xe0]                  
 .text.lzip_de...4989c6          MOV         R14,RAX                                 
 .text.lzip_de...4885c0          TEST        RAX,RAX                                 
 .text.lzip_de...0f8464010000    JZ          LAB_00108ce3                            
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
 .text.lzip_de...31d2            XOR         EDX,EDX                                 
-.text.lzip_de...be00010000      MOV         ESI,0x100                               
-.text.lzip_de...488dbdc8f...    LEA         RDI=>local_e40,[RBP + -0xe38]           
+.text.lzip_de...be00010000      MOV         ctx,0x100                               
+.text.lzip_de...488dbdc8f...    LEA         rsa=>local_e40,[RBP + -0xe38]           
 .text.lzip_de...ff90e0000000    CALL        qword ptr [RAX + 0xe0]                  
 .text.lzip_de...31d2            XOR         EDX,EDX                                 
-.text.lzip_de...be01000000      MOV         ESI,0x1                                 
-.text.lzip_de...488bbd70f...    MOV         RDI,qword ptr [RBP + local_e98+0x8]     
+.text.lzip_de...be01000000      MOV         ctx,0x1                                 
+.text.lzip_de...488bbd70f...    MOV         rsa,qword ptr [RBP + local_e98+0x8]     
 .text.lzip_de...4989c7          MOV         R15,RAX                                 
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
 .text.lzip_de...ff90e0000000    CALL        qword ptr [RAX + 0xe0]                  
-.text.lzip_de...488bbd78f...    MOV         RDI,qword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...488bbd78f...    MOV         rsa,qword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...4c89f2          MOV         RDX,R14                                 
-.text.lzip_de...4c89fe          MOV         RSI,R15                                 
+.text.lzip_de...4c89fe          MOV         ctx,R15                                 
 .text.lzip_de...48898570f...    MOV         qword ptr [RBP + local_e98+0x8],RAX     
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
 .text.lzip_de...488b8d70f...    MOV         RCX,qword ptr [RBP + local_e98+0x8]     
@@ -11736,29 +11744,29 @@
 .text.lzip_de...ff5058          CALL        qword ptr [RAX + 0x58]                  
 .text.lzip_de...4531c9          XOR         R9D,R9D                                 
 .text.lzip_de...31c9            XOR         ECX,ECX                                 
-.text.lzip_de...498db58f0...    LEA         RSI,[R13 + 0x18f]                       
+.text.lzip_de...498db58f0...    LEA         ctx,[R13 + 0x18f]                       
 .text.lzip_de...4989c0          MOV         R8,RAX                                  
-.text.lzip_de...488dbdfdf...    LEA         RDI=>local_90b,[RBP + -0x903]           
+.text.lzip_de...488dbdfdf...    LEA         rsa=>local_90b,[RBP + -0x903]           
 .text.lzip_de...4c89f2          MOV         RDX,R14                                 
 .text.lzip_de...41ffd7          CALL        R15                                     
 .text.lzip_de...ffc8            DEC         EAX                                     
 .text.lzip_de...0f85cb000000    JNZ         LAB_00108ce3                            
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
 .text.lzip_de...ba20000000      MOV         EDX,0x20                                
-.text.lzip_de...4c89f6          MOV         RSI,R14                                 
+.text.lzip_de...4c89f6          MOV         ctx,R14                                 
 .text.lzip_de...4c8dbdc8f...    LEA         R15=>local_d40,[RBP + -0xd38]           
 .text.lzip_de...4c8b8d78f...    MOV         R9,qword ptr [RBP + local_e90+0x8]      
 .text.lzip_de...4c8d858cf...    LEA         R8=>local_e7c,[RBP + -0xe74]            
 .text.lzip_de...4c89f9          MOV         RCX,R15                                 
-.text.lzip_de...bfa0020000      MOV         EDI,0x2a0                               
+.text.lzip_de...bfa0020000      MOV         rsa,0x2a0                               
 .text.lzip_de...ff90f8000000    CALL        qword ptr [RAX + 0xf8]                  
 .text.lzip_de...ffc8            DEC         EAX                                     
 .text.lzip_de...0f8594000000    JNZ         LAB_00108ce3                            
 .text.lzip_de...81bd8cf1f...    CMP         dword ptr [RBP + local_e7c+0x8],0x100   
 .text.lzip_de...0f8584000000    JNZ         LAB_00108ce3                            
-.text.lzip_de...488dbde0f...    LEA         RDI=>local_c28,[RBP + -0xc20]           
+.text.lzip_de...488dbde0f...    LEA         rsa=>local_c28,[RBP + -0xc20]           
 .text.lzip_de...b940000000      MOV         ECX,0x40                                
-.text.lzip_de...4c89fe          MOV         RSI,R15                                 
+.text.lzip_de...4c89fe          MOV         ctx,R15                                 
 .text.lzip_de...48b800000...    MOV         RAX,0xc00000014010000                   
 .text.lzip_de...488985c8f...    MOV         qword ptr [RBP + local_c40+0x8],RAX     
 .text.lzip_de...488b4340        MOV         RAX,qword ptr [RBX + 0x40]              
@@ -11768,14 +11776,14 @@
 .text.lzip_de...488995d0f...    MOV         qword ptr [RBP + local_c38+0x8],RDX     
 .text.lzip_de...8985d8f3ffff    MOV         dword ptr [RBP + local_c30+0x8],EAX     
 .text.lzip_de...498d85c00...    LEA         RAX,[R13 + 0x2c0]                       
-.text.lzip_de...f3a5            MOVSD.REP   RDI,RSI                                 
+.text.lzip_de...f3a5            MOVSD.REP   rsa->pad,ctx                            
 .text.lzip_de...48898570f...    MOV         qword ptr [RBP + local_e98+0x8],RAX     
 .text.lzip_de...b947000000      MOV         ECX,0x47                                
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
-.text.lzip_de...488bb560f...    MOV         RSI,qword ptr [RBP + local_ea8+0x8]     
-.text.lzip_de...4a8dbc2d8...    LEA         RDI,[RBP + R13*0x1 + -0x774]            
-.text.lzip_de...f3a5            MOVSD.REP   RDI,RSI                                 
-.text.lzip_de...488bbd78f...    MOV         RDI,qword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...488bb560f...    MOV         ctx,qword ptr [RBP + local_ea8+0x8]     
+.text.lzip_de...4a8dbc2d8...    LEA         rsa,[RBP + R13*0x1 + -0x774]            
+.text.lzip_de...f3a5            MOVSD.REP   rsa->pad,ctx                            
+.text.lzip_de...488bbd78f...    MOV         rsa,qword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...ff9008010000    CALL        qword ptr [RAX + 0x108]                 
 .text.lzip_de...4c8bb568f...    MOV         R14,qword ptr [RBP + local_ea0+0x8]     
 .text.lzip_de...e99efbffff      JMP         LAB_00108881                            
@@ -11786,24 +11794,24 @@
 .text.lzip_de...48899570f...    MOV         qword ptr [RBP + local_e98+0x8],RDX     
                             LAB_00108cf2:                 ;XREF[1,0]:   00108bd9
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
-.text.lzip_de...488bbd78f...    MOV         RDI,qword ptr [RBP + local_e90+0x8]     
+.text.lzip_de...488bbd78f...    MOV         rsa,qword ptr [RBP + local_e90+0x8]     
 .text.lzip_de...ff9008010000    CALL        qword ptr [RAX + 0x108]                 
 .text.lzip_de...4d85f6          TEST        R14,R14                                 
 .text.lzip_de...740d            JZ          LAB_00108d15                            
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
-.text.lzip_de...4c89f7          MOV         RDI,R14                                 
+.text.lzip_de...4c89f7          MOV         rsa,R14                                 
 .text.lzip_de...ff9010010000    CALL        qword ptr [RAX + 0x110]                 
                             LAB_00108d15:                 ;XREF[1,0]:   00108d06
 .text.lzip_de...4d85ff          TEST        R15,R15                                 
 .text.lzip_de...740d            JZ          LAB_00108d27                            
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
-.text.lzip_de...4c89ff          MOV         RDI,R15                                 
+.text.lzip_de...4c89ff          MOV         rsa,R15                                 
 .text.lzip_de...ff9010010000    CALL        qword ptr [RAX + 0x110]                 
                             LAB_00108d27:                 ;XREF[1,0]:   00108d18
 .text.lzip_de...4883bd70f...    CMP         qword ptr [RBP + local_e98+0x8],0x0     
 .text.lzip_de...0f84f9fbffff    JZ          LAB_0010892e                            
 .text.lzip_de...488b4308        MOV         RAX,qword ptr [RBX + 0x8]               
-.text.lzip_de...488bbd70f...    MOV         RDI,qword ptr [RBP + local_e98+0x8]     
+.text.lzip_de...488bbd70f...    MOV         rsa,qword ptr [RBP + local_e98+0x8]     
 .text.lzip_de...ff9010010000    CALL        qword ptr [RAX + 0x110]                 
 .text.lzip_de...e9e3fbffff      JMP         LAB_0010892e                            
                             LAB_00108d4b:                 ;XREF[1,0]:   001083ab
@@ -12350,26 +12358,14 @@
           ;local_254     undefined1        -254                      ;XREF[1,0]:   001097c3
           ;local_255     undefined1        -255                      ;XREF[1,0]:   0010976e
           ;local_259     undefined4        -259                      ;XREF[2,0]:   00109760,00109862
-          ;local_2cb     undefined1        -2cb                      ;XREF[2,0]:   001096a7,00109964
-          ;local_2e0     undefined1[21]    -2e0                      ;XREF[10,25]: 00109767,00109791,00109994,00109ad3,00109b21
-                                                                     ;             00109b57,00109c1a,00109f43,0010a15d,0010a1f6
-                                                                     ;             001095d7,00109609,00109618,0010962b,0010967c
-                                                                     ;             00109775,00109799,001097a3,00109805,001099ab
-                                                                     ;             00109a36,00109b75,00109b93,00109b9f,00109baa
-                                                                     ;             00109c02,00109c30,00109c55,00109c7f,00109d1c
-                                                                     ;             00109d8e,00109f07,00109f37,00109f54,00109fd1
-          ;local_2e8     undefined8        -2e8                      ;XREF[3,0]:   00109557,00109581,0010a194
-          ;local_2f0     undefined8        -2f0                      ;XREF[5,0]:   001094e1,0010955f,00109570,001095cf,0010a17c
+          ;local_2f0     uchar *           -2f0                      ;XREF[5,0]:   001094e1,0010955f,00109570,001095cf,0010a17c
           ;local_451     undefined1        -451                      ;XREF[1,0]:   0010a0d7
           ;local_45a     undefined1        -45a                      ;XREF[1,0]:   0010a0cf
-          ;local_520     undefined8        -520                      ;XREF[1,0]:   0010a1b1
-          ;local_528     undefined2        -528                      ;XREF[1,0]:   0010a19c
-          ;local_530     undefined8        -530                      ;XREF[1,0]:   0010a184
-          ;local_538     undefined8        -538                      ;XREF[1,0]:   0010a1a4
-          ;local_540     undefined8        -540                      ;XREF[3,0]:   001096f6,0010a09b,0010a18c
-          ;local_550     undefined1[16]    -550                      ;XREF[11,3]:  001096e0,00109749,00109944,00109e1d,0010a070
+          ;rsa2          RSA               -550                      ;XREF[11,10]: 001096e0,00109749,00109944,00109e1d,0010a070
                                                                      ;             0010a07c,0010a0b4,0010a0c7,0010a0fa,0010a165
-                                                                     ;             0010a16d,0010985a,0010a068,0010a174
+                                                                     ;             0010a16d,001096f6,0010985a,0010a068,0010a09b
+                                                                     ;             0010a174,0010a184,0010a18c,0010a19c,0010a1a4
+                                                                     ;             0010a1b1
           ;local_580     undefined1        -580                      ;XREF[1,0]:   00109706
           ;local_590     undefined1[16]    -590                      ;XREF[7,1]:   001096f1,001098fa,00109dd8,00109e34,00109e4e
                                                                      ;             0010a0aa,0010a0c2,00109e39
@@ -12391,6 +12387,7 @@
           ;local_5f8     undefined8        -5f8                      ;XREF[11,0]:  00109787,001097dc,001097ea,0010980f,001099b5
                                                                      ;             001099cc,001099e8,00109fed,00109ff7,0010a008
                                                                      ;             0010a018
+          ;puVar19       byte *         HASH...                      
                                                           ;XREF[6,0]:   00105442,00105473,0010a2b2,0010a32d
                                                           ;             0010a394,_elfSectionHeaders::00002cd0
 .text.lzma_in...f30f1efa        ENDBR64                                             
@@ -12404,6 +12401,7 @@
 .text.lzma_in...53              PUSH        RBX                                     
 .text.lzma_in...4881ecc80...    SUB         RSP,0x5c8                               
 .text.lzma_in...48897c2420      MOV         qword ptr [RSP + local_5d8+0x5f8],rsa   
+                            ;Zero out local variables
 .text.lzma_in...488dbc240...    LEA         rsa=>local_2f0,[RSP + 0x308]            
 .text.lzma_in...f3ab            STOSD.REP   rsa->pad                                
 .text.lzma_in...4889542408      MOV         qword ptr [RSP + local_5f0+0x5f8],match 
@@ -12430,14 +12428,14 @@
 .text.lzma_in...488b442408      MOV         RAX,qword ptr [RSP + local_5f0+0x5f8]   
 .text.lzma_in...488b7c2420      MOV         rsa,qword ptr [RSP + local_5d8+0x5f8]   
 .text.lzma_in...31c9            XOR         ECX,ECX                                 
-.text.lzma_in...488d94241...    LEA         match=>local_2e8,[RSP + 0x310]          
+.text.lzma_in...488d94241...    LEA         match=>Stack[-0x2e8],[RSP + 0x310]      
 .text.lzma_in...488db4240...    LEA         ctx=>local_2f0,[RSP + 0x308]            
 .text.lzma_in...c70001000000    MOV         dword ptr [RAX],0x1                     
 .text.lzma_in...41ffd0          CALL        R8                                      
 .text.lzma_in...488bbc240...    MOV         rsa,qword ptr [RSP + local_2f0+0x5f8]   
 .text.lzma_in...4885ff          TEST        rsa,rsa                                 
 .text.lzma_in...0f84b10b0000    JZ          LAB_0010a132                            
-.text.lzma_in...4883bc241...    CMP         qword ptr [RSP + local_2e8+0x5f8],0x0   
+.text.lzma_in...4883bc241...    CMP         qword ptr [RSP +...,0x0                 
 .text.lzma_in...0f84a20b0000    JZ          LAB_0010a132                            
 .text.lzma_in...498b4508        MOV         RAX,qword ptr [R13 + 0x8]               
 .text.lzma_in...4885c0          TEST        RAX,RAX                                 
@@ -12455,7 +12453,7 @@
 .text.lzma_in...0f87670b0000    JA          LAB_0010a132                            
 .text.lzma_in...498b4508        MOV         RAX,qword ptr [R13 + 0x8]               
 .text.lzma_in...488bbc240...    MOV         rsa,qword ptr [RSP + local_2f0+0x5f8]   
-.text.lzma_in...488db4241...    LEA         ctx=>local_2e0[5],[RSP + 0x31d]         
+.text.lzma_in...488db4241...    LEA         ctx=>Stack[-0x2db],[RSP + 0x31d]        
 .text.lzma_in...ff9000010000    CALL        qword ptr [RAX + 0x100]                 
 .text.lzma_in...85c0            TEST        EAX,EAX                                 
 .text.lzma_in...0f88450b0000    JS          LAB_0010a132                            
@@ -12466,14 +12464,14 @@
 .text.lzma_in...0f82330b0000    JC          LAB_0010a132                            
 .text.lzma_in...4883f810        CMP         RAX,0x10                                
 .text.lzma_in...0f86310b0000    JBE         LAB_0010a13a                            
-.text.lzma_in...8bac241d0...    MOV         EBP,dword ptr [RSP + local_2e0[5]+0x5f8]
+.text.lzma_in...8bac241d0...    MOV         EBP,dword ptr [RSP + Stack[-0x2db]+0x...
 .text.lzma_in...85ed            TEST        EBP,EBP                                 
 .text.lzma_in...0f84220b0000    JZ          LAB_0010a13a                            
-.text.lzma_in...8b8424210...    MOV         EAX,dword ptr [RSP + local_2e0[9]+0x5f8]
+.text.lzma_in...8b8424210...    MOV         EAX,dword ptr [RSP + Stack[-0x2d7]+0x...
 .text.lzma_in...85c0            TEST        EAX,EAX                                 
 .text.lzma_in...0f84130b0000    JZ          LAB_0010a13a                            
 .text.lzma_in...480fafe8        IMUL        RBP,RAX                                 
-.text.lzma_in...4803ac242...    ADD         RBP,qword ptr [RSP + local_2e0[13]+0x...
+.text.lzma_in...4803ac242...    ADD         RBP,qword ptr [RSP + Stack[-0x2d3]+0x...
 .text.lzma_in...4883fd03        CMP         RBP,0x3                                 
 .text.lzma_in...0f87fd0a0000    JA          LAB_0010a13a                            
 .text.lzma_in...498b4510        MOV         RAX,qword ptr [R13 + 0x10]              
@@ -12487,7 +12485,7 @@
 .text.lzma_in...0f84c70a0000    JZ          LAB_0010a132                            
 .text.lzma_in...4181bd600...    CMP         dword ptr [R13 + 0x160],0x1c8           
 .text.lzma_in...0f85b60a0000    JNZ         LAB_0010a132                            
-.text.lzma_in...0f108c241...    MOVUPS      XMM1,xmmword ptr [RSP + local_2e0[5]+...
+.text.lzma_in...0f108c241...    MOVUPS      XMM1,xmmword ptr [RSP + Stack[-0x2db]...
 .text.lzma_in...4c8da4248...    LEA         R12=>local_73,[RSP + 0x585]             
 .text.lzma_in...4c89ee          MOV         ctx,R13                                 
 .text.lzma_in...4c89e7          MOV         rsa,R12                                 
@@ -12495,7 +12493,7 @@
 .text.lzma_in...e851ebffff      CALL        .text.parse_lzma10:.Lparse_lzma12.0     ;undefined .Lparse_lzma12.0()
 .text.lzma_in...85c0            TEST        EAX,EAX                                 
 .text.lzma_in...0f848b0a0000    JZ          LAB_0010a132                            
-.text.lzma_in...488dbc242...    LEA         rsa=>local_2cb,[RSP + 0x32d]            
+.text.lzma_in...488dbc242...    LEA         rsa=>Stack[-0x2cb],[RSP + 0x32d]        
 .text.lzma_in...4d8b4d08        MOV         R9,qword ptr [R13 + 0x8]                
 .text.lzma_in...8d73f0          LEA         ctx,[RBX + -0x10]                       
 .text.lzma_in...4c89e2          MOV         match,R12                               
@@ -12509,12 +12507,12 @@
 .text.lzma_in...0f57c0          XORPS       XMM0,XMM0                               
 .text.lzma_in...4c89e7          MOV         rsa,R12                                 
 .text.lzma_in...89d0            MOV         EAX,match                               
-.text.lzma_in...0f118424a...    MOVUPS      xmmword ptr [RSP...,XMM0                
+.text.lzma_in...0f118424a...    MOVUPS      xmmword ptr [RSP + rsa2.pad+0x5f8],XMM0 
 .text.lzma_in...f3aa            STOSB.REP   rsa->pad                                
 .text.lzma_in...31c0            XOR         EAX,EAX                                 
 .text.lzma_in...b993000000      MOV         ECX,0x93                                
 .text.lzma_in...0f11442468      MOVUPS      xmmword ptr [RSP...,XMM0                
-.text.lzma_in...488dbc24b...    LEA         rsa=>local_540,[RSP + 0xb8]             
+.text.lzma_in...488dbc24b...    LEA         rsa=>rsa2.meth,[RSP + 0xb8]             
 .text.lzma_in...f3ab            STOSD.REP   rsa->pad                                
 .text.lzma_in...89d0            MOV         EAX,match                               
 .text.lzma_in...498b5528        MOV         match,qword ptr [R13 + 0x28]            
@@ -12532,23 +12530,23 @@
 .text.lzma_in...4883f871        CMP         RAX,0x71                                
 .text.lzma_in...0f86ee090000    JBE         LAB_0010a132                            
 .text.lzma_in...488b442410      MOV         RAX,qword ptr [RSP + local_5e8+0x5f8]   
-.text.lzma_in...89ac24a80...    MOV         dword ptr [RSP + local_550[0]+0x5f8],EBP
+.text.lzma_in...89ac24a80...    MOV         dword ptr [RSP + rsa2.pad+0x5f8],EBP    
 .text.lzma_in...482d82000000    SUB         RAX,0x82                                
 .text.lzma_in...4883f804        CMP         RAX,0x4                                 
 .text.lzma_in...0f86d2090000    JBE         LAB_0010a132                            
 .text.lzma_in...8b84249f0...    MOV         EAX,dword ptr [RSP + local_259+0x5f8]   
-.text.lzma_in...898424180...    MOV         dword ptr [RSP + local_2e0[0]+0x5f8],EAX
+.text.lzma_in...898424180...    MOV         dword ptr [RSP +...,EAX                 
 .text.lzma_in...8a8424a30...    MOV         AL,byte ptr [RSP + local_255+0x5f8]     
-.text.lzma_in...8884241c0...    MOV         byte ptr [RSP + local_2e0[4]+0x5f8],AL  
+.text.lzma_in...8884241c0...    MOV         byte ptr [RSP + Stack[-0x2dc]+0x5f8],AL 
 .text.lzma_in...488b442410      MOV         RAX,qword ptr [RSP + local_5e8+0x5f8]   
 .text.lzma_in...482d87000000    SUB         RAX,0x87                                
 .text.lzma_in...48890424        MOV         qword ptr [RSP]=>local_5f8,RAX          
 .text.lzma_in...4883fd02        CMP         RBP,0x2                                 
 .text.lzma_in...756f            JNZ         LAB_00109800                            
-.text.lzma_in...80bc24180...    CMP         byte ptr [RSP + local_2e0[0]+0x5f8],0x0 
-.text.lzma_in...0fb784241...    MOVZX       EAX,word ptr [RSP + local_2e0[3]+0x5f8] 
+.text.lzma_in...80bc24180...    CMP         byte ptr [RSP + Stack[-0x2e0]+0x5f8],0x0
+.text.lzma_in...0fb784241...    MOVZX       EAX,word ptr [RSP + Stack[-0x2dd]+0x5f8]
 .text.lzma_in...7810            JS          LAB_001097b3                            
-.text.lzma_in...f68424190...    TEST        byte ptr [RSP + local_2e0[1]+0x5f8],0x1 
+.text.lzma_in...f68424190...    TEST        byte ptr [RSP + Stack[-0x2df]+0x5f8],0x1
 .text.lzma_in...7423            JZ          LAB_001097d0                            
 .text.lzma_in...4883c008        ADD         RAX,0x8                                 
 .text.lzma_in...eb1d            JMP         LAB_001097d0                            
@@ -12576,7 +12574,7 @@
                             LAB_00109800:                 ;XREF[1,0]:   0010978f
 .text.lzma_in...83fd03          CMP         EBP,0x3                                 
 .text.lzma_in...7539            JNZ         LAB_0010983e                            
-.text.lzma_in...f68424190...    TEST        byte ptr [RSP + local_2e0[1]+0x5f8],0x40
+.text.lzma_in...f68424190...    TEST        byte ptr [RSP + ...,0x40                
 .text.lzma_in...752f            JNZ         LAB_0010983e                            
 .text.lzma_in...48833c242f      CMP         qword ptr [RSP]=>local_5f8,0x2f         
 .text.lzma_in...0f8618090000    JBE         LAB_0010a132                            
@@ -12595,7 +12593,7 @@
 .text.lzma_in...48c744241...    MOV         qword ptr [RSP + local_5e0+0x5f8],0x5   
 .text.lzma_in...b804000000      MOV         EAX,0x4                                 
                             LAB_0010985a:                 ;XREF[2,0]:   001097fe,0010983c
-.text.lzma_in...488d8c24a...    LEA         RCX=>local_550[4],[RSP + 0xac]          
+.text.lzma_in...488d8c24a...    LEA         RCX=>rsa2+0x4,[RSP + 0xac]              
 .text.lzma_in...488db4249...    LEA         ctx=>local_259,[RSP + 0x39f]            
 .text.lzma_in...48894c2428      MOV         qword ptr [RSP + local_5d0+0x5f8],RCX   
 .text.lzma_in...8d4801          LEA         ECX,[RAX + 0x1]                         
@@ -12648,7 +12646,7 @@
 .text.lzma_in...488b442418      MOV         RAX,qword ptr [RSP + local_5e0+0x5f8]   
 .text.lzma_in...4c895c2448      MOV         qword ptr [RSP + local_5b0+0x5f8],R11   
 .text.lzma_in...b95c020000      MOV         ECX,0x25c                               
-.text.lzma_in...488db424a...    LEA         ctx=>local_550,[RSP + 0xa8]             
+.text.lzma_in...488db424a...    LEA         ctx=>rsa2,[RSP + 0xa8]                  
 .text.lzma_in...488d5004        LEA         match,[RAX + 0x4]                       
 .text.lzma_in...498b4528        MOV         RAX,qword ptr [R13 + 0x28]              
 .text.lzma_in...488b4008        MOV         RAX,qword ptr [RAX + 0x8]               
@@ -12656,7 +12654,7 @@
 .text.lzma_in...50              PUSH        RAX                                     
 .text.lzma_in...4155            PUSH        R13                                     
 .text.lzma_in...4c8b4c2440      MOV         R9,qword ptr [RSP + local_5c8+0x608]    
-.text.lzma_in...4c8d84243...    LEA         R8=>local_2cb,[RSP + 0x33d]             
+.text.lzma_in...4c8d84243...    LEA         R8=>Stack[-0x2cb],[RSP + 0x33d]         
 .text.lzma_in...e8dfdcffff      CALL        .text.lzma_index_dua:FUN_00107650       ;undefined FUN_00107650(undefined par...
 .text.lzma_in...4c8b5c2458      MOV         R11,qword ptr [RSP + local_5b0+0x608]   
 .text.lzma_in...5a              POP         match                                   
@@ -12668,11 +12666,11 @@
 .text.lzma_in...418985000...    MOV         dword ptr [R13 + 0x100],EAX             
 .text.lzma_in...4883fd02        CMP         RBP,0x2                                 
 .text.lzma_in...0f851a010000    JNZ         LAB_00109aae                            
-.text.lzma_in...80bc24180...    CMP         byte ptr [RSP + local_2e0[0]+0x5f8],0x0 
+.text.lzma_in...80bc24180...    CMP         byte ptr [RSP + Stack[-0x2e0]+0x5f8],0x0
 .text.lzma_in...0f890c010000    JNS         LAB_00109aae                            
 .text.lzma_in...4d85f6          TEST        R14,R14                                 
 .text.lzma_in...0f8487070000    JZ          LAB_0010a132                            
-.text.lzma_in...f68424190...    TEST        byte ptr [RSP + local_2e0[1]+0x5f8],0x1 
+.text.lzma_in...f68424190...    TEST        byte ptr [RSP + Stack[-0x2df]+0x5f8],0x1
 .text.lzma_in...7411            JZ          LAB_001099c6                            
 .text.lzma_in...48833c2408      CMP         qword ptr [RSP]=>local_5f8,0x8          
 .text.lzma_in...b808000000      MOV         EAX,0x8                                 
@@ -12704,7 +12702,7 @@
 .text.lzma_in...4883e839        SUB         RAX,0x39                                
 .text.lzma_in...4839d8          CMP         RAX,RBX                                 
 .text.lzma_in...0f82fc060000    JC          LAB_0010a132                            
-.text.lzma_in...488dbc241...    LEA         rsa=>local_2e0[5],[RSP + 0x31d]         
+.text.lzma_in...488dbc241...    LEA         rsa=>Stack[-0x2db],[RSP + 0x31d]        
 .text.lzma_in...498b95f00...    MOV         match,qword ptr [R13 + 0xf0]            
 .text.lzma_in...31c0            XOR         EAX,EAX                                 
 .text.lzma_in...4a8d3427        LEA         ctx,[rsa->pad + R12*0x1]                
@@ -12746,7 +12744,7 @@
 .text.lzma_in...4c29e0          SUB         RAX,R12                                 
 .text.lzma_in...4839d8          CMP         RAX,RBX                                 
 .text.lzma_in...0f8207070000    JC          LAB_0010a1da                            
-.text.lzma_in...8a8424180...    MOV         AL,byte ptr [RSP + local_2e0[0]+0x5f8]  
+.text.lzma_in...8a8424180...    MOV         AL,byte ptr [RSP + Stack[-0x2e0]+0x5f8] 
 .text.lzma_in...a804            TEST        AL,0x4                                  
 .text.lzma_in...7426            JZ          LAB_00109b04                            
 .text.lzma_in...498b5510        MOV         match,qword ptr [R13 + 0x10]            
@@ -12770,7 +12768,7 @@
                             LAB_00109b1a:                 ;XREF[1,0]:   00109b02
 .text.lzma_in...498b4510        MOV         RAX,qword ptr [R13 + 0x10]              
 .text.lzma_in...ff5010          CALL        qword ptr [RAX + 0x10]                  
-.text.lzma_in...448abc241...    MOV         R15B,byte ptr [RSP + local_2e0[0]+0x5f8]
+.text.lzma_in...448abc241...    MOV         R15B,byte ptr [RSP + Stack[-0x2e0]+0x...
 .text.lzma_in...418985900...    MOV         dword ptr [R13 + 0x90],EAX              
 .text.lzma_in...4189c6          MOV         R14D,EAX                                
 .text.lzma_in...4589fb          MOV         R11D,R15D                               
@@ -12787,7 +12785,7 @@
 .text.lzma_in...7420            JZ          LAB_00109b75                            
 .text.lzma_in...eb2b            JMP         LAB_00109b82                            
                             LAB_00109b57:                 ;XREF[1,0]:   00109b4e
-.text.lzma_in...488dbc241...    LEA         rsa=>local_2e0,[RSP + 0x318]            
+.text.lzma_in...488dbc241...    LEA         rsa=>Stack[-0x2e0],[RSP + 0x318]        
 .text.lzma_in...4c89ee          MOV         ctx,R13                                 
 .text.lzma_in...e899e2ffff      CALL        .text.lzma_rc_pricea:.Llzma_rc_prices.1 ;undefined .Llzma_rc_prices.1()
 .text.lzma_in...85c0            TEST        EAX,EAX                                 
@@ -12796,7 +12794,7 @@
 .text.lzma_in...74e0            JZ          LAB_00109b50                            
 .text.lzma_in...e965060000      JMP         LAB_0010a1da                            
                             LAB_00109b75:                 ;XREF[1,0]:   00109b53
-.text.lzma_in...8a8c24190...    MOV         CL,byte ptr [RSP + local_2e0[1]+0x5f8]  
+.text.lzma_in...8a8c24190...    MOV         CL,byte ptr [RSP + Stack[-0x2df]+0x5f8] 
 .text.lzma_in...84c9            TEST        CL,CL                                   
 .text.lzma_in...7967            JNS         LAB_00109be7                            
 .text.lzma_in...eb77            JMP         LAB_00109bf9                            
@@ -12809,15 +12807,15 @@
 .text.lzma_in...31c0            XOR         EAX,EAX                                 
 .text.lzma_in...e917010000      JMP         LAB_00109caa                            
                             LAB_00109b93:                 ;XREF[1,0]:   00109b85
-.text.lzma_in...f68424190...    TEST        byte ptr [RSP + local_2e0[1]+0x5f8],0x1 
+.text.lzma_in...f68424190...    TEST        byte ptr [RSP + Stack[-0x2df]+0x5f8],0x1
 .text.lzma_in...7437            JZ          LAB_00109bd4                            
 .text.lzma_in...ebed            JMP         LAB_00109b8c                            
                             LAB_00109b9f:                 ;XREF[1,0]:   00109b8a
-.text.lzma_in...8a94241b0...    MOV         match,byte ptr [RSP + local_2e0[3]+0x...
+.text.lzma_in...8a94241b0...    MOV         match,byte ptr [RSP + Stack[-0x2dd]+0...
 .text.lzma_in...84d2            TEST        match,match                             
 .text.lzma_in...7917            JNS         LAB_00109bc1                            
                             LAB_00109baa:                 ;XREF[1,0]:   00109bcd
-.text.lzma_in...8a8c241a0...    MOV         CL,byte ptr [RSP + local_2e0[2]+0x5f8]  
+.text.lzma_in...8a8c241a0...    MOV         CL,byte ptr [RSP + Stack[-0x2de]+0x5f8] 
 .text.lzma_in...31c0            XOR         EAX,EAX                                 
 .text.lzma_in...f6c120          TEST        CL,0x20                                 
 .text.lzma_in...0f8592000000    JNZ         LAB_00109c4e                            
@@ -12841,7 +12839,7 @@
 .text.lzma_in...b2ff            MOV         match,0xff                              
 .text.lzma_in...f6c102          TEST        CL,0x2                                  
 .text.lzma_in...740f            JZ          LAB_00109c11                            
-.text.lzma_in...668b94241...    MOV         match,word ptr [RSP + local_2e0[2]+0x...
+.text.lzma_in...668b94241...    MOV         match,word ptr [RSP + Stack[-0x2de]+0...
 .text.lzma_in...66c1ea06        SHR         match,0x6                               
 .text.lzma_in...83e27f          AND         match,0x7f                              
                             LAB_00109c11:                 ;XREF[1,0]:   00109c00
@@ -12849,14 +12847,14 @@
 .text.lzma_in...b2ff            MOV         match,0xff                              
 .text.lzma_in...4584ff          TEST        R15B,R15B                               
 .text.lzma_in...790f            JNS         LAB_00109c29                            
-.text.lzma_in...488b94241...    MOV         match,qword ptr [RSP + local_2e0[0]+0...
+.text.lzma_in...488b94241...    MOV         match,qword ptr [RSP + Stack[-0x2e0]+...
 .text.lzma_in...48c1ea1d        SHR         match,0x1d                              
 .text.lzma_in...83e21f          AND         match,0x1f                              
                             LAB_00109c29:                 ;XREF[1,0]:   00109c18
 .text.lzma_in...80e104          AND         CL,0x4                                  
 .text.lzma_in...88d4            MOV         AH,match                                
 .text.lzma_in...7446            JZ          LAB_00109c76                            
-.text.lzma_in...8a94241c0...    MOV         match,byte ptr [RSP + local_2e0[4]+0x...
+.text.lzma_in...8a94241c0...    MOV         match,byte ptr [RSP + Stack[-0x2dc]+0...
 .text.lzma_in...25ffff00ff      AND         EAX,0xff00ffff                          
 .text.lzma_in...89d1            MOV         ECX,match                               
 .text.lzma_in...c0ea05          SHR         match,0x5                               
@@ -12869,7 +12867,7 @@
 .text.lzma_in...40b6ff          MOV         ctx,0xff                                
 .text.lzma_in...84c9            TEST        CL,CL                                   
 .text.lzma_in...7908            JNS         LAB_00109c5d                            
-.text.lzma_in...408ab4241...    MOV         ctx,byte ptr [RSP + local_2e0[4]+0x5f8] 
+.text.lzma_in...408ab4241...    MOV         ctx,byte ptr [RSP + Stack[-0x2dc]+0x5f8]
                             LAB_00109c5d:                 ;XREF[1,0]:   00109c53
 .text.lzma_in...80e140          AND         CL,0x40                                 
 .text.lzma_in...4088f0          MOV         AL,ctx                                  
@@ -12887,7 +12885,7 @@
 .text.lzma_in...b2ff            MOV         match,0xff                              
 .text.lzma_in...eb1c            JMP         LAB_00109c9b                            
                             LAB_00109c7f:                 ;XREF[1,0]:   00109c74
-.text.lzma_in...8a9424190...    MOV         match,byte ptr [RSP + local_2e0[1]+0x...
+.text.lzma_in...8a9424190...    MOV         match,byte ptr [RSP + Stack[-0x2df]+0...
 .text.lzma_in...25ffff00ff      AND         EAX,0xff00ffff                          
 .text.lzma_in...89d1            MOV         ECX,match                               
 .text.lzma_in...c0ea03          SHR         match,0x3                               
@@ -12926,7 +12924,7 @@
 .text.lzma_in...0f84c7040000    JZ          LAB_0010a1da                            
 .text.lzma_in...833800          CMP         dword ptr [RAX],0x0                     
 .text.lzma_in...0f84be040000    JZ          LAB_0010a1da                            
-.text.lzma_in...80bc24190...    CMP         byte ptr [RSP + local_2e0[1]+0x5f8],0x0 
+.text.lzma_in...80bc24190...    CMP         byte ptr [RSP + Stack[-0x2df]+0x5f8],0x0
 .text.lzma_in...7830            JS          LAB_00109d56                            
 .text.lzma_in...488b90c80...    MOV         match,qword ptr [RAX + 0xc8]            
 .text.lzma_in...4885d2          TEST        match,match                             
@@ -12956,7 +12954,7 @@
 .text.lzma_in...c7442458f...    MOV         dword ptr [RSP +...,0xffffffff          
 .text.lzma_in...488d7c2458      LEA         rsa=>local_5a0,[RSP + 0x58]             
 .text.lzma_in...7419            JZ          LAB_00109da7                            
-.text.lzma_in...408ab4241...    MOV         ctx,byte ptr [RSP + local_2e0[1]+0x5f8] 
+.text.lzma_in...408ab4241...    MOV         ctx,byte ptr [RSP + Stack[-0x2df]+0x5f8]
 .text.lzma_in...4c89e2          MOV         match,R12                               
 .text.lzma_in...40c0ee03        SHR         ctx,0x3                                 
 .text.lzma_in...83e60f          AND         ctx,0xf                                 
@@ -12993,7 +12991,7 @@
 .text.lzma_in...49d3e4          SHL         R12,CL                                  
 .text.lzma_in...4d63f6          MOVSXD      R14,R14D                                
                             LAB_00109e1d:                 ;XREF[1,0]:   00109e6a
-.text.lzma_in...488db424a...    LEA         ctx=>local_550,[RSP + 0xa8]             
+.text.lzma_in...488db424a...    LEA         ctx=>rsa2,[RSP + 0xa8]                  
 .text.lzma_in...31c0            XOR         EAX,EAX                                 
 .text.lzma_in...4531c9          XOR         R9D,R9D                                 
 .text.lzma_in...31d2            XOR         match,match                             
@@ -13052,7 +13050,7 @@
 .text.lzma_in...488b7118        MOV         ctx,qword ptr [RCX + 0x18]              
 .text.lzma_in...4885f6          TEST        ctx,ctx                                 
 .text.lzma_in...0f84d3020000    JZ          LAB_0010a1da                            
-.text.lzma_in...8a84241a0...    MOV         AL,byte ptr [RSP + local_2e0[2]+0x5f8]  
+.text.lzma_in...8a84241a0...    MOV         AL,byte ptr [RSP + Stack[-0x2de]+0x5f8] 
 .text.lzma_in...488b5158        MOV         match,qword ptr [RCX + 0x58]            
 .text.lzma_in...243f            AND         AL,0x3f                                 
 .text.lzma_in...7407            JZ          LAB_00109f1d                            
@@ -13070,15 +13068,15 @@
 .text.lzma_in...488932          MOV         qword ptr [match],ctx                   
 .text.lzma_in...e95f010000      JMP         LAB_0010a096                            
                             LAB_00109f37:                 ;XREF[1,0]:   00109cf5
-.text.lzma_in...8a8424190...    MOV         AL,byte ptr [RSP + local_2e0[1]+0x5f8]  
+.text.lzma_in...8a8424190...    MOV         AL,byte ptr [RSP + Stack[-0x2df]+0x5f8] 
 .text.lzma_in...83fd01          CMP         EBP,0x1                                 
 .text.lzma_in...7538            JNZ         LAB_00109f7b                            
-.text.lzma_in...408ab4241...    MOV         ctx,byte ptr [RSP + local_2e0[0]+0x5f8] 
+.text.lzma_in...408ab4241...    MOV         ctx,byte ptr [RSP + Stack[-0x2e0]+0x5f8]
 .text.lzma_in...89c2            MOV         match,EAX                               
 .text.lzma_in...89c7            MOV         rsa,EAX                                 
 .text.lzma_in...4d89e8          MOV         R8,R13                                  
 .text.lzma_in...d0ea            SHR         match,0x1                               
-.text.lzma_in...0fb68c241...    MOVZX       ECX,byte ptr [RSP + local_2e0[3]+0x5f8] 
+.text.lzma_in...0fb68c241...    MOVZX       ECX,byte ptr [RSP + Stack[-0x2dd]+0x5f8]
 .text.lzma_in...83e701          AND         rsa,0x1                                 
 .text.lzma_in...40c0ee06        SHR         ctx,0x6                                 
 .text.lzma_in...83e201          AND         match,0x1                               
@@ -13115,7 +13113,7 @@
 .text.lzma_in...730d            JNC         LAB_00109fd9                            
 .text.lzma_in...e909020000      JMP         LAB_0010a1da                            
                             LAB_00109fd1:                 ;XREF[1,0]:   00109fae
-.text.lzma_in...0fb784241...    MOVZX       EAX,word ptr [RSP + local_2e0[3]+0x5f8] 
+.text.lzma_in...0fb784241...    MOVZX       EAX,word ptr [RSP + Stack[-0x2dd]+0x5f8]
                             LAB_00109fd9:                 ;XREF[1,0]:   00109fca
 .text.lzma_in...4839c3          CMP         RBX,RAX                                 
 .text.lzma_in...0f82f8010000    JC          LAB_0010a1da                            
@@ -13164,11 +13162,11 @@
 .text.lzma_in...31ff            XOR         rsa,rsa                                 
 .text.lzma_in...4531c9          XOR         R9D,R9D                                 
 .text.lzma_in...31d2            XOR         match,match                             
-.text.lzma_in...48898c24b...    MOV         qword ptr [RSP + local_550[8]+0x5f8],RCX
-.text.lzma_in...4c8d8424a...    LEA         R8=>local_550,[RSP + 0xa8]              
+.text.lzma_in...48898c24b...    MOV         qword ptr [RSP + rsa2.version+0x5f8],RCX
+.text.lzma_in...4c8d8424a...    LEA         R8=>rsa2,[RSP + 0xa8]                   
 .text.lzma_in...31c9            XOR         ECX,ECX                                 
 .text.lzma_in...31f6            XOR         ctx,ctx                                 
-.text.lzma_in...48c78424a...    MOV         qword ptr [RSP + local_550[0]+0x5f8],0x5
+.text.lzma_in...48c78424a...    MOV         qword ptr [RSP + rsa2.pad+0x5f8],0x5    
 .text.lzma_in...ffd0            CALL        RAX                                     
 .text.lzma_in...31ff            XOR         rsa,rsa                                 
 .text.lzma_in...41ff542418      CALL        qword ptr [R12 + 0x18]                  
@@ -13176,16 +13174,16 @@
                             LAB_0010a096:                 ;XREF[3,0]:   00109f32,00109f76,0010a038
 .text.lzma_in...0f57c0          XORPS       XMM0,XMM0                               
 .text.lzma_in...31c0            XOR         EAX,EAX                                 
-.text.lzma_in...488dbc24b...    LEA         rsa=>local_540,[RSP + 0xb8]             
+.text.lzma_in...488dbc24b...    LEA         rsa=>rsa2.meth,[RSP + 0xb8]             
 .text.lzma_in...31d2            XOR         match,match                             
 .text.lzma_in...b93c000000      MOV         ECX,0x3c                                
 .text.lzma_in...c644246801      MOV         byte ptr [RSP + local_590[0]+0x5f8],0x1 
 .text.lzma_in...be01000000      MOV         ctx,0x1                                 
-.text.lzma_in...0f118424a...    MOVUPS      xmmword ptr [RSP...,XMM0                
+.text.lzma_in...0f118424a...    MOVUPS      xmmword ptr [RSP + rsa2.pad+0x5f8],XMM0 
 .text.lzma_in...f3ab            STOSD.REP   rsa->pad                                
 .text.lzma_in...498b4508        MOV         RAX,qword ptr [R13 + 0x8]               
 .text.lzma_in...488d7c2468      LEA         rsa=>local_590,[RSP + 0x68]             
-.text.lzma_in...c68424a80...    MOV         byte ptr [RSP + local_550[0]+0x5f8],0x80
+.text.lzma_in...c68424a80...    MOV         byte ptr [RSP + rsa2.pad+0x5f8],0x80    
 .text.lzma_in...c684249e0...    MOV         byte ptr [RSP + local_45a+0x5f8],0x8    
 .text.lzma_in...c68424a70...    MOV         byte ptr [RSP + local_451+0x5f8],0x1    
 .text.lzma_in...ff90e0000000    CALL        qword ptr [RAX + 0xe0]                  
@@ -13194,7 +13192,7 @@
 .text.lzma_in...0f84e9000000    JZ          LAB_0010a1da                            
 .text.lzma_in...498b4508        MOV         RAX,qword ptr [R13 + 0x8]               
 .text.lzma_in...be00010000      MOV         ctx,0x100                               
-.text.lzma_in...488dbc24a...    LEA         rsa=>local_550,[RSP + 0xa8]             
+.text.lzma_in...488dbc24a...    LEA         rsa=>rsa2,[RSP + 0xa8]                  
 .text.lzma_in...31d2            XOR         match,match                             
 .text.lzma_in...ff90e0000000    CALL        qword ptr [RAX + 0xe0]                  
 .text.lzma_in...4889c6          MOV         ctx,RAX                                 
@@ -13233,19 +13231,19 @@
 .text.lzma_in...b90b000000      MOV         ECX,0xb                                 
 .text.lzma_in...4c89ee          MOV         ctx,R13                                 
 .text.lzma_in...f3ab            STOSD.REP   rsa->pad                                
-.text.lzma_in...488d84241...    LEA         RAX=>local_2e0,[RSP + 0x318]            
-.text.lzma_in...488dbc24a...    LEA         rsa=>local_550,[RSP + 0xa8]             
-.text.lzma_in...89ac24a80...    MOV         dword ptr [RSP + local_550[0]+0x5f8],EBP
-.text.lzma_in...48898424b...    MOV         qword ptr [RSP + local_550[8]+0x5f8],RAX
+.text.lzma_in...488d84241...    LEA         RAX=>Stack[-0x2e0],[RSP + 0x318]        
+.text.lzma_in...488dbc24a...    LEA         rsa=>rsa2,[RSP + 0xa8]                  
+.text.lzma_in...89ac24a80...    MOV         dword ptr [RSP + rsa2.pad+0x5f8],EBP    
+.text.lzma_in...48898424b...    MOV         qword ptr [RSP + rsa2.version+0x5f8],RAX
 .text.lzma_in...488b84240...    MOV         RAX,qword ptr [RSP + local_2f0+0x5f8]   
-.text.lzma_in...4c898424c...    MOV         qword ptr [RSP + local_530+0x5f8],R8    
-.text.lzma_in...48898424b...    MOV         qword ptr [RSP + local_540+0x5f8],RAX   
-.text.lzma_in...488b84241...    MOV         RAX,qword ptr [RSP + local_2e8+0x5f8]   
-.text.lzma_in...66899c24d...    MOV         word ptr [RSP + local_528+0x5f8],BX     
-.text.lzma_in...48898424c...    MOV         qword ptr [RSP + local_538+0x5f8],RAX   
+.text.lzma_in...4c898424c...    MOV         qword ptr [RSP + rsa2.n+0x5f8],R8       
+.text.lzma_in...48898424b...    MOV         qword ptr [RSP + rsa2.meth+0x5f8],RAX   
+.text.lzma_in...488b84241...    MOV         RAX,qword ptr [RSP + Stack[-0x2e8]+0x...
+.text.lzma_in...66899c24d...    MOV         word ptr [RSP + rsa2.e+0x5f8],BX        
+.text.lzma_in...48898424c...    MOV         qword ptr [RSP + rsa2.engine+0x5f8],RAX 
 .text.lzma_in...488b442420      MOV         RAX,qword ptr [RSP + local_5d8+0x5f8]   
-.text.lzma_in...48898424d...    MOV         qword ptr [RSP + local_520+0x5f8],RAX   
-.text.lzma_in...e8d2e0ffff      CALL        .text.lzip_decoder_memconfia:installe...;undefined installed_func_0()
+.text.lzma_in...48898424d...    MOV         qword ptr [RSP + rsa2.d+0x5f8],RAX      
+.text.lzma_in...e8d2e0ffff      CALL        .text.lzip_decoder_memconfia:installe...;undefined installed_func_0(RSA * rsa...
 .text.lzma_in...85c0            TEST        EAX,EAX                                 
 .text.lzma_in...7418            JZ          LAB_0010a1da                            
 .text.lzma_in...488b442408      MOV         RAX,qword ptr [RSP + local_5f0+0x5f8]   
@@ -13273,7 +13271,7 @@
 .text.lzma_in...41c745180...    MOV         dword ptr [R13 + 0x18],0x1              
 .text.lzma_in...4889d7          MOV         rsa,match                               
 .text.lzma_in...f3aa            STOSB.REP   rsa->pad                                
-.text.lzma_in...f68424180...    TEST        byte ptr [RSP + local_2e0[0]+0x5f8],0x1 
+.text.lzma_in...f68424180...    TEST        byte ptr [RSP + Stack[-0x2e0]+0x5f8],0x1
 .text.lzma_in...0f8436ffffff    JZ          LAB_0010a13a                            
 .text.lzma_in...498b4510        MOV         RAX,qword ptr [R13 + 0x10]              
 .text.lzma_in...4885c0          TEST        RAX,RAX                                 
@@ -13415,8 +13413,8 @@
                             ;************************************************************************************************
                             ;*                                           FUNCTION                                           *
                             ;************************************************************************************************
-                            ;void _Llzma_index_init_0(long param_1, undefined8 param_2, undefined8 param_3, RSA * param_4, int param_5)
-          ;param_1       long               RDI                      
+                            ;void _Llzma_index_init_0(RSA * rsa, undefined8 param_2, undefined8 param_3, RSA * param_4, int param_5)
+          ;rsa           RSA *              RDI                      
           ;param_2       undefined8         RSI                      
           ;param_3       undefined8         RDX                      
           ;param_4       RSA *              RCX                      
@@ -13441,14 +13439,14 @@
 .text.lzma_in...4d85f6          TEST        R14,R14                                 
 .text.lzma_in...7438            JZ          LAB_0010a3b6                            
 .text.lzma_in...4989d4          MOV         R12,param_3                             
-.text.lzma_in...4885ff          TEST        param_1,param_1                         
+.text.lzma_in...4885ff          TEST        rsa,rsa                                 
 .text.lzma_in...741c            JZ          LAB_0010a3a2                            
 .text.lzma_in...488d54241c      LEA         param_3=>match,[RSP + 0x1c]             
 .text.lzma_in...48894c2408      MOV         qword ptr [RSP + local_30+0x38],param_4 
-.text.lzma_in...48893c24        MOV         qword ptr [RSP]=>local_38,param_1       
+.text.lzma_in...48893c24        MOV         qword ptr [RSP]=>local_38,rsa           
 .text.lzma_in...e827f1ffff      CALL        .text.lzma_index_stream_siza:installe...;int installed_func_1(RSA * rsa, long...
 .text.lzma_in...488b4c2408      MOV         param_4,qword ptr [RSP + local_30+0x38] 
-.text.lzma_in...488b3c24        MOV         param_1,qword ptr [RSP]=>local_38       
+.text.lzma_in...488b3c24        MOV         rsa,qword ptr [RSP]=>local_38           
                             LAB_0010a3a2:                 ;XREF[1,0]:   0010a384
 .text.lzma_in...4883c420        ADD         RSP,0x20                                
 .text.lzma_in...4c89e2          MOV         param_3,R12                             
